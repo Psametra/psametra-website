@@ -27,5 +27,5 @@
 }
 .transition-mark {
   width: min(50vw, 370px);
-  color: var(--accent);
+  color: var(--transition-mark);
 }

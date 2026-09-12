@@ -13,14 +13,15 @@
   --accent-hover: #0b3ac1;
   --blue-shadow: #164cef20;
   --header: #fafaf9ed;
+  --transition-mark: #050505;
   --radius-button: 5px;
   --duration-fast: 180ms;
   --ease-premium: cubic-bezier(0.76, 0, 0.24, 1);
   color-scheme: light;
 }
 [data-theme="dark"] {
-  --surface: #101114;
-  --surface-alt: #191b20;
+  --surface: #08090c;
+  --surface-alt: #111318;
   --ink: #f0f1f5;
   --muted: #969ca8;
   --line: #2b2e36;
@@ -28,7 +29,8 @@
   --accent: #4776ff;
   --accent-hover: #285ae8;
   --blue-shadow: #124bea30;
-  --header: #101114ed;
+  --header: #08090cf2;
+  --transition-mark: #ffffff;
   color-scheme: dark;
 }
 [data-theme="dark"] .logo-on-light {
