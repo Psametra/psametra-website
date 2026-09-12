@@ -12,6 +12,8 @@
   --accent: #124bea;
   --accent-hover: #0b3ac1;
   --blue-shadow: #164cef20;
+  --hero-logo-glow-near: #1d62ff1f;
+  --hero-logo-glow-far: #1d62ff0d;
   --header: #fafaf9ed;
   --transition-mark: #050505;
   --radius-button: 5px;
@@ -29,6 +31,8 @@
   --accent: #4776ff;
   --accent-hover: #285ae8;
   --blue-shadow: #124bea30;
+  --hero-logo-glow-near: #2f7dff2b;
+  --hero-logo-glow-far: #2f7dff14;
   --header: #08090cf2;
   --transition-mark: #ffffff;
   color-scheme: dark;

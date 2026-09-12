@@ -136,19 +136,8 @@
 }
 .hero-art .eclipse {
   width: 285px;
-  filter: none;
-}
-.hero-art .eclipse::before {
-  content: "";
-  position: absolute;
-  inset: 8%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    #187bff4a 0%,
-    #187bff0d 47%,
-    transparent 69%
-  );
+  filter: drop-shadow(0 0 7px var(--hero-logo-glow-near))
+    drop-shadow(0 0 19px var(--hero-logo-glow-far));
 }
 .hero-art .eclipse-half {
   border-color: var(--ink);
