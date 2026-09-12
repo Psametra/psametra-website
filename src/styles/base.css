@@ -228,22 +228,6 @@ p {
   clip-path: inset(0 0 0 55%);
   transform: translateY(13px);
 }
-.orbital-line {
-  position: absolute;
-  width: 89%;
-  aspect-ratio: 1;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-}
-.art-cross {
-  position: absolute;
-  right: 4%;
-  top: 18%;
-  font:
-    20px var(--font-geist-mono),
-    monospace;
-  color: var(--muted);
-}
 .art-caption {
   position: absolute;
   bottom: 7px;
@@ -394,10 +378,6 @@ h2 {
   }
   .eclipse-half {
     border-width: 47px;
-  }
-  .orbital-line {
-    width: 310px;
-    max-width: 96%;
   }
   .hero-baseline {
     font-size: 7px;

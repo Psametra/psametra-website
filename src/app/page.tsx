@@ -30,9 +30,7 @@ export default function Home() {
           <span className="art-coordinate">
             PS / 001 — THE POSSIBILITY OF PRECISE
           </span>
-          <div className="orbital-line" />
           <Eclipse />
-          <span className="art-cross">+</span>
           <div className="art-caption">
             <span>Built with intention.</span>
             <span>Designed to move you forward.</span>
