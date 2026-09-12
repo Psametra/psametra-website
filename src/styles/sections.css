@@ -283,6 +283,9 @@
   font-size: 20px;
 }
 .capabilities-art {
+  --orbit-period: 24s;
+  --orbit-counter-period: 38s;
+  --orbit-pulse-period: 3.6s;
   position: relative;
   min-height: 410px;
   display: grid;
@@ -324,6 +327,7 @@
   background: var(--ink);
   left: 50%;
   top: -3px;
+  translate: -50% 0;
 }
 .orbit-two::after {
   top: auto;
@@ -346,12 +350,49 @@
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  top: 26%;
-  right: 21%;
+  /* Anchor the satellite to its ring so every breakpoint shares its orbit. */
+  top: 25%;
+  left: 93.30127%;
+  translate: -50% -50%;
   background: var(--accent);
+}
+.orbit-point::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   box-shadow:
     0 0 0 10px #3173ff19,
     0 0 0 20px #3173ff0a;
+}
+/* Transform-only ambient motion; the central mark and axes stay stationary.
+   Opt in to motion so reduced-motion users keep the original composition. */
+@media (prefers-reduced-motion: no-preference) {
+  .orbit-two {
+    animation: orbit-revolve var(--orbit-counter-period) linear infinite reverse;
+  }
+  .orbit-three {
+    animation: orbit-revolve var(--orbit-period) linear infinite;
+  }
+  .orbit-point::after {
+    animation: orbit-pulse var(--orbit-pulse-period) ease-in-out infinite;
+  }
+}
+@keyframes orbit-revolve {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes orbit-pulse {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
 }
 .orbit-caption {
   position: absolute;

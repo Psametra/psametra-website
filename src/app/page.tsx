@@ -88,11 +88,12 @@ export default function Home() {
           <div className="capabilities-art" aria-hidden="true">
             <div className="orbit orbit-one" />
             <div className="orbit orbit-two" />
-            <div className="orbit orbit-three" />
+            <div className="orbit orbit-three">
+              <div className="orbit-point" />
+            </div>
             <div className="orbit-axis horizontal" />
             <div className="orbit-axis vertical" />
             <Eclipse />
-            <div className="orbit-point" />
             <span className="orbit-caption">
               CONNECTED THINKING. COHERENT SYSTEMS.
             </span>
