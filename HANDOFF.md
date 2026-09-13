@@ -479,6 +479,51 @@ This is probably the highest-impact path from ~8.4 visual quality toward a compa
 
 Current founder profiles link to portfolios. If useful and approved, add verified professional proof such as GitHub/LinkedIn links. Keep both founders balanced. Do not assign CEO/CTO or other executive titles unless Saad explicitly approves them for Psametra.
 
+### PROOF-01 — verified external project proof inventory (2026-09-14)
+**VERIFIED / AUDIT EVIDENCE ONLY — NO SITE CHANGE**
+
+Founder portfolios and the private RMS logistics repository materially strengthen the evidence available for future Work-page copy, but personal/freelance work must not be silently relabeled as Psametra company client work.
+
+- Abdur Rafay Khan’s public portfolio lists **APPNA New Jersey** as 2026 freelance Full-Stack Developer work, with a live public link at `https://www.appnanj.org/` and a Next.js/React/TypeScript/Tailwind/Vercel stack.
+- The same portfolio describes APPNA New Jersey as a nonprofit website covering programs, leadership/events, membership, and donations. The live APPNA NJ site was independently fetched during this audit and currently publishes `10,000+ patients served` and `200+ students mentored` (plus other organization metrics). If these are ever referenced, attribute them as APPNA-reported organizational impact — **not as outcomes caused by Psametra/the website unless that causality is separately evidenced**.
+- Muhammad Saad’s public portfolio provides additional founder-built proof candidates: QuickSign, `extract`, Ledger, and DineSync. These are evidence of founder capability, not automatically Psametra client engagements.
+- Existing Psametra founder portfolio links are already present; do not repeat work to add them.
+
+### CASE-01 — APPNA New Jersey case-study candidate
+**VERIFIED REAL PUBLIC BUILD / NEEDS ATTRIBUTION + COPY APPROVAL BEFORE USE**
+
+APPNA New Jersey is the strongest immediately public client-style proof found in the audit. It can support a real-work case study once ownership/agency attribution is phrased truthfully. Prefer verifiable scope, screenshots, stack, and public URL. Do not invent outcomes, engagement metrics, or imply Psametra contracted the work unless Saad confirms that relationship.
+
+### CASE-02 — Raaziq logistics platform case-study candidate
+**VERIFIED REAL PRODUCT EVIDENCE / NEEDS PUBLICATION + CLAIM APPROVAL BEFORE USE**
+
+Evidence reviewed from `E:\LogisticSoftware\sea-and-air` and the live branded shell at `https://frontend-beryl-three.vercel.app/` confirms Raaziq is a substantial logistics build rather than a concept mockup. The air vertical documents quotation-to-shipment workflows, ops/worker/customer/public-tracking surfaces, a 17-stage air-freight lifecycle, FastAPI + React architecture, and a documented integration-test suite. The sea vertical provides public container lookup through a provider abstraction and shares the customer-facing tracking UI.
+
+Claim boundaries are important: current documentation explicitly does **not** support claims of live carrier integrations for air, ETA prediction, GPS/IoT, AI pricing/prediction, payments/ERP, or other future capabilities. The sea SAPT connector has an explicit authorization/commercial-use caveat; never market it as an official SAPT partnership/integration unless separately authorized. Air documentation is internally stale/inconsistent around ops authentication, so avoid detailed auth claims until runtime/source behavior is specifically re-verified. Public shell/branding was verified; authenticated live workflow verification was not completed in this audit.
+
+### CONTENT-03 — recommended real-work information architecture
+**P1 PRODUCT/SALES RECOMMENDATION — NEEDS SAAD DECISION**
+
+For credibility, the strongest evidence-backed direction is a distinct **Selected Work / Real Builds** area led by APPNA New Jersey and Raaziq, plus a separately labeled **Founder-built products** area if QuickSign, `extract`, Ledger, or DineSync are used. This separation prevents personal/freelance work from being presented as company client history while still proving the founders can ship real systems.
+
+### TESTIMONIAL-01 — temporary testimonial evidence boundary
+**OWNER-REPORTED POSITIVE FEEDBACK / STAGING PLACEHOLDER ONLY / NEEDS APPROVED QUOTE FOR FACTUAL PUBLICATION**
+
+Saad reports that both the APPNA New Jersey client and the Raaziq client were happy with the work and intends to use temporary testimonials. No exact approved client quotation, speaker name/title, or publication permission was verified during this audit. A testimonial component may use clearly marked staging/placeholder copy during development, but fabricated attributed quotes must not ship as factual customer statements. Before production, use an exact approved quote or owner/client-approved paraphrase with truthful attribution.
+
+### AUDIT-01 — one-pass local audit confirmation (2026-09-14)
+**VERIFIED / AUDIT ONLY — NO PRODUCT CODE CHANGE**
+
+A single local audit script inspected Git state, package/config files, the filtered source tree, tests, TODO/FIXME/error patterns, existing handoff items, relevant navigation/scroll/SEO/performance patterns, and attempted the standard quality gates. At the start of the pass, branch `codex/psametra-site` and `origin/codex/psametra-site` both pointed to `1051fed7e43645ece769fce616b14e8ef0f71188`; the only working-tree change was this handoff update.
+
+- No additional critical source bug was identified beyond **BUG-01**.
+- No source `TODO`/`FIXME`/`HACK`/`XXX`, `@ts-ignore`, or `@ts-expect-error` debt was found by the pass; TODO hits were confined to this handoff/checklist.
+- The single source `console.error` remains in transition failure handling and was not identified as a new defect.
+- Existing findings for SEO metadata, missing robots/sitemap, always-priority brand images, Lenis ownership, and the mobile-menu scroll-lock path were reconfirmed rather than duplicated as new issues.
+- Unit tests executed successfully: **9/9 passed**.
+- `lint`, `typecheck`, and `build` could not start in this checkout because the local `eslint`/`next` executables are unavailable (`node_modules` is not installed). Treat this as a local environment precondition, **not a code-gate failure**. Earlier successful lint/typecheck/build evidence in this handoff remains the latest completed gate evidence until dependencies are installed and the gate is rerun.
+- The temporary audit report is not a project artifact and must not be committed.
+
 ### BIZ-01 — custom company domain
 **P1 BEFORE SERIOUS PUBLIC LAUNCH / NEEDS SAAD**
 
@@ -652,6 +697,7 @@ Do not raise these scores merely because code was changed. Raise them only after
 ## 12. FINAL STATUS AT THIS HANDOFF
 
 - A-Z committed-repo audit: **VERIFIED COMPLETE**
+- Latest one-pass local audit transport check (2026-09-14): **VERIFIED — HANDOFF-only findings; 9/9 unit tests passed; lint/typecheck/build blocked locally by missing installed dependencies**
 - Original premium plan comparison: **VERIFIED COMPLETE**
 - Premium implementation in GitHub: **DONE at `49a5691`**
 - Public production upgraded: **NO — still old `698002c` release**
