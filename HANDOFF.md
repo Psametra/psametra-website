@@ -1,6 +1,58 @@
 # Psametra premium upgrade — audit, scores, implementation plan, and AI handoff
 
-## READ THIS FIRST
+## Current handoff — 2026-09-13 (read before the historical plan below)
+
+The user explicitly requested implementing this handoff and pushing all completed work when usage reached 90%. That threshold has now been reached. Implementation is paused for the requested checkpoint; the remaining acceptance work below is NOT complete.
+
+### Authorization and repository state
+
+- Existing RMS repository: rmspvtltdsoftware/psametra-website. No new repository created.
+- Working branch: codex/psametra-site.
+- Pulled the original handoff by fast-forward from 698002c to 1886f15 before editing.
+- Implementation commit: 49a5691049cb8d51fb62a303aaa84497a1c9f10f (Upgrade Psametra layouts, motion, founders, and contact).
+- This handoff is a separate documentation commit on top of that source commit; use git log -1 for its exact hash.
+- User corrected the earlier push-identity preference: use the current ARKhan8604 account; both collaborators have access to RMS. Git Credential Manager lists ARKhan8604. Existing author identity remains Abdur Rafay Khan. Do not require msaad9632 for these pushes.
+- No website changes remain uncommitted after the implementation commit. Only this HANDOFF.md update is pending its own commit/push at the time of writing.
+- The current user request authorizes implementation, documentation, commits and push. Earlier approval questions below are historical, not a requirement to repeat authorization already given.
+- No production deployment or Vercel settings changed. Production remains https://psametra-website.vercel.app/ at the previous release. Verify RMS Vercel scope before any future authorized deployment.
+- Local Next dev preview: http://127.0.0.1:3000/ (server started this session; restart with npm run dev if stopped).
+
+### Implemented
+
+1. Shared monochrome palette, larger responsive typography, cropped hero eclipse with faint edge glow, dark statement/capabilities/work, light approach section, and large footer wordmark.
+2. One lead homepage project plus two secondary previews; larger 16:10 work-page studies with semantic challenge/direction groups. Honest concept labels preserved.
+3. Editorial services rows with typed decorative SVG diagrams; equal founder profiles and provided portfolio links; approved company positioning.
+4. RMS email default, clickable contact/footer address, Open email draft and separate Download brief actions. Whitespace validation and mailto encoding are pure tested helpers. No backend, storage, or fake sent state.
+5. 620ms nominal navigation choreography: 80ms cover, concurrent route loading/220ms rotation, 320ms split. Commit barrier and recovery preserved, extra destination dimming removed, Back/Forward remains native, trailing-slash active states fixed.
+6. Single ScrollProvider with pinned Lenis 1.3.26, lerp .12, one automatic RAF. Fine-pointer/hover, width >=768px and no reduced motion only. Native touch/anchors/keyboard/history; composable menu/transition locks and cleanup.
+7. Progressive section entrances, offscreen ambient pause, local orbit paint/overflow containment. Content remains visible without JavaScript.
+8. Styles separated into navigation, home, diagrams, projects, pages, footer, and shared foundations. README, architecture, environment example, tests and QA documentation updated.
+
+### Exact verification
+
+- npm run lint: PASS.
+- npm run typecheck: PASS.
+- npm test: PASS, 9 tests, zero failures.
+- npm run build: PASS, all five routes and 404 statically exported.
+- npm run format:check: PASS before final documentation-only QA update; that update was separately formatted.
+- git diff --check: PASS before commits.
+- Browser: 90 settled layout checks (5 routes x 9 widths x 2 themes), zero horizontal document overflow. Widths: 320,375,390,430,768,1024,1280,1440,1920.
+- Checked trailing-slash active links, same-page history, cross-page hash placement, main focus, menu Escape/focus/lock restoration, whitespace rejection and valid local brief download status.
+- Desktop homepage/About/founders/work and mobile homepage/contact/footer reviewed visually. Layout review fixed Tailwind's unintended container max-width and removed brittle positional selectors.
+- See docs/QA.md for the exact evidence and limitations. No new Lighthouse score, 60fps claim, or numeric premium-quality score is asserted.
+
+### Remaining work — next concrete steps
+
+1. Complete stage 4 acceptance on a production preview: fresh Lighthouse mobile >=95/desktop >=99 targets, LCP/CLS checks, automated accessibility and contrast scan. Previous production scores below are NOT this implementation's results.
+2. Record desktop wheel/navigation traces and emulated midrange-phone traces. Browser tool's read-only evaluation did not expose performance.now; attempted frame recording could not run. Continuous full-rotation mobile overflow measurement, physical touch behavior and OS-level reduced motion remain pending. Sampled orbit transforms did change with zero overflow; do not promote samples into a full-cycle claim.
+3. Exercise rapid/interrupted navigation, Back during cover/rotation/reveal, throttled destinations, full keyboard pass, downloaded byte inspection and external portfolio link availability. Pure barrier/failure/reduced-motion tests pass but do not replace these browser cases.
+4. Ask for product-owner review of the local/approved preview. This is a substantial first implementation of stages 1–3, not a verified 9/10 release. Refine based on review and finish remaining acceptance checks before production release.
+5. When production deployment is authorized, use RMS Vercel only: rmspvtltdsoftware-4375 / rmspvtltdsoftware-4375s-projects. Never use the previously deleted personal-account project. No automatic GitHub deployment should be assumed.
+6. Update this handoff and push at every stop/checkpoint, preserving the user's latest account correction and explicit authorization.
+
+---
+
+## Historical handoff and implementation plan
 
 This file is the source-of-truth handoff for continuing the Psametra website work after the previous Astra/Codex session reached its usage limit.
 
