@@ -1,35 +1,50 @@
-# Verification record
+# Verification — premium upgrade, 2026-09-13
 
-## Automated
+## Automated checks
 
-- ESLint: passes.
-- Strict TypeScript and Next route generation: pass.
-- Production static export: passes; all five pages and a custom 404 are generated.
-- Navigation tests cover external links, same-page anchors, query changes, and equivalent trailing slashes.
-- Transition tests deliberately hold the route-commit promise, confirm reveal remains blocked, exercise reduced motion, and reject failed navigation without exposing stale content.
-- Theme tests cover system light/dark, explicit preferences, invalid stored values, and denied storage before paint.
-- Brief formatting preserves Unicode, multiline details, and optional company fields.
+- `npm run lint`: passed, no errors or warnings.
+- `npm run typecheck`: passed, Next route generation and strict TypeScript.
+- `npm test`: 9 tests passed, 0 failed. Covers cross-page eligibility/trailing slashes, Unicode brief formatting, whitespace rejection, mailto round-trip encoding, system/manual theme behavior including storage denial, concurrent routing/rotation, delayed commit barriers, reduced motion, and failed navigation.
+- `npm run build`: passed; all five routes and custom 404 exported statically.
+- `npm run format:check`: passed.
+- Dependency added: pinned `lenis@1.3.26`; no other animation runtime.
 
-## Browser review
+## Browser checks completed
 
-- Desktop homepage and Services: checked at 1440px in light and dark modes.
-- Mobile homepage, Work, menu, and Contact: checked at 390px.
-- About and header: checked at 320px, with no horizontal page overflow.
-- The mobile menu exposes all four links, closes when following a route, and restores the normal page after transition.
-- Native Back and Forward navigate correctly between Home and Work.
-- Empty contact fields fail native validation; a completed sample brief reaches the download-ready status without sending data.
-- Theme controls and reload persistence reviewed.
-- Final browser console checked for application errors.
+Local development preview: http://127.0.0.1:3000/ (Next dev, not a performance benchmark).
 
-## Fixes made during review
+- All five routes at 320, 375, 390, 430, 768, 1024, 1280, 1440, and 1920 CSS pixels, in dark and light themes: 90 settled viewport checks. Document scroll width never exceeded client width.
+- Direct visits with trailing slashes: matching desktop/mobile navigation links have `aria-current="page"`.
+- Homepage visual review at desktop and 390px, both themes. Large monochrome heading, cropped eclipse, restrained edge glow, dark capabilities/work, full-width off-white approach, and large footer wordmark.
+- About desktop story and equal founder profiles reviewed visually. Work preview/details and mobile contact/footer reviewed visually.
+- System theme resolved to dark in the test environment. Manual light persisted across direct route visits. Existing theme tests cover both system preferences and storage denial.
+- Same-page Discover link retained native hash/history and aligned the capabilities section below the sticky header. Back/Forward did not leave an overlay or scroll lock.
+- Cross-page capability link reached `/services/#web`; target top was about 136px, focus moved to `main`, overlay hid, and overflow lock cleared.
+- Mobile dialog: opening focused Close menu and locked scrolling; Escape restored Open menu focus and scrolling; following Contact closed the dialog and completed navigation.
+- Whitespace-only name/description produced useful validation messages and no success status. Corrected input allowed the local download action; status explicitly stated nothing was sent or stored.
+- Mailto recipient/encoding verified by pure tests; no test email was sent and no external email application was launched.
+- Orbit sampled while visible: computed transform changed, animation running, zero horizontal overflow. Offscreen observer state was false. Continuous full-cycle measurement remains pending.
+- Narrow viewport after eligibility update has no Lenis instance/class; desktop fine-pointer viewport initializes it. Browser viewport resize does not emulate a physical touch device.
+- No application errors observed in captured browser logs. A development Fast Refresh full-reload warning appeared during source edits.
 
-- Scoped desktop navigation selectors to the header’s direct navigation child. The broad selector had also hidden navigation inside the mobile dialog.
-- Closed the native dialog before beginning route motion so its top layer cannot obscure the eclipse.
-- Added a stable scrollbar gutter to prevent page-width shifts while transitions lock scrolling.
-- Matched route barriers to normalized destination paths and let native history interrupt abandoned transitions.
-- Split prepaint theme configuration from its client component to avoid Fast Refresh boundary warnings.
-- Prevented the narrow-screen header CTA from wrapping.
+## Corrections made during review
 
-## Limits and launch configuration
+- Neutralized Tailwind's implicit container max-width so the explicit layout width governs large screens.
+- Kept captions readable where the decorative cropped logo approaches them.
+- Replaced brittle work-description positional selectors with explicit semantic groups.
+- Kept the mobile orbit inside a local paint/overflow boundary rather than hiding document overflow.
+- Replaced the placeholder mailbox in source, contact UI, footer, environment example, and documentation.
+- Changed white-on-blue controls to an accessible darker control accent; brand blue is reserved for small decorative accents.
 
-The contact mailbox is an explicit placeholder until a verified address is configured. Direct server-side form delivery is not implemented. Concept studies are not real client case studies. Lighthouse scores and a physical mid-range mobile device were not measured. Reduced-motion ordering is covered in automated tests; OS-level motion settings were not changed during browser review.
+## Remaining acceptance checks
+
+These are not marked complete and previous production Lighthouse numbers do not describe this implementation:
+
+- Fresh production-build Lighthouse mobile/desktop reports, LCP/CLS comparison, and comprehensive automated accessibility scan.
+- Desktop scrolling/navigation frame traces and emulated midrange-phone performance; stable 60fps and no recurring long tasks are not yet measured. The available read-only browser evaluation does not expose `performance.now`, so the attempted frame recorder could not run.
+- Continuous 38-second complete-orbit observation at all required mobile widths, including touch hardware and both themes.
+- OS/browser-level reduced-motion interaction check; rapid repeated clicks and Back during the transition; throttled destination loading in the real browser. Ordering and failure recovery are tested in pure tests, not all interaction permutations.
+- Actual downloaded file byte inspection, keyboard-only full-site pass, and external portfolio link availability.
+- Product-owner visual review. No unsupported numeric quality score is assigned.
+
+Production https://psametra-website.vercel.app/ remains the earlier release. No production deployment or Vercel setting change was made in this implementation session.

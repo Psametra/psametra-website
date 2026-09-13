@@ -2,30 +2,45 @@
 import { useState, type FormEvent } from "react";
 import { site } from "@/content/site";
 import { Arrow } from "./ui";
-import { formatProjectBrief } from "@/lib/project-brief";
+import {
+  briefFieldError,
+  formatProjectBrief,
+  projectEmailUrl,
+  type ProjectBrief,
+} from "@/lib/project-brief";
 
 /** Prepares a local brief. No submission is claimed and no personal data leaves the browser automatically. */
 export function ContactForm() {
   const [message, setMessage] = useState("");
-  const emailReady = !site.email.endsWith(".example");
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const body = formatProjectBrief({
+    const brief: ProjectBrief = {
       name: String(form.get("name") || ""),
       email: String(form.get("email") || ""),
       company: String(form.get("company") || ""),
       service: String(form.get("service") || ""),
       details: String(form.get("details") || ""),
-    });
-    if (emailReady) {
-      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent("A new project conversation")}&body=${encodeURIComponent(body)}`;
+    };
+    for (const field of ["name", "details"] as const) {
+      const input = event.currentTarget.elements.namedItem(field) as
+        HTMLInputElement | HTMLTextAreaElement;
+      input.setCustomValidity(briefFieldError(field, brief[field]));
+    }
+    if (!event.currentTarget.reportValidity()) return;
+    const download =
+      (event.nativeEvent as SubmitEvent).submitter?.getAttribute("value") ===
+      "download";
+    if (!download) {
+      window.location.href = projectEmailUrl(site.email, brief);
       setMessage(
         "Your email app has been requested. Review and send your brief there.",
       );
     } else {
       const url = URL.createObjectURL(
-        new Blob([body], { type: "text/plain;charset=utf-8" }),
+        new Blob([formatProjectBrief(brief)], {
+          type: "text/plain;charset=utf-8",
+        }),
       );
       const anchor = document.createElement("a");
       anchor.href = url;
@@ -39,7 +54,18 @@ export function ContactForm() {
     }
   }
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form
+      className="contact-form"
+      onSubmit={submit}
+      onInput={(event) => {
+        const input = event.target;
+        if (
+          input instanceof HTMLInputElement ||
+          input instanceof HTMLTextAreaElement
+        )
+          input.setCustomValidity(briefFieldError(input.name, input.value));
+      }}
+    >
       <div className="form-row">
         <label>
           Your name <span>*</span>
@@ -93,14 +119,18 @@ export function ContactForm() {
         />
       </label>
       <p className="form-note">
-        {emailReady
-          ? "This opens your email app. You review and send the message yourself."
-          : "Prepare a brief to keep. Direct enquiries will open once our contact address is confirmed."}
+        This opens your email app. You review and send the message yourself. No
+        email app? Download your brief instead.
       </p>
-      <button className="button primary" type="submit">
-        {emailReady ? "Prepare your email" : "Download project brief"}
-        <Arrow diagonal />
-      </button>
+      <div className="form-actions">
+        <button className="button primary" type="submit" value="email">
+          Open email draft
+          <Arrow diagonal />
+        </button>
+        <button className="text-link" type="submit" value="download">
+          Download brief <Arrow />
+        </button>
+      </div>
       <p className="form-status" role="status">
         {message}
       </p>

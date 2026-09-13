@@ -26,7 +26,7 @@ export default function Home() {
             </SiteLink>
           </div>
         </div>
-        <div className="hero-art" aria-hidden="true">
+        <div className="hero-art" aria-hidden="true" data-ambient>
           <span className="art-coordinate">
             PS / 001 — THE POSSIBILITY OF PRECISE
           </span>
@@ -60,41 +60,45 @@ export default function Home() {
             Meet Psametra <Arrow />
           </SiteLink>
         </div>
-        <div className="horizon" aria-hidden="true" />
-      </section>
-      <section id="capabilities" className="section container">
-        <div className="section-rule">
-          <span>03</span>
-          <i />
-          <span>CAPABILITIES</span>
+        <div className="statement-eclipse" aria-hidden="true" data-ambient>
+          <Eclipse />
         </div>
-        <div className="capabilities-layout">
-          <div className="capabilities">
-            {site.services.map((service, index) => (
-              <SiteLink
-                href={`/services#${service.id}`}
-                className="capability"
-                key={service.id}
-              >
-                <span className="index">0{index + 1}</span>
-                <h3>{service.title}</h3>
-                <p>{service.summary}</p>
-                <Arrow />
-              </SiteLink>
-            ))}
+      </section>
+      <section id="capabilities" className="capabilities-section dark-surface">
+        <div className="section container">
+          <div className="section-rule">
+            <span>03</span>
+            <i />
+            <span>CAPABILITIES</span>
           </div>
-          <div className="capabilities-art" aria-hidden="true">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="orbit orbit-three">
-              <div className="orbit-point" />
+          <div className="capabilities-layout">
+            <div className="capabilities" data-reveal>
+              {site.services.map((service, index) => (
+                <SiteLink
+                  href={`/services#${service.id}`}
+                  className="capability"
+                  key={service.id}
+                >
+                  <span className="index">0{index + 1}</span>
+                  <h3>{service.title}</h3>
+                  <p>{service.summary}</p>
+                  <Arrow />
+                </SiteLink>
+              ))}
             </div>
-            <div className="orbit-axis horizontal" />
-            <div className="orbit-axis vertical" />
-            <Eclipse />
-            <span className="orbit-caption">
-              CONNECTED THINKING. COHERENT SYSTEMS.
-            </span>
+            <div className="capabilities-art" aria-hidden="true" data-ambient>
+              <div className="orbit orbit-one" />
+              <div className="orbit orbit-two" />
+              <div className="orbit orbit-three">
+                <div className="orbit-point" />
+              </div>
+              <div className="orbit-axis horizontal" />
+              <div className="orbit-axis vertical" />
+              <Eclipse />
+              <span className="orbit-caption">
+                CONNECTED THINKING. COHERENT SYSTEMS.
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -122,31 +126,33 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <section className="principles-section container section">
-        <div className="section-rule">
-          <span>05</span>
-          <i />
-          <span>OUR APPROACH</span>
-        </div>
-        <div className="principle-intro">
-          <h2>
-            A clearer path
-            <br />
-            from insight to impact.
-          </h2>
-          <p>
-            Technology is only as valuable as the problem it solves. We bring
-            clarity, care, and a long-term perspective to every decision.
-          </p>
-        </div>
-        <div className="principles-grid">
-          {site.principles.map((principle, index) => (
-            <div key={principle.title}>
-              <span className="index">0{index + 1}</span>
-              <h3>{principle.title}</h3>
-              <p>{principle.description}</p>
-            </div>
-          ))}
+      <section className="principles-section light-surface">
+        <div className="container section">
+          <div className="section-rule">
+            <span>05</span>
+            <i />
+            <span>OUR APPROACH</span>
+          </div>
+          <div className="principle-intro" data-reveal>
+            <h2>
+              A clearer path
+              <br />
+              from insight to impact.
+            </h2>
+            <p>
+              Technology is only as valuable as the problem it solves. We bring
+              clarity, care, and a long-term perspective to every decision.
+            </p>
+          </div>
+          <div className="principles-grid">
+            {site.principles.map((principle, index) => (
+              <div key={principle.title} data-reveal>
+                <span className="index">0{index + 1}</span>
+                <h3>{principle.title}</h3>
+                <p>{principle.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <ContactCta />

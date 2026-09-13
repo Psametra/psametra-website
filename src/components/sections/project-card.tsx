@@ -75,7 +75,7 @@ export function ProjectVisual({ project }: { project: Project }) {
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="project-card">
+    <article className="project-card" data-reveal>
       <SiteLink
         href={`/work#${project.id}`}
         aria-label={`Explore ${project.title}`}

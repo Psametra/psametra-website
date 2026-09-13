@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { shouldTransition } from "@/lib/navigation";
+import { shouldTransition, normalizePath } from "@/lib/navigation";
+import { useScrollController } from "./scroll-provider";
 import { runTransition } from "@/lib/transition-sequence";
 import "./transition.css";
 
 const MOTION = {
-  appear: 120,
-  rotate: 320,
-  reveal: 420,
+  appear: 80,
+  rotate: 220,
+  reveal: 320,
   fade: 100,
   routeTimeout: 8000,
   easing: "cubic-bezier(.76, 0, .24, 1)",
@@ -19,11 +20,11 @@ type RouteBarrier = {
   resolve: () => void;
   reject: (reason: Error) => void;
 };
-const normalizePath = (path: string) => path.replace(/\/$/, "");
 
 /** Owns click exclusion, motion resources, and routing recovery; ordinary links and native history remain intact. */
 export function TransitionProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
+  const { suspend } = useScrollController();
   const pathname = usePathname();
   const overlay = useRef<HTMLDivElement>(null);
   const shell = useRef<HTMLDivElement>(null);
@@ -42,7 +43,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
     let busy = false;
     let disposed = false;
     let historyInterrupted = false;
-    let previousOverflow = "";
+    let releaseScroll: (() => void) | undefined;
     const animations = new Set<Animation>();
     let watchdog: ReturnType<typeof setTimeout> | undefined;
 
@@ -67,10 +68,9 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
       const reducedMotion = matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      previousOverflow = document.documentElement.style.overflow;
+      releaseScroll = suspend();
       page.inert = true;
       layer.hidden = false;
-      document.documentElement.style.overflow = "hidden";
       try {
         await runTransition({
           reducedMotion,
@@ -143,12 +143,6 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
           page.inert = false;
           const main = document.querySelector<HTMLElement>("main");
           main?.focus({ preventScroll: true });
-          if (main && !reducedMotion)
-            await animate(
-              main,
-              [{ opacity: 0.85 }, { opacity: 1 }],
-              MOTION.appear,
-            );
         }
       } catch (error) {
         // Native back/forward supersedes a pending click; never force the abandoned destination back into history.
@@ -166,7 +160,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
         animations.clear();
         layer.hidden = true;
         page.inert = false;
-        document.documentElement.style.overflow = previousOverflow;
+        releaseScroll?.();
         busy = false;
       }
     };
@@ -203,7 +197,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
           new Error("Superseded by browser history"),
         );
         animations.forEach((animation) => animation.cancel());
-      } else void navigate(null);
+      }
     }
     document.addEventListener("click", onClick, true);
     window.addEventListener("popstate", onPopState);
@@ -216,9 +210,9 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
       animations.forEach((animation) => animation.cancel());
       page.inert = false;
       layer.hidden = true;
-      if (busy) document.documentElement.style.overflow = previousOverflow;
+      releaseScroll?.();
     };
-  }, [router]);
+  }, [router, suspend]);
 
   return (
     <>

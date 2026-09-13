@@ -25,13 +25,9 @@ export default function Contact() {
           </p>
           <div className="contact-direct">
             <span className="eyebrow">Prefer email?</span>
-            <p>{site.email}</p>
-            {site.email.endsWith(".example") && (
-              <small>
-                Our direct contact address will be available here soon. In the
-                meantime, prepare a project brief below.
-              </small>
-            )}
+            <a className="text-link email-link" href={`mailto:${site.email}`}>
+              {site.email}
+            </a>
           </div>
           <div className="contact-next">
             <span className="eyebrow">What comes next</span>

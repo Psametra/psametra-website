@@ -23,14 +23,18 @@ export default function Work() {
         {site.projects.map((project) => (
           <article id={project.id} key={project.id} className="work-detail">
             <ProjectVisual project={project} />
-            <div className="work-detail-copy">
+            <div className="work-detail-copy" data-reveal>
               <p className="eyebrow">{project.category} / CONCEPT</p>
               <h2>{project.title}</h2>
               <p className="work-lead">{project.summary}</p>
-              <h3>The challenge</h3>
-              <p>{project.challenge}</p>
-              <h3>The direction</h3>
-              <p>{project.approach}</p>
+              <div className="work-context">
+                <h3>The challenge</h3>
+                <p>{project.challenge}</p>
+              </div>
+              <div className="work-context">
+                <h3>The direction</h3>
+                <p>{project.approach}</p>
+              </div>
               <div className="tags">
                 {project.tags.map((tag) => (
                   <span key={tag}>{tag}</span>

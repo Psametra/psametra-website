@@ -4,11 +4,16 @@ import { usePathname } from "next/navigation";
 import { site } from "@/content/site";
 import Link from "next/link";
 import { Arrow } from "@/components/ui";
+import { normalizePath } from "@/lib/navigation";
+import { useScrollController } from "./scroll-provider";
 
 /** A native modal provides focus containment, Escape dismissal, and background exclusion. */
 export function MobileMenu() {
   const dialog = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
+  const { suspend } = useScrollController();
+  const release = useRef<(() => void) | null>(null);
+  useEffect(() => () => release.current?.(), []);
   useEffect(() => {
     dialog.current?.close();
   }, [pathname]);
@@ -17,7 +22,11 @@ export function MobileMenu() {
       <button
         className="icon-button"
         aria-label="Open menu"
-        onClick={() => dialog.current?.showModal()}
+        onClick={() => {
+          release.current?.();
+          release.current = suspend();
+          dialog.current?.showModal();
+        }}
       >
         <svg
           width="20"
@@ -30,7 +39,15 @@ export function MobileMenu() {
           <path d="M4 8h16M4 16h16" />
         </svg>
       </button>
-      <dialog ref={dialog} className="menu-dialog" aria-label="Navigation menu">
+      <dialog
+        ref={dialog}
+        className="menu-dialog"
+        aria-label="Navigation menu"
+        onClose={() => {
+          release.current?.();
+          release.current = null;
+        }}
+      >
         <div className="menu-top">
           <span>PSAMETRA / EXPLORE</span>
           <button
@@ -46,7 +63,11 @@ export function MobileMenu() {
             <Link
               href={item.href}
               key={item.href}
-              aria-current={pathname === item.href ? "page" : undefined}
+              aria-current={
+                normalizePath(pathname) === normalizePath(item.href)
+                  ? "page"
+                  : undefined
+              }
               onClick={() => dialog.current?.close()}
             >
               <span>0{index + 1}</span>

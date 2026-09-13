@@ -24,10 +24,32 @@ test("order-violation regression: delayed route commit blocks reveal determinist
     },
   });
   await commitStarted.promise;
-  assert.deepEqual(events, ["cover", "rotate", "commit"]);
+  assert.deepEqual(events, ["cover", "commit", "rotate"]);
   commitGate.resolve();
   await transition;
-  assert.deepEqual(events, ["cover", "rotate", "commit", "reveal"]);
+  assert.deepEqual(events, ["cover", "commit", "rotate", "reveal"]);
+});
+
+test("routing starts before rotation finishes, but reveal waits for both", async () => {
+  const rotation = Promise.withResolvers<void>();
+  const commit = Promise.withResolvers<void>();
+  let revealed = false;
+  const transition = runTransition({
+    reducedMotion: false,
+    cover: async () => {},
+    rotate: () => rotation.promise,
+    commit: async () => {
+      commit.resolve();
+    },
+    reveal: async () => {
+      revealed = true;
+    },
+  });
+  await commit.promise;
+  assert.equal(revealed, false);
+  rotation.resolve();
+  await transition;
+  assert.equal(revealed, true);
 });
 
 test("reduced motion skips rotation while retaining the route barrier", async () => {

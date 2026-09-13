@@ -11,7 +11,10 @@ export async function runTransition(
   sequence: TransitionSequence,
 ): Promise<void> {
   await sequence.cover();
-  if (!sequence.reducedMotion) await sequence.rotate();
-  await sequence.commit();
+  // Route loading overlaps rotation, but neither may reveal unfinished content.
+  await Promise.all([
+    sequence.commit(),
+    sequence.reducedMotion ? Promise.resolve() : sequence.rotate(),
+  ]);
   await sequence.reveal();
 }

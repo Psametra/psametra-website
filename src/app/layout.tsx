@@ -5,6 +5,8 @@ import { site } from "@/content/site";
 import { TransitionProvider } from "@/components/navigation/transition-provider";
 import { themeBootstrap } from "@/components/navigation/theme-config";
 import { Footer } from "@/components/footer";
+import { ScrollProvider } from "@/components/navigation/scroll-provider";
+import { MotionObserver } from "@/components/motion-observer";
 import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,16 +44,19 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
       <body>
-        <TransitionProvider>
-          <a className="skip-link" href="#main">
-            Skip to content
-          </a>
-          <Header />
-          <main id="main" tabIndex={-1}>
-            {children}
-          </main>
-          <Footer />
-        </TransitionProvider>
+        <ScrollProvider>
+          <TransitionProvider>
+            <MotionObserver />
+            <a className="skip-link" href="#main">
+              Skip to content
+            </a>
+            <Header />
+            <main id="main" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
+          </TransitionProvider>
+        </ScrollProvider>
       </body>
     </html>
   );

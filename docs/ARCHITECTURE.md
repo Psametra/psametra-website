@@ -28,7 +28,7 @@ Two transition designs were considered: independent animated link wrappers, and 
 ## Transition invariants
 
 - Exactly one sequence owns the overlay at a time; exclusion begins before the first await.
-- `runTransition` enforces cover → rotation → committed destination → reveal.
+- `runTransition` enforces cover → concurrent rotation/route commit → reveal.
 - The route barrier matches the intended normalized pathname, not any unrelated render.
 - Native history interrupts the old sequence without pushing its abandoned destination again.
 - Every animation and timeout has one owner and structural cleanup on success, failure, or teardown.
@@ -41,8 +41,19 @@ Two transition designs were considered: independent animated link wrappers, and 
 
 Storage denial does not make the theme unusable: the current visit still works without persistence. Transition errors recover through ordinary browser navigation after logging; intentional unmount and history cancellation are not failures. Invalid contact fields are rejected by native browser validation. No fake submission success, clients, metrics, awards, or testimonials are present.
 
-The contact form is deliberately explicit about its local behavior because no verified address or delivery provider was supplied. Portfolio compositions are labelled concept studies rather than represented as completed client products.
+The approved RMS mailbox is configured. Draft creation and download are explicit local actions; no delivery provider or backend is implied. Portfolio compositions are labelled concept studies rather than represented as completed client products.
 
 ## Change discipline
 
 Keep new business copy in the content module. Put reusable presentation in `components`, pure policy in `lib`, and operational tooling in `scripts` or `tests`. Add client boundaries only for browser interactions. Document preconditions and non-obvious decisions rather than restating the code. Prefer fixing selectors or ownership boundaries over accumulating layout exceptions or extending timeouts.
+
+## Premium upgrade ownership (2026-09-13)
+
+- `ScrollProvider`: a single dynamically imported Lenis engine, responsive eligibility, native-input exclusions, inertia cancellation, and composable modal/route locks. Each suspension returns an idempotent release function; only the last release restores the prior overflow state. Media changes destroy the old engine; a revision guard prevents stale imports from creating a second engine.
+- `MotionObserver`: one intersection observer per route. Selected groups animate 16px over 450ms once; ambient graphics pause outside the viewport. Content is visible in server HTML, without animation classes that could strand it hidden. Reduced-motion changes cancel running entrances.
+- `ServiceDiagram`: typed code-native decorative illustrations. Service explanations and founder facts live in the editorial source, not in SVG labels.
+- CSS modules are grouped by visual responsibility and contain their own breakpoint rules. `sections.css` is only an import index. The shared `.container` explicitly neutralizes Tailwind’s default max-width; decorative orbit overflow is clipped locally, not hidden on the document.
+- `briefFieldError` and `projectEmailUrl`: pure validation/encoding policies shared with tests. Both contact actions reuse the same validated data and formatting. No user inputs are persisted or automatically sent.
+- The normal transition budget is 80 + max(220, route readiness) + 320ms. Reduced motion uses two 100ms fades. The route commit barrier, native history cancellation, and 8-second navigation recovery bound remain intact.
+
+Lenis API reference: https://github.com/darkroomengineering/lenis (verified against installed 1.3.26 types and stylesheet). No additional animation framework was introduced.

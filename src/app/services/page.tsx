@@ -3,6 +3,7 @@ import { site } from "@/content/site";
 import { PageIntro } from "@/components/sections/page-intro";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { SectionLabel } from "@/components/ui";
+import { ServiceDiagram } from "@/components/sections/service-diagram";
 export const metadata: Metadata = {
   title: "Services",
   description:
@@ -14,17 +15,25 @@ export default function Services() {
       <PageIntro {...site.intros.services} />
       <section className="service-details container">
         {site.services.map((service, index) => (
-          <article id={service.id} className="service-detail" key={service.id}>
-            <span className="index">0{index + 1} / CAPABILITY</span>
-            <div>
+          <article
+            id={service.id}
+            className="service-detail"
+            key={service.id}
+            data-reveal
+          >
+            <div className="service-illustration">
+              <span className="index">0{index + 1} / CAPABILITY</span>
+              <ServiceDiagram type={service.id} />
+            </div>
+            <div className="service-description">
               <h2>{service.title}</h2>
               <p>{service.description}</p>
+              <ul>
+                {service.deliverables.map((deliverable) => (
+                  <li key={deliverable}>{deliverable}</li>
+                ))}
+              </ul>
             </div>
-            <ul>
-              {service.deliverables.map((deliverable) => (
-                <li key={deliverable}>{deliverable}</li>
-              ))}
-            </ul>
           </article>
         ))}
       </section>

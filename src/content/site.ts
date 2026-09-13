@@ -21,7 +21,7 @@ export const site = {
       title: "Intentional by nature.",
       accent: "Precise by design.",
       description:
-        "We’re a software and AI company built around a simple belief: the best technology makes the complex feel clear.",
+        "Psametra is the company Muhammad Saad and Abdur Rafay Khan are building to create focused software products, business systems, and websites.",
     },
     contact: {
       label: "Let’s build something that matters",
@@ -33,12 +33,29 @@ export const site = {
   },
   aboutStory: [
     "There is no shortage of technology. What matters is choosing the right approach, understanding the people who will use it, and getting the details right.",
-    "Psametra brings product thinking, design, and engineering together. We turn uncertainty into a clear direction, and that direction into software built with purpose.",
+    "We bring complementary strengths to the same work: software engineering, AI and backend systems alongside full-stack development, interfaces, and product delivery.",
     "Our aim is simple: to be a thoughtful partner to ambitious businesses, building systems that make sense today and leave room for tomorrow.",
   ],
   description:
     "Thoughtful software engineering, AI systems, and digital experiences for ambitious businesses.",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@psametra.example",
+  email:
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL || "rmspvtltd.software@gmail.com",
+  founders: [
+    {
+      name: "Muhammad Saad",
+      focus: "Software engineering · AI/ML · Backend systems",
+      description:
+        "Connecting applied intelligence with dependable software foundations.",
+      portfolio: "https://muhammadsaad-portfolio.vercel.app/",
+    },
+    {
+      name: "Abdur Rafay Khan",
+      focus: "Full-stack development · Interfaces · Product delivery",
+      description:
+        "Connecting considered interfaces with the systems that bring them to life.",
+      portfolio: "https://abdur-rafay-khan-portfolio.vercel.app/",
+    },
+  ],
   logo: {
     light: "/brand/psametra-logo-dark.webp",
     dark: "/brand/psametra-logo-light.webp",

@@ -4,7 +4,7 @@ export function ContactCta() {
   return (
     <section className="cta-section">
       <div className="container cta-inner">
-        <div>
+        <div data-reveal>
           <SectionLabel>The next chapter starts here</SectionLabel>
           <h2>
             Something in mind?
