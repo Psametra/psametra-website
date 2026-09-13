@@ -1,241 +1,668 @@
-# Psametra premium upgrade — current audit and AI handoff
+# Psametra — A-Z audit, continuation checklist, and AI handoff
 
-**Updated:** 2026-09-13, ~23:15 PKT  
+**Updated:** 2026-09-13, ~23:35 PKT  
 **Repository:** `rmspvtltdsoftware/psametra-website`  
-**Branch:** `codex/psametra-site`
+**Branch:** `codex/psametra-site`  
+**HEAD before this handoff update:** `9b828bfc8ed69ac630875592ed3b97bcbd9c35b7`  
+**Premium-upgrade implementation:** `49a5691049cb8d51fb62a303aaa84497a1c9f10f`
 
-This is the current source-of-truth handoff. The complete historical premium-upgrade plan and the earlier 6.5/10 baseline remain available in Git history at commit `d77fefd7d71724365aa916ec9d7e74519cbd3a23` and its parent history. Read this file first; consult that historical version when exact original-plan wording is needed.
+This is the current source-of-truth handoff for Saad and any AI continuing the Psametra site. The original detailed premium-upgrade plan and old ~6.5/10 baseline remain in Git history at `d77fefd7d71724365aa916ec9d7e74519cbd3a23` and its parents.
 
-## 1. User instruction and scope for this continuation
+---
 
-Saad asked the AI to continue the audit where the previous run hit its usage limit, compare the implementation against the approved plan, audit the updated site for design, smoothness, bugs, and speed, and **push a handoff before stopping**.
+## 0. MANDATORY CONTINUATION PROTOCOL — DO NOT REPEAT FINISHED WORK
 
-For this continuation:
+Every AI must follow this before doing anything:
 
-- Audit/documentation and pushing this handoff are authorized.
-- **Do not change website implementation code.**
-- **Do not deploy the upgraded website or change Vercel settings.**
-- Do not create a new repository. Repository ownership stays with RMS.
-- Connected GitHub identity in the current ChatGPT session is `msaad9632`, which has push access to the existing RMS repository.
-- Keep updating and pushing the handoff before future AI usage/context limits are exhausted.
+1. **Read this entire HANDOFF.md first.**
+2. Confirm current branch and HEAD and compare them with the hashes recorded here.
+3. Work from the checklist below **item by item**.
+4. Items marked **DONE** or **VERIFIED** must NOT be repeated merely to “be safe.” Re-run them only when:
+   - code affecting that item changed after the recorded verification, or
+   - the item explicitly requires a fresh preview/production measurement.
+5. Items marked **TODO** are the remaining work. Items marked **OPTIONAL** are recommendations, not permission to implement them.
+6. Items marked **BLOCKED / NEEDS SAAD** require Saad’s decision or authorization before implementation.
+7. When an item is completed, change its state to **DONE** or **VERIFIED**, record the exact evidence/result and relevant commit, and remove it from the active TODO queue if appropriate.
+8. If an attempted item cannot be completed, mark it **BLOCKED** and record exactly why. Do not leave ambiguous “probably done” status.
+9. After a code fix, re-run only the tests/checks affected by that code plus the standard build gate; do not blindly repeat the complete 90-viewport matrix unless the change can affect global layout.
+10. **Before stopping, handing off, or nearing a model/context/usage limit, update, commit, and push this HANDOFF.md.** Never leave the next AI dependent on chat history.
 
-No product-code change was made by this continuation.
+### User control / authorization
 
-## 2. Repository and deployment state
+- Repository ownership stays with RMS.
+- Do not create a new repo.
+- Do not modify website code merely because this audit recommends something.
+- Do not deploy production or change Vercel settings without Saad’s explicit approval.
+- Documentation/handoff maintenance and pushing the handoff are authorized for continuity.
+- Connected GitHub identity during the latest ChatGPT audit is `msaad9632` and has push access.
 
-Before this handoff commit:
+---
 
-- Branch HEAD: `d77fefd7d71724365aa916ec9d7e74519cbd3a23` — `Record premium upgrade progress and remaining acceptance checks`.
-- Premium-upgrade implementation commit: `49a5691049cb8d51fb62a303aaa84497a1c9f10f` — `Upgrade Psametra layouts, motion, founders, and contact`.
-- Earlier plan/handoff commit: `1886f1592d7cc8067a4724330a5adb4f80bfdc3d`.
-- Current production deployment is still the **old build**, not the premium-upgrade implementation.
-- Vercel team: `rmspvtltdsoftware-4375s-projects` / `team_K7mVodqcY51jB9vLxTygtBRm`.
-- Vercel project: `psametra-website` / `prj_uegLEQdah5M3SMVjidjqqoPChpeK`.
-- Production deployment: `dpl_6TmvkL75xh4tEg57nfuPbzB7qSRq`, state `READY`.
-- Production deployment Git SHA: `698002c3faceb877faafd894a671271949bf1940`.
-- Production URL: `https://psametra-website.vercel.app/`.
+## 1. CURRENT REPOSITORY / DEPLOYMENT STATE
 
-**Important:** the public website currently serves the pre-upgrade version. The upgraded code exists in GitHub but has not been deployed to production. Any audit result below that refers to the upgraded experience comes from the reviewed implementation/local build from the previous audit run, not the currently public production release.
+### GitHub
 
-The live production HTML was rechecked during this continuation and still contains old content such as the placeholder footer email `hello@psametra.example`, confirming the deployment mismatch.
+- Repo: `rmspvtltdsoftware/psametra-website`
+- Branch: `codex/psametra-site`
+- Premium implementation: `49a5691` — `Upgrade Psametra layouts, motion, founders, and contact`
+- Previous audit handoff: `9b828bf` — `Audit upgraded Psametra and record latest handoff`
+- No product code was changed by the A-Z audit that produced this handoff.
 
-## 3. Implementation vs approved plan
+### Vercel
 
-### Stage 1 — visual system + homepage: largely complete
+- Team: `rmspvtltdsoftware-4375s-projects`
+- Team ID: `team_K7mVodqcY51jB9vLxTygtBRm`
+- Project: `psametra-website`
+- Project ID: `prj_uegLEQdah5M3SMVjidjqqoPChpeK`
+- Production deployment: `dpl_6TmvkL75xh4tEg57nfuPbzB7qSRq`
+- Production state: READY
+- Production Git SHA: `698002c3faceb877faafd894a671271949bf1940`
+- Public URL: `https://psametra-website.vercel.app/`
 
-The implementation matches the approved direction closely:
+**CRITICAL:** production is still the OLD build. The premium-upgrade implementation in GitHub is NOT what the public site currently serves. The live production HTML was rechecked and still contains old content such as `hello@psametra.example`.
 
-- restrained monochrome system with limited blue accent
-- larger responsive typography
-- oversized/cropped eclipse treatment and subtle glow
-- stronger section pacing with dark/light contrast
-- dark statement/capabilities/work sequence and lighter approach section
-- one lead homepage project plus two secondary previews instead of three equal cards
-- larger, more editorial work presentations
-- expanded footer composition and wordmark treatment
-- concept labels remain honest; no unsupported client-success claims were introduced
+Do not use the current production URL to judge whether the premium upgrade is visually correct.
 
-### Stage 2 — smooth motion + navigation: substantially complete, one confirmed bug
+---
 
-Implemented as planned:
+## 2. WHAT THE PREVIOUS HANDOFF SAID
 
-- Lenis 1.3.26 is the single desktop glide owner
+The previous handoff said the premium implementation was approximately **8.4/10**, substantially improved from the old ~6.5/10 baseline. It recorded that:
+
+- Stages 1–3 of the approved plan are largely implemented.
+- Stage 4 — final performance/accessibility/release acceptance — remains incomplete.
+- Build/lint/type/tests had passed.
+- 90 settled responsive layout checks had passed with no horizontal document overflow.
+- Production is stale and still points at the older build.
+- One real release-blocking responsive-state bug was confirmed: opening the mobile menu and then resizing into desktop can leave scroll locked.
+- Fresh Lighthouse, accessibility, real-device touch, reduced-motion, interrupted-navigation stress, full orbit-cycle checks, external-link verification, and final product-owner review remain pending.
+- No product code should be changed without Saad’s authorization.
+
+This A-Z audit extends that handoff rather than replacing those facts.
+
+---
+
+## 3. A-Z REPOSITORY AUDIT SCOPE — COMPLETED
+
+**Status: VERIFIED — do not repeat this source inventory unless the repo changes materially.**
+
+The latest audit inspected the repository from root through application code and deployment state, excluding only binary image bytes from line-by-line text review.
+
+### Root/config/docs reviewed
+
+- `.env.example`
+- `.gitignore`
+- `.openai/hosting.json`
+- `AGENTS.md`
+- `CLAUDE.md`
+- `README.md`
+- `docs/ARCHITECTURE.md`
+- `docs/QA.md`
+- `eslint.config.mjs`
+- `next.config.ts`
+- `package.json`
+- `package-lock.json` inventory/version context
+- `postcss.config.mjs`
+- `tsconfig.json`
+- `scripts/optimize-brand.mjs`
+- public brand asset inventory and sizes
+- GitHub branch/commit state
+- Vercel team/project/deployment state
+
+### App/routes reviewed
+
+- `src/app/layout.tsx`
+- `src/app/page.tsx`
+- `src/app/services/page.tsx`
+- `src/app/work/page.tsx`
+- `src/app/about/page.tsx`
+- `src/app/contact/page.tsx`
+- `src/app/not-found.tsx`
+- `src/app/globals.css`
+
+### Components reviewed
+
+- `brand.tsx`
+- `contact-form.tsx`
+- `footer.tsx`
+- `motion-observer.tsx`
+- `ui.tsx`
+- navigation: header, mobile menu, scroll provider, site link, theme config/toggle, transition provider/CSS
+- shared sections: contact CTA, page intro, project card/visual, service diagrams
+
+### Data/libs reviewed
+
+- `src/content/site.ts`
+- `src/lib/navigation.ts`
+- `src/lib/project-brief.ts`
+- `src/lib/transition-sequence.ts`
+
+### Styling reviewed
+
+- tokens
+- base
+- navigation
+- home
+- diagrams
+- projects
+- pages
+- footer
+- sections import index
+
+### Tests reviewed
+
+- navigation tests
+- project brief tests
+- theme bootstrap tests
+- transition sequence tests
+
+### A-Z conclusion
+
+Architecture is disciplined and small. There is no reason to rebuild it or introduce a large framework. Editorial data is centralized, static export fits the current product, client code is restricted to actual browser interactions, contact behavior is honest, and transition/scroll ownership is substantially better than the original version.
+
+No second critical code bug was found during static inspection beyond the already-confirmed responsive mobile-menu scroll-lock bug.
+
+---
+
+## 4. APPROVED PLAN IMPLEMENTATION STATUS
+
+### VIS-01 — shared visual system / typography / palette
+**DONE / VERIFIED**
+
+- restrained monochrome palette
+- limited blue accent
+- larger responsive type
+- stronger hierarchy
+- dark/light surface choreography
+- responsive container system
+
+Do not redesign from scratch.
+
+### VIS-02 — premium homepage hero
+**DONE / VERIFIED**
+
+- large asymmetric typography
+- cropped eclipse
+- faint edge glow
+- immediately readable headline
+- ambient drift with reduced-motion support
+
+### VIS-03 — homepage pacing
+**DONE / VERIFIED**
+
+- dark statement
+- dark capabilities
+- dark work
+- off-white approach section
+- dark closing CTA/footer
+
+### VIS-04 — homepage work hierarchy
+**DONE / VERIFIED**
+
+- one lead concept + two secondary previews
+- not three equal cards
+- honest concept labels retained
+
+### VIS-05 — footer upgrade
+**DONE / VERIFIED**
+
+- oversized PSAMETRA wordmark
+- compact navigation
+- real RMS contact link in upgraded source
+
+### MOT-01 — Lenis desktop glide
+**DONE / VERIFIED IN CODE + PREVIOUS LOCAL BROWSER PASS**
+
+- pinned Lenis `1.3.26`
+- single owner
+- one automatic RAF
 - `lerp: 0.12`
-- enabled only for fine-pointer/hover desktop at width >=768px
-- touch/mobile remains native
-- reduced-motion users do not get eased desktop scrolling
-- one automatic RAF owner
-- section entrances are progressive and content remains visible without JavaScript
-- ambient animation is locally contained and paused offscreen where appropriate
-- page transition target was reduced to roughly 620ms nominal choreography
-- destination loading begins earlier/concurrently
-- trailing-slash active-state bug was fixed
-- browser Back/Forward is intended to stay native
-- transition/menu scroll locks were made composable
+- only fine-pointer / hover / >=768px / no reduced motion
+- native touch retained
 
-However, the audit found a real responsive-state bug described in section 5 below.
+### MOT-02 — page transition architecture
+**DONE / VERIFIED**
 
-### Stage 3 — internal pages + About + Contact: largely complete
+- one root transition owner
+- 80ms cover
+- route loading concurrent with ~220ms rotation
+- reveal ~320ms
+- route barrier prevents stale reveal
+- browser history can interrupt transition
+- reduced-motion path avoids rotation/translation-heavy choreography
 
-Implemented:
+### MOT-03 — progressive entrances / ambient pause
+**DONE / VERIFIED**
 
-- services moved toward editorial rows with restrained diagrams
-- work studies enlarged toward 16:10 editorial layouts
-- About contains equal founder profiles
-- Muhammad Saad and Abdur Rafay Khan portfolio destinations were added
-- company positioning is software/products/business systems/websites without invented claims
-- contact uses the real RMS address `rmspvtltd.software@gmail.com`
-- email draft action is separated from brief download
-- whitespace validation and mailto encoding are handled with pure helpers/tests
-- no backend/database/fake sent state was added
+- content visible without JS
+- 16px / ~450ms reveal treatment
+- intersection observer
+- ambient state tracks viewport
+- reduced motion cancels running entrance animation
 
-### Stage 4 — acceptance/performance/accessibility: only partially complete
+### INT-01 — Services page
+**DONE / VERIFIED**
 
-A strong verification pass was done, but release acceptance is not complete. Do **not** call this a verified 9/10 production release yet.
+- editorial rows
+- four services retained
+- code-native diagrams
+- deliverables retained
 
-## 4. Verification already completed on the upgraded implementation
+### INT-02 — Work page
+**DONE / VERIFIED**
 
-The previous audit run recorded:
+- larger editorial visual studies
+- explicit concept disclaimer
+- challenge/direction groupings
+- concept status remains honest
+
+### INT-03 — About / founders
+**DONE / VERIFIED**
+
+- Muhammad Saad and Abdur Rafay Khan represented equally
+- portfolio links present
+- no invented titles/metrics/outcomes
+
+### INT-04 — Contact
+**DONE / VERIFIED IN SOURCE + PARTIAL BROWSER QA**
+
+- real default email `rmspvtltd.software@gmail.com`
+- explicit mailto draft
+- local brief download
+- whitespace validation
+- no backend/storage/fake “sent” state
+
+---
+
+## 5. EXISTING VERIFICATION — DO NOT BLINDLY REPEAT
+
+**VERIFIED at premium-upgrade checkpoint unless relevant code changes:**
 
 - `npm run lint`: PASS
 - `npm run typecheck`: PASS
-- `npm test`: PASS — 9 tests, 0 failures
-- `npm run build`: PASS — all five routes plus 404 statically exported
-- `npm run format:check`: PASS before the final documentation-only QA update
-- `git diff --check`: PASS before commits
-- 90 settled responsive layout checks: 5 routes × 9 widths × 2 themes
-- widths checked: 320, 375, 390, 430, 768, 1024, 1280, 1440, 1920
-- zero horizontal **document** overflow in the settled matrix
-- trailing-slash active links checked
-- same-page history and cross-page hash placement checked
-- main-focus behavior checked
-- menu Escape/focus/lock restoration checked in ordinary open/close flows
-- whitespace rejection and local brief-download status checked
-- desktop homepage/About/founders/work visually reviewed
-- mobile homepage/contact/footer visually reviewed
+- `npm test`: PASS — 9 tests / 0 failures
+- `npm run build`: PASS — five routes + 404 statically exported
+- `npm run format:check`: PASS at recorded checkpoint
+- `git diff --check`: PASS at recorded checkpoint
+- 90 settled route/width/theme layout checks: PASS
+- widths: 320, 375, 390, 430, 768, 1024, 1280, 1440, 1920
+- both themes in that matrix
+- zero horizontal document overflow in those settled checks
+- trailing-slash active nav: checked
+- same-page history: checked
+- cross-page hash placement: checked
+- main focus after internal navigation: checked
+- ordinary mobile menu Escape/focus/scroll restoration: checked
+- whitespace validation: checked
+- local brief download action: checked
+- desktop homepage/About/founders/work visual review: completed
+- mobile homepage/contact/footer visual review: completed
 
-The implementation also corrected an unintended Tailwind container max-width and removed brittle positional selectors during that review.
+### Re-test rule
 
-What has **not** been freshly established for this new implementation:
+If only the mobile-menu resize-lock fix changes, do NOT automatically redo all 90 settled layout checks. Re-run:
 
-- new Lighthouse mobile/desktop score
-- measured LCP/CLS for the upgraded build
-- automated full accessibility/contrast scan of the upgraded build
-- measured 60fps trace
-- real-device touch verification
-- OS-level reduced-motion verification
-- full interrupted/rapid navigation stress test
+- lint
+- typecheck
+- tests
+- build
+- mobile-menu open/close/resize regression
+- affected widths around the breakpoint (e.g. 390/430/700/701/768)
+- scroll ownership after transition/menu overlap
 
-The old production Lighthouse baseline (97 mobile / 100 desktop performance, with excellent initial-load metrics) belongs to the older deployed version and must not be presented as the upgraded build’s score.
+Run the full matrix again only if global CSS/layout/navigation structure changes materially.
 
-## 5. Confirmed bug — mobile menu can leave scrolling locked after desktop resize
+---
 
-**Severity:** P1 before production release.  
-**Status:** confirmed by browser testing and supported by code inspection.  
-**Fix made:** none; user requested audit only.
+## 6. CONFIRMED BUG QUEUE
+
+### BUG-01 — mobile menu resize can retain scroll lock
+**TODO — P0 BEFORE RELEASE / NEEDS SAAD AUTHORIZATION TO FIX**
 
 Reproduction:
 
-1. Use a viewport <=700px.
-2. Open the mobile navigation dialog.
-3. While it is still open, widen the viewport above the mobile breakpoint.
-4. The mobile-menu wrapper becomes hidden by CSS, but the dialog state/scroll suspension is not explicitly closed/released on that breakpoint change.
-5. The page can therefore appear back in desktop layout while scrolling remains locked.
+1. viewport <=700px
+2. open mobile dialog
+3. resize above mobile breakpoint while dialog is still open
+4. `.mobile-menu` becomes hidden by CSS
+5. dialog component remains mounted and the `suspend()` release may never run
+6. desktop-looking page can remain scroll locked
 
-Root cause in current code:
+Root cause is confirmed in `MobileMenu` + `navigation.css`:
 
-- `MobileMenu` calls `suspend()` before `showModal()` and stores the release callback.
-- The release callback runs on the dialog `close` event, pathname change, or component unmount.
-- `.mobile-menu` is switched from `display: block` to its default `display: none` when the viewport grows past the `max-width: 700px` media query.
-- CSS hiding does not unmount the React component or necessarily fire the dialog close event, so the scroll lock can survive the breakpoint transition.
+- `suspend()` is acquired before `showModal()`
+- release occurs on `close`, pathname change, or unmount
+- CSS breakpoint hides the wrapper but does not unmount/close it
 
-Recommended fix when Saad authorizes implementation:
+Recommended bounded fix:
 
-- observe the mobile breakpoint (for example with `matchMedia`) and, when leaving mobile while the dialog is open, explicitly close the dialog and release the scroll suspension; or otherwise centralize dialog/breakpoint state so an invisible menu can never own a scroll lock.
-- add an automated regression test for `open menu -> cross breakpoint -> scroll lock released`.
+- observe the mobile breakpoint with `matchMedia`
+- when leaving mobile, explicitly close an open dialog and release the lock
+- make release idempotent
+- add a browser/component regression covering `open -> cross breakpoint -> unlocked`
 
-Do not fix it without Saad’s approval in a future coding session.
+Do not implement until Saad authorizes website code changes.
 
-## 6. Provisional updated scores for the upgraded implementation
+### BUG-02 — none confirmed
+**VERIFIED:** static A-Z inspection found no second release-critical bug.
 
-These are **subjective audit scores for the reviewed upgraded build**, not fresh Lighthouse metrics and not scores for the currently public production deployment.
+Do not invent additional bugs without reproduction/evidence.
 
-| Area | Updated /10 | Audit note |
+---
+
+## 7. NEW A-Z AUDIT FINDINGS / RECOMMENDATIONS
+
+These did not all appear in the earlier handoff.
+
+### QA-01 — browser-level regression coverage
+**TODO — P1 RECOMMENDATION / NEEDS SAAD FOR IMPLEMENTATION**
+
+Current tests are valuable but pure/unit-oriented. They cover transition ordering, URL policy, theme bootstrap, and contact formatting. They do not mount the actual dialog/viewport behavior, which is exactly why BUG-01 escaped.
+
+Recommended:
+
+- add a minimal Playwright or equivalent browser regression suite
+- keep it small: mobile menu resize lock, transition completion, native back/forward, contact validation, reduced-motion mode
+- do not create a giant brittle screenshot suite
+
+### CI-01 — GitHub CI
+**TODO — P1 RECOMMENDATION / NEEDS SAAD FOR IMPLEMENTATION**
+
+The latest GitHub commit has no reported CI/status checks. Local checks passed, but there is no durable automated gate visible on GitHub.
+
+Recommended lightweight workflow on push/PR:
+
+- `npm ci`
+- lint
+- typecheck
+- tests
+- build
+
+If browser tests are later added, run the small critical suite after the build gate.
+
+### SEO-01 — canonical / metadata base / share completeness
+**TODO — P1 RECOMMENDATION**
+
+Current root metadata has title, description, and basic Open Graph fields, and pages have titles/descriptions. The repository does not currently provide a complete public-share/SEO layer.
+
+Consider after the final domain is known:
+
+- `metadataBase`
+- canonical URLs
+- Twitter metadata
+- a purpose-built OG/social image
+- consistent per-page share metadata where useful
+
+Do not hard-code a temporary Vercel URL as the permanent canonical if Psametra will use a custom domain.
+
+### SEO-02 — robots / sitemap / structured organization data
+**TODO — P1 RECOMMENDATION**
+
+No `robots.ts`/`robots.txt` or `sitemap.ts`/`sitemap.xml` is present in the current tree. Consider:
+
+- robots
+- sitemap for the five public routes
+- Organization/ProfessionalService-style structured data only with factual, approved company information
+
+Do not invent address, awards, clients, ratings, founding dates, or other schema facts.
+
+### BRAND-01 — generated app icon is not square
+**TODO — P2 RECOMMENDATION**
+
+`scripts/optimize-brand.mjs` resizes the supplied dark logo to width 192 while preserving its original aspect ratio. The resulting `src/app/icon.png` is therefore approximately 192×128 rather than a conventional square app/favicon asset.
+
+Recommended:
+
+- create a deliberate square icon treatment while preserving the approved mark/artwork
+- optionally add an Apple touch icon
+- visually verify it at very small sizes
+
+Do not crop/redraw the logo without Saad’s approval.
+
+### PERF-01 — brand images are always `priority`
+**TODO — P2 PERFORMANCE POLISH**
+
+`Brand()` renders both light/dark WebPs with `priority`, and the component is used in both header and footer. The assets are already small (~16.9KB dark WebP and ~26.7KB light WebP), so this is not a serious problem, but the footer does not need LCP priority and both theme variants do not necessarily need eager treatment.
+
+Recommended only if fresh Lighthouse/trace shows value:
+
+- allow `Brand` to accept a priority/eager prop
+- header may remain priority
+- footer should be normal/lazy
+- avoid changing the visual/logo assets just for micro-optimization
+
+### PERF-02 — keep current dependency discipline
+**VERIFIED / DO NOT CHANGE WITHOUT EVIDENCE**
+
+- no Framer Motion
+- no Three.js
+- no icon library
+- Lenis is the only motion dependency
+- static export stays appropriate
+
+Do not add 3D/heavy animation libraries merely to chase “premium.”
+
+### CODE-01 — `SiteLink` client subscription scope
+**OPTIONAL P3 CLEANUP**
+
+`SiteLink` calls `usePathname()` for every use, including many ordinary content/CTA links where active-route semantics are unnecessary. This is not a current bug and may not matter measurably.
+
+Possible future cleanup only if profiling/build analysis justifies it:
+
+- reserve active-route hook behavior for navigation links
+- use ordinary Next `Link` for non-nav CTAs/content links
+
+Do not refactor this before release acceptance simply for theoretical purity.
+
+### CODE-02 — minor repo housekeeping
+**OPTIONAL P3**
+
+`.gitignore` contains `.vercel` twice. Harmless; clean only when touching nearby configuration.
+
+### CONTENT-01 — generic concepts are now the largest credibility limitation
+**P1 PRODUCT/SALES RECOMMENDATION — NEEDS SAAD DECISION**
+
+The current Work page is intentionally honest, but every item is a generic concept study. For a software company trying to win work, verified real builds will create more trust than another layer of visual polish.
+
+Potential direction:
+
+- retain concept studies if desired
+- add a distinct “Selected builds” / “Founder-built products” section using real, verifiable projects
+- candidates may include real founder/RMS work such as QuickSign, logistics/business software, AI extraction tooling, or other actually built products — **only after verifying ownership, public links, screenshots, status, and what claims may be made**
+- describe the actual problem, what was built, technologies, and current status
+- never invent client outcomes, revenue, adoption, launch status, or testimonials
+
+This is probably the highest-impact path from ~8.4 visual quality toward a company site that also sells effectively.
+
+### CONTENT-02 — founder proof links
+**OPTIONAL P2 / NEEDS SAAD CONTENT APPROVAL**
+
+Current founder profiles link to portfolios. If useful and approved, add verified professional proof such as GitHub/LinkedIn links. Keep both founders balanced. Do not assign CEO/CTO or other executive titles unless Saad explicitly approves them for Psametra.
+
+### BIZ-01 — custom company domain
+**P1 BEFORE SERIOUS PUBLIC LAUNCH / NEEDS SAAD**
+
+Current production is on a `vercel.app` hostname. A real Psametra domain would materially improve trust, email/brand consistency, canonical SEO, and sharing.
+
+Do not buy/configure a domain without Saad’s approval.
+
+### ANALYTICS-01 — lightweight conversion measurement
+**OPTIONAL P2 AFTER LAUNCH / NEEDS SAAD**
+
+README confirms there is currently no analytics. Once the upgraded site is live, consider lightweight measurement for:
+
+- Start a project clicks
+- contact-page visits
+- Open email draft
+- Download brief
+- portfolio/case-study clicks
+
+Use a privacy-conscious setup and document it. Do not add analytics before Saad chooses the provider and privacy approach.
+
+---
+
+## 8. RELEASE ACCEPTANCE TODO QUEUE — EXECUTE IN THIS ORDER
+
+This is the list the next AI should work through rather than starting another general audit.
+
+### REL-01 — BUG-01 fix
+**TODO / BLOCKED ON SAAD AUTHORIZATION**
+
+Fix mobile-menu breakpoint scroll lock and add regression coverage.
+
+### REL-02 — standard code gate after BUG-01
+**TODO AFTER REL-01**
+
+Run lint, typecheck, tests, build. Re-run breakpoint-focused browser checks, not automatically the entire old matrix.
+
+### REL-03 — upgraded Vercel preview
+**TODO / NEEDS SAAD AUTHORIZATION IF DEPLOYMENT ACTION REQUIRED**
+
+Create or identify a preview containing the upgraded HEAD. Verify it is built from the correct new SHA. Do not promote production yet.
+
+### REL-04 — fresh Lighthouse / Core Web Vitals lab checks
+**TODO ON UPGRADED PREVIEW**
+
+Targets retained from plan:
+
+- mobile performance >=95
+- desktop performance >=99
+- LCP <=2.5s
+- CLS <=0.05
+
+Record actual scores and test conditions. Do not reuse old production scores.
+
+### REL-05 — upgraded accessibility acceptance
+**TODO ON UPGRADED PREVIEW**
+
+- automated accessibility scan
+- contrast scan
+- keyboard-only pass
+- focus visibility
+- dialog behavior
+- both themes
+
+### REL-06 — navigation stress
+**TODO**
+
+- rapid repeated internal clicks
+- Back during cover
+- Back during rotation
+- Back during reveal
+- throttled destination readiness
+- transition + mobile-menu lock overlap
+
+### REL-07 — motion / device acceptance
+**TODO**
+
+- desktop wheel trace
+- emulated midrange phone trace
+- real/native touch if available
+- OS/browser-level reduced motion
+- full ambient orbit cycle without overflow
+- do not claim stable 60fps until measured
+
+### REL-08 — contact end-to-end acceptance
+**TODO**
+
+- inspect downloaded brief bytes/content/filename
+- verify mailto result in real browser
+- no fake sent state
+- real RMS address everywhere
+
+### REL-09 — external links
+**TODO**
+
+- Saad portfolio link
+- Rafay portfolio link
+- any future real case-study links
+
+### REL-10 — product-owner visual review
+**TODO / NEEDS SAAD**
+
+Saad reviews the actual upgraded preview on desktop/mobile and both themes. Record concrete requested refinements instead of launching another generic redesign audit.
+
+### REL-11 — production promotion
+**TODO / BLOCKED ON SAAD EXPLICIT APPROVAL**
+
+Only after the release queue above is acceptable. Confirm RMS Vercel scope and deployed commit SHA after promotion.
+
+---
+
+## 9. WHAT REMOTE DESKTOP COMMANDER IS / IS NOT NEEDED FOR
+
+### Not needed for current source audit
+**VERIFIED:** GitHub + Vercel connectors were enough to inspect the committed repo and deployment state A-Z.
+
+### Useful later
+Remote Desktop Commander can be useful if Saad authorizes it for:
+
+- inspecting the exact local working tree if it has unpushed changes
+- launching the upgraded local build
+- physical/local browser interaction the connector cannot reproduce
+- local Lighthouse/DevTools/performance tracing
+- checking downloaded brief files on disk
+- verifying touch/emulation/reduced-motion settings available on the local machine
+
+Do not require RDC merely to reread source files already audited in GitHub.
+
+---
+
+## 10. PROVISIONAL SCORES — UPGRADED IMPLEMENTATION
+
+These are subjective design/readiness scores for the upgraded implementation reviewed locally/source-side, NOT scores for the stale public production build.
+
+| Area | Score | Status |
 |---|---:|---|
-| Overall premium feel | **8.4** | Major improvement from the old ~6.5 baseline; release verification and final polish remain |
-| Hero / visual identity | **8.8** | Stronger scale, eclipse treatment, restraint, and hierarchy |
-| Typography | **8.7** | Much closer to the intended editorial/premium hierarchy |
-| Section pacing / composition | **8.6** | Less repetitive and more deliberate than the old build |
-| Services presentation | **8.5** | Editorial treatment and diagrams improve distinctiveness |
-| Work presentation | **8.6** | Larger studies and hierarchy materially improve impact |
-| About / founder credibility | **8.6** | Both founders are represented equally with real portfolio destinations |
-| Contact experience | **8.4** | Real RMS address and honest mail-draft/download behavior; needs final browser acceptance |
-| Navigation / transition motion | **8.1** | Faster and better coordinated, but resize-lock bug prevents release-grade score |
-| Desktop scrolling / motion | **8.5** | Architecture matches plan; needs measured trace before claiming performance quality |
-| Mobile responsiveness | **8.5** | Settled layouts are strong across matrix; breakpoint-state bug remains |
-| Accessibility readiness | **8.5** | Good foundations and reduced-motion design, but full upgraded-build automated/manual acceptance still pending |
-| Performance readiness | **8.7** | Build remains lean/static-oriented, but new Lighthouse/frame measurements are still required |
+| Overall premium feel | **8.4/10** | strong improvement; final acceptance pending |
+| Hero / identity | **8.8** | visually strong |
+| Typography | **8.7** | close to intended hierarchy |
+| Section pacing | **8.6** | deliberate and varied |
+| Services | **8.5** | editorial treatment works |
+| Work presentation | **8.6 visual / lower sales proof** | presentation strong; generic concepts limit credibility |
+| About/founders | **8.6** | balanced and credible within supplied facts |
+| Contact | **8.4** | honest and usable; final browser acceptance pending |
+| Navigation/motion | **8.1** | BUG-01 blocks release-grade score |
+| Desktop glide | **8.5 provisional** | architecture good; measured traces pending |
+| Mobile responsiveness | **8.5** | settled layouts strong; breakpoint bug remains |
+| Accessibility readiness | **8.5 provisional** | final upgraded preview scan pending |
+| Performance readiness | **8.7 provisional** | lean architecture; fresh measured results pending |
 
-Target remains approximately **9/10 without sacrificing performance**.
+Do not raise these scores merely because code was changed. Raise them only after evidence/product review supports it.
 
-## 7. Priority recommendations
+---
 
-### P0 / release blockers
+## 11. NON-NEGOTIABLE PRODUCT CONSTRAINTS
 
-1. **Fix and regression-test the mobile-menu breakpoint scroll-lock bug.**
-2. Create/identify an authorized Vercel preview of the upgraded commit before production promotion; do not test the old production URL as though it contains the upgrade.
-3. Run fresh Lighthouse on the upgraded preview. Targets from the approved plan remain mobile >=95, desktop >=99, LCP <=2.5s, CLS <=0.05.
-4. Run an automated accessibility + contrast scan on the upgraded preview and complete a keyboard/focus pass in both themes.
-
-### P1 / high-value acceptance work
-
-5. Stress rapid/interrupted navigation, including Back during cover/rotation/reveal and slow/throttled destinations.
-6. Finish explicit dark-mode and light-mode visual review of every route at representative desktop/mobile widths.
-7. Verify the downloaded brief bytes/filename and the complete contact mailto result in-browser.
-8. Verify both external founder portfolio links from the rendered About page.
-9. Verify a full ambient-orbit cycle and real-device/native touch behavior without horizontal scroll or scroll ownership conflicts.
-10. Verify OS-level `prefers-reduced-motion`, not only code-path/unit behavior.
-
-### P2 / polish after acceptance
-
-11. Only after performance traces are clean, tune any motion that still feels slightly long/heavy. Do not add another animation framework or 3D stack merely for spectacle.
-12. Use product-owner visual review to decide whether remaining differences from a 9/10 feel are typography/spacing refinements rather than architecture changes.
-
-## 8. Exact next steps for the next AI
-
-1. Read this handoff first.
-2. Confirm current branch/HEAD because this handoff commit will sit on top of `d77fefd`.
-3. Do not deploy production or alter Vercel settings without Saad’s approval.
-4. If Saad authorizes code changes, fix **only** the confirmed resize/menu lock bug first and add a regression test.
-5. Re-run lint, typecheck, tests, build, and the responsive/browser checks affected by that fix.
-6. Ask Saad before any product-code push/deployment unless he has already explicitly authorized that bounded action.
-7. Complete Stage 4 acceptance on an upgraded preview.
-8. Report the new measured Lighthouse/accessibility/performance evidence separately from the old production baseline.
-9. **Before stopping or reaching a model/context limit, update and push this handoff again.** Never leave continuation state only in chat.
-
-## 9. Non-negotiable product constraints carried forward
-
-- Repository ownership remains RMS.
-- Existing routes/core concepts/logo assets remain unless Saad explicitly changes scope.
+- RMS repository ownership remains unchanged.
+- Existing routes/core concepts/logo assets remain unless Saad changes scope.
 - Default theme follows system; manual theme switch stays.
-- Desktop scroll may use gentle Lenis easing; touch remains native.
-- No backend/database is required for contact.
-- Contact address is `rmspvtltd.software@gmail.com`.
-- Do not claim an enquiry was sent when only a mail draft is opened.
-- Do not invent client outcomes, executive titles, portraits, revenue/customer metrics, or shipped-client claims for concept work.
-- Keep honest concept/prototype labels.
-- Do not add a heavy animation/3D framework without a demonstrated need.
-- Do not change the website merely because an audit recommendation exists; Saad controls implementation scope.
+- Desktop may use gentle Lenis easing; touch stays native.
+- Contact has no backend/database unless Saad explicitly changes that decision.
+- Approved address: `rmspvtltd.software@gmail.com`.
+- Never claim an enquiry was sent when only a mail draft opens.
+- Keep concept/prototype status honest.
+- Do not invent customers, outcomes, testimonials, revenue, awards, addresses, launch status, executive titles, or metrics.
+- Do not add heavy animation/3D dependencies without a demonstrated need.
+- Performance and responsiveness must not be sacrificed for visual spectacle.
+- Suggestions in this handoff are not automatic authorization to implement them.
 
-## 10. Handoff status
+---
 
-At this checkpoint:
+## 12. FINAL STATUS AT THIS HANDOFF
 
-- Premium-upgrade implementation: **implemented in GitHub at `49a5691`, not deployed to production**
-- Current branch documentation checkpoint before this commit: **`d77fefd`**
-- Product code changed by this continuation: **none**
-- Vercel deployment/settings changed by this continuation: **none**
-- Confirmed unresolved bug: **mobile-menu breakpoint resize can retain scroll lock**
-- Fresh upgraded-build Lighthouse/accessibility/performance acceptance: **pending**
-- Next code action: **requires Saad’s approval**
-- Handoff push: **authorized by Saad and performed as this documentation-only commit**
+- A-Z committed-repo audit: **VERIFIED COMPLETE**
+- Original premium plan comparison: **VERIFIED COMPLETE**
+- Premium implementation in GitHub: **DONE at `49a5691`**
+- Public production upgraded: **NO — still old `698002c` release**
+- Product code changed by latest A-Z audit: **NONE**
+- Vercel settings/deployment changed by latest A-Z audit: **NONE**
+- Confirmed release bug: **BUG-01 mobile menu resize scroll lock**
+- Fresh upgraded Lighthouse/a11y/perf acceptance: **TODO**
+- Browser regression/CI improvements: **TODO recommendation**
+- SEO/share completeness: **TODO recommendation**
+- Real project/case-study proof: **P1 product recommendation / NEEDS SAAD**
+- Custom domain: **P1 before serious launch / NEEDS SAAD**
+- Next coding action: **REL-01 only after Saad approval**
+
+**Next AI: do not start another A-Z audit. Start at the first applicable TODO in Section 8, respecting authorization, and update this checklist as each item is actually completed.**
