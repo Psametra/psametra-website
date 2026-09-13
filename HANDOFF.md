@@ -1,480 +1,241 @@
-# Psametra premium upgrade — audit, scores, implementation plan, and AI handoff
+# Psametra premium upgrade — current audit and AI handoff
 
-## Current handoff — 2026-09-13 (read before the historical plan below)
+**Updated:** 2026-09-13, ~23:15 PKT  
+**Repository:** `rmspvtltdsoftware/psametra-website`  
+**Branch:** `codex/psametra-site`
 
-The user explicitly requested implementing this handoff and pushing all completed work when usage reached 90%. That threshold has now been reached. Implementation is paused for the requested checkpoint; the remaining acceptance work below is NOT complete.
+This is the current source-of-truth handoff. The complete historical premium-upgrade plan and the earlier 6.5/10 baseline remain available in Git history at commit `d77fefd7d71724365aa916ec9d7e74519cbd3a23` and its parent history. Read this file first; consult that historical version when exact original-plan wording is needed.
 
-### Authorization and repository state
+## 1. User instruction and scope for this continuation
 
-- Existing RMS repository: rmspvtltdsoftware/psametra-website. No new repository created.
-- Working branch: codex/psametra-site.
-- Pulled the original handoff by fast-forward from 698002c to 1886f15 before editing.
-- Implementation commit: 49a5691049cb8d51fb62a303aaa84497a1c9f10f (Upgrade Psametra layouts, motion, founders, and contact).
-- This handoff is a separate documentation commit on top of that source commit; use git log -1 for its exact hash.
-- User corrected the earlier push-identity preference: use the current ARKhan8604 account; both collaborators have access to RMS. Git Credential Manager lists ARKhan8604. Existing author identity remains Abdur Rafay Khan. Do not require msaad9632 for these pushes.
-- No website changes remain uncommitted after the implementation commit. Only this HANDOFF.md update is pending its own commit/push at the time of writing.
-- The current user request authorizes implementation, documentation, commits and push. Earlier approval questions below are historical, not a requirement to repeat authorization already given.
-- No production deployment or Vercel settings changed. Production remains https://psametra-website.vercel.app/ at the previous release. Verify RMS Vercel scope before any future authorized deployment.
-- Local Next dev preview: http://127.0.0.1:3000/ (server started this session; restart with npm run dev if stopped).
+Saad asked the AI to continue the audit where the previous run hit its usage limit, compare the implementation against the approved plan, audit the updated site for design, smoothness, bugs, and speed, and **push a handoff before stopping**.
 
-### Implemented
+For this continuation:
 
-1. Shared monochrome palette, larger responsive typography, cropped hero eclipse with faint edge glow, dark statement/capabilities/work, light approach section, and large footer wordmark.
-2. One lead homepage project plus two secondary previews; larger 16:10 work-page studies with semantic challenge/direction groups. Honest concept labels preserved.
-3. Editorial services rows with typed decorative SVG diagrams; equal founder profiles and provided portfolio links; approved company positioning.
-4. RMS email default, clickable contact/footer address, Open email draft and separate Download brief actions. Whitespace validation and mailto encoding are pure tested helpers. No backend, storage, or fake sent state.
-5. 620ms nominal navigation choreography: 80ms cover, concurrent route loading/220ms rotation, 320ms split. Commit barrier and recovery preserved, extra destination dimming removed, Back/Forward remains native, trailing-slash active states fixed.
-6. Single ScrollProvider with pinned Lenis 1.3.26, lerp .12, one automatic RAF. Fine-pointer/hover, width >=768px and no reduced motion only. Native touch/anchors/keyboard/history; composable menu/transition locks and cleanup.
-7. Progressive section entrances, offscreen ambient pause, local orbit paint/overflow containment. Content remains visible without JavaScript.
-8. Styles separated into navigation, home, diagrams, projects, pages, footer, and shared foundations. README, architecture, environment example, tests and QA documentation updated.
+- Audit/documentation and pushing this handoff are authorized.
+- **Do not change website implementation code.**
+- **Do not deploy the upgraded website or change Vercel settings.**
+- Do not create a new repository. Repository ownership stays with RMS.
+- Connected GitHub identity in the current ChatGPT session is `msaad9632`, which has push access to the existing RMS repository.
+- Keep updating and pushing the handoff before future AI usage/context limits are exhausted.
 
-### Exact verification
+No product-code change was made by this continuation.
 
-- npm run lint: PASS.
-- npm run typecheck: PASS.
-- npm test: PASS, 9 tests, zero failures.
-- npm run build: PASS, all five routes and 404 statically exported.
-- npm run format:check: PASS before final documentation-only QA update; that update was separately formatted.
-- git diff --check: PASS before commits.
-- Browser: 90 settled layout checks (5 routes x 9 widths x 2 themes), zero horizontal document overflow. Widths: 320,375,390,430,768,1024,1280,1440,1920.
-- Checked trailing-slash active links, same-page history, cross-page hash placement, main focus, menu Escape/focus/lock restoration, whitespace rejection and valid local brief download status.
-- Desktop homepage/About/founders/work and mobile homepage/contact/footer reviewed visually. Layout review fixed Tailwind's unintended container max-width and removed brittle positional selectors.
-- See docs/QA.md for the exact evidence and limitations. No new Lighthouse score, 60fps claim, or numeric premium-quality score is asserted.
+## 2. Repository and deployment state
 
-### Remaining work — next concrete steps
+Before this handoff commit:
 
-1. Complete stage 4 acceptance on a production preview: fresh Lighthouse mobile >=95/desktop >=99 targets, LCP/CLS checks, automated accessibility and contrast scan. Previous production scores below are NOT this implementation's results.
-2. Record desktop wheel/navigation traces and emulated midrange-phone traces. Browser tool's read-only evaluation did not expose performance.now; attempted frame recording could not run. Continuous full-rotation mobile overflow measurement, physical touch behavior and OS-level reduced motion remain pending. Sampled orbit transforms did change with zero overflow; do not promote samples into a full-cycle claim.
-3. Exercise rapid/interrupted navigation, Back during cover/rotation/reveal, throttled destinations, full keyboard pass, downloaded byte inspection and external portfolio link availability. Pure barrier/failure/reduced-motion tests pass but do not replace these browser cases.
-4. Ask for product-owner review of the local/approved preview. This is a substantial first implementation of stages 1–3, not a verified 9/10 release. Refine based on review and finish remaining acceptance checks before production release.
-5. When production deployment is authorized, use RMS Vercel only: rmspvtltdsoftware-4375 / rmspvtltdsoftware-4375s-projects. Never use the previously deleted personal-account project. No automatic GitHub deployment should be assumed.
-6. Update this handoff and push at every stop/checkpoint, preserving the user's latest account correction and explicit authorization.
+- Branch HEAD: `d77fefd7d71724365aa916ec9d7e74519cbd3a23` — `Record premium upgrade progress and remaining acceptance checks`.
+- Premium-upgrade implementation commit: `49a5691049cb8d51fb62a303aaa84497a1c9f10f` — `Upgrade Psametra layouts, motion, founders, and contact`.
+- Earlier plan/handoff commit: `1886f1592d7cc8067a4724330a5adb4f80bfdc3d`.
+- Current production deployment is still the **old build**, not the premium-upgrade implementation.
+- Vercel team: `rmspvtltdsoftware-4375s-projects` / `team_K7mVodqcY51jB9vLxTygtBRm`.
+- Vercel project: `psametra-website` / `prj_uegLEQdah5M3SMVjidjqqoPChpeK`.
+- Production deployment: `dpl_6TmvkL75xh4tEg57nfuPbzB7qSRq`, state `READY`.
+- Production deployment Git SHA: `698002c3faceb877faafd894a671271949bf1940`.
+- Production URL: `https://psametra-website.vercel.app/`.
 
----
+**Important:** the public website currently serves the pre-upgrade version. The upgraded code exists in GitHub but has not been deployed to production. Any audit result below that refers to the upgraded experience comes from the reviewed implementation/local build from the previous audit run, not the currently public production release.
 
-## Historical handoff and implementation plan
+The live production HTML was rechecked during this continuation and still contains old content such as the placeholder footer email `hello@psametra.example`, confirming the deployment mismatch.
 
-This file is the source-of-truth handoff for continuing the Psametra website work after the previous Astra/Codex session reached its usage limit.
+## 3. Implementation vs approved plan
 
-**User instruction:** do not make changes beyond the work the user has explicitly approved. Ask Saad before editing code, committing, pushing, deploying, changing Vercel settings, or making any other repo/product change. If the user approves a bounded action, stay within that scope.
+### Stage 1 — visual system + homepage: largely complete
 
-### Mandatory handoff rule for every AI
+The implementation matches the approved direction closely:
 
-Before stopping work, handing the task to another AI, handing the work back to Saad, or getting close to a context/usage limit, you MUST:
+- restrained monochrome system with limited blue accent
+- larger responsive typography
+- oversized/cropped eclipse treatment and subtle glow
+- stronger section pacing with dark/light contrast
+- dark statement/capabilities/work sequence and lighter approach section
+- one lead homepage project plus two secondary previews instead of three equal cards
+- larger, more editorial work presentations
+- expanded footer composition and wordmark treatment
+- concept labels remain honest; no unsupported client-success claims were introduced
 
-1. Update this `HANDOFF.md` with the exact current state.
-2. Include current branch and commit, changed/uncommitted files, completed work, exact checks/tests and results, unresolved issues, deployment/preview links, user decisions, and next concrete steps.
-3. Commit and **push the updated `HANDOFF.md` to the existing RMS repository** so the next AI can actually read it from GitHub.
-4. Do not leave the handoff only in chat or only as an uncommitted local file.
-5. Never mark untested work as complete.
+### Stage 2 — smooth motion + navigation: substantially complete, one confirmed bug
 
-If you are approaching a model/session limit, do this **before** the limit is exhausted. Preserve the user’s decisions exactly. Leave the same quality of handoff for Saad’s AI when returning the work.
+Implemented as planned:
 
----
+- Lenis 1.3.26 is the single desktop glide owner
+- `lerp: 0.12`
+- enabled only for fine-pointer/hover desktop at width >=768px
+- touch/mobile remains native
+- reduced-motion users do not get eased desktop scrolling
+- one automatic RAF owner
+- section entrances are progressive and content remains visible without JavaScript
+- ambient animation is locally contained and paused offscreen where appropriate
+- page transition target was reduced to roughly 620ms nominal choreography
+- destination loading begins earlier/concurrently
+- trailing-slash active-state bug was fixed
+- browser Back/Forward is intended to stay native
+- transition/menu scroll locks were made composable
 
-## 1. Repository and current state
+However, the audit found a real responsive-state bug described in section 5 below.
 
-- Repository: `rmspvtltdsoftware/psametra-website`
-- Repository ownership must remain with RMS. **Do not create a new personal repo.**
-- Working/default branch: `codex/psametra-site`
-- Audited base commit before this handoff: `698002c3faceb877faafd894a671271949bf1940`
-- That commit message: `Ignore local Vercel project metadata`
-- Connected personal GitHub identity requested for future pushes: `msaad9632`
-- Production: `https://psametra-website.vercel.app/`
-- Vercel project: `psametra-website`
-- Latest production deployment before this handoff was `READY` and built from commit `698002c3faceb877faafd894a671271949bf1940`
-- Vercel project framework: Next.js
-- Vercel Node version observed: 24.x
-- No website implementation from the premium-upgrade plan had been made before this handoff.
-- This `HANDOFF.md` is the only file being added by the current ChatGPT session at the user’s explicit request. No website code, deployment, or Vercel setting is being changed in this handoff step.
+### Stage 3 — internal pages + About + Contact: largely complete
 
-### Confirmed product decisions
+Implemented:
 
-- Default theme follows the visitor’s **system theme**.
-- Keep the existing manual theme switch.
-- Desktop scrolling should use a **gently eased glide**.
-- Touch/mobile scrolling stays native.
-- Contact uses a real email link/draft with **no backend**.
-- Contact address: `rmspvtltd.software@gmail.com`
-- Pushes should be made using Saad’s personal GitHub identity `msaad9632` to the existing RMS repository.
-- Repository ownership remains RMS.
-- Keep the existing routes, core concepts, logo assets, and honest status of existing project concepts.
-- Do not invent client outcomes, executive titles, launch claims, or other unsupported business claims.
+- services moved toward editorial rows with restrained diagrams
+- work studies enlarged toward 16:10 editorial layouts
+- About contains equal founder profiles
+- Muhammad Saad and Abdur Rafay Khan portfolio destinations were added
+- company positioning is software/products/business systems/websites without invented claims
+- contact uses the real RMS address `rmspvtltd.software@gmail.com`
+- email draft action is separated from brief download
+- whitespace validation and mailto encoding are handled with pure helpers/tests
+- no backend/database/fake sent state was added
 
----
+### Stage 4 — acceptance/performance/accessibility: only partially complete
 
-## 2. Current audit and scores
+A strong verification pass was done, but release acceptance is not complete. Do **not** call this a verified 9/10 production release yet.
 
-**Overall premium feel: 6.5/10. Target: 9/10.**
+## 4. Verification already completed on the upgraded implementation
 
-The site has a fast, clean foundation. Biggest weaknesses are repetitive composition, modest typography, small project presentations, generic About content, weak contact experience, and slow/underdeveloped navigation/scroll choreography.
+The previous audit run recorded:
 
-| Area | Current /10 | Main observation |
+- `npm run lint`: PASS
+- `npm run typecheck`: PASS
+- `npm test`: PASS — 9 tests, 0 failures
+- `npm run build`: PASS — all five routes plus 404 statically exported
+- `npm run format:check`: PASS before the final documentation-only QA update
+- `git diff --check`: PASS before commits
+- 90 settled responsive layout checks: 5 routes × 9 widths × 2 themes
+- widths checked: 320, 375, 390, 430, 768, 1024, 1280, 1440, 1920
+- zero horizontal **document** overflow in the settled matrix
+- trailing-slash active links checked
+- same-page history and cross-page hash placement checked
+- main-focus behavior checked
+- menu Escape/focus/lock restoration checked in ordinary open/close flows
+- whitespace rejection and local brief-download status checked
+- desktop homepage/About/founders/work visually reviewed
+- mobile homepage/contact/footer visually reviewed
+
+The implementation also corrected an unintended Tailwind container max-width and removed brittle positional selectors during that review.
+
+What has **not** been freshly established for this new implementation:
+
+- new Lighthouse mobile/desktop score
+- measured LCP/CLS for the upgraded build
+- automated full accessibility/contrast scan of the upgraded build
+- measured 60fps trace
+- real-device touch verification
+- OS-level reduced-motion verification
+- full interrupted/rapid navigation stress test
+
+The old production Lighthouse baseline (97 mobile / 100 desktop performance, with excellent initial-load metrics) belongs to the older deployed version and must not be presented as the upgraded build’s score.
+
+## 5. Confirmed bug — mobile menu can leave scrolling locked after desktop resize
+
+**Severity:** P1 before production release.  
+**Status:** confirmed by browser testing and supported by code inspection.  
+**Fix made:** none; user requested audit only.
+
+Reproduction:
+
+1. Use a viewport <=700px.
+2. Open the mobile navigation dialog.
+3. While it is still open, widen the viewport above the mobile breakpoint.
+4. The mobile-menu wrapper becomes hidden by CSS, but the dialog state/scroll suspension is not explicitly closed/released on that breakpoint change.
+5. The page can therefore appear back in desktop layout while scrolling remains locked.
+
+Root cause in current code:
+
+- `MobileMenu` calls `suspend()` before `showModal()` and stores the release callback.
+- The release callback runs on the dialog `close` event, pathname change, or component unmount.
+- `.mobile-menu` is switched from `display: block` to its default `display: none` when the viewport grows past the `max-width: 700px` media query.
+- CSS hiding does not unmount the React component or necessarily fire the dialog close event, so the scroll lock can survive the breakpoint transition.
+
+Recommended fix when Saad authorizes implementation:
+
+- observe the mobile breakpoint (for example with `matchMedia`) and, when leaving mobile while the dialog is open, explicitly close the dialog and release the scroll suspension; or otherwise centralize dialog/breakpoint state so an invisible menu can never own a scroll lock.
+- add an automated regression test for `open menu -> cross breakpoint -> scroll lock released`.
+
+Do not fix it without Saad’s approval in a future coding session.
+
+## 6. Provisional updated scores for the upgraded implementation
+
+These are **subjective audit scores for the reviewed upgraded build**, not fresh Lighthouse metrics and not scores for the currently public production deployment.
+
+| Area | Updated /10 | Audit note |
 |---|---:|---|
-| Homepage hero | 6.5 | Clear, but isolated logo feels more like a placeholder than a signature composition |
-| Typography | 6.5 | Desktop hero around 66px; scale contrast is limited |
-| Spacing and alignment | 7 | Consistent grid but insufficient variation between sections |
-| Brand identity | 7 | Eclipse geometry is recognizable and worth retaining |
-| Color restraint | 7 | Blue headline lines and large blue marks weaken its rarity |
-| Section pacing | 5.5 | Dark mode looks similar throughout; light mode alternates predictably |
-| Services | 6 | Readable but visually repetitive |
-| Work presentation | 6 | Small diagrams and boxed previews lack impact |
-| About | 5 | Generic company story; neither founder appears |
-| Contact experience | 4 | Placeholder email; no usable enquiry destination |
-| Header/navigation | 7 | Restrained, with an active-state bug |
-| Footer | 5 | Functional, without a memorable closing composition |
-| Mobile presentation | 6.5 | Generally readable; intermittent horizontal overflow |
-| Hover interactions | 7 | Sensible distances, but some motion changes layout |
-| Page transitions | 6 | Distinctive idea; approximately one second feels slow |
-| Scroll choreography | 4 | Ambient orbits exist; composed section entrances do not |
-| Accessibility | 8 | Good foundation; manual checks found issues beyond homepage automation |
-| Mobile initial-load performance | 9.7 | Lighthouse 97/100 |
-| Desktop initial-load performance | 10 | Lighthouse 100/100 |
-
-### Performance baseline from previous audit
-
-Fresh PageSpeed/Lighthouse results from the previous audit:
-
-- Mobile: first content about 0.9s, largest content about 2.3s, blocking time about 20ms, layout shift 0.
-- Desktop: largest content about 0.3s, blocking time about 10ms, layout shift 0.
-- Homepage automated accessibility, best practices, and SEO: 100/100.
-
-These were single-run lab results. Real-user performance data and a measured animation frame-rate trace were not available.
-
----
-
-## 3. Known issues to address
-
-1. **Navigation delay:** about 440ms elapsed before routing starts; complete transition roughly 980ms. Destination loading should begin earlier and compatible stages should overlap.
-2. **Active navigation bug:** direct visits such as `/services/` lose active highlighting because pathname comparisons handle trailing slashes inconsistently.
-3. **Mobile overflow:** the rotating orbital graphic can intermittently extend the page sideways. Decorative animation should be locally contained and a complete rotation verified.
-4. **History behavior:** eclipse transition is applied to same-page Back navigation. Browser Back/Forward should remain native, and interrupted transitions should cancel cleanly.
-5. **Contact:** replace `hello@psametra.example` with `rmspvtltd.software@gmail.com`. Reject whitespace-only names/descriptions before preparing an email draft.
-6. **Contrast/polish:** dark-theme blue buttons were around 3.96:1 contrast with small white text. Fix control colors, remove padding-based hover motion, and eliminate extra dimming after page reveal.
-
-### Verification already completed before handoff
-
-- All six existing tests passed.
-- Current Vercel production build succeeded.
-- TypeScript checks succeeded.
-- No application console errors appeared during the reviewed flows.
-- Local lint/build was not freshly verified because dependencies were absent in that audit environment.
-
----
-
-## 4. Implementation plan
-
-Implement in reviewable stages:
-
-1. shared visual system + homepage
-2. navigation + motion
-3. internal pages + About + Contact
-4. complete verification/performance/accessibility pass
-
-Do not expand this into a different product or architecture unless Saad explicitly asks.
-
-### Stage 1 — visual system and homepage
-
-- Preserve existing routes, navigation, logo assets, project concepts, and core messaging.
-- Update About and Contact details exactly as approved.
-- Keep **system theme** as the default while retaining the manual theme switch.
-- Visual palette direction:
-  - near-black `#050505`
-  - off-white `#F7F7F5`
-  - restrained grays
-  - Neptune blue `#306CFE` as a small accent rather than an everywhere-color
-  - use accessible variants where text or controls require it
-- Increase hero typography toward:
-  - **96–128px desktop**
-  - **64–88px tablet**
-  - **42–56px mobile**
-  - responsive sizing and intentional line wrapping
-- Body copy should generally be 16–18px.
-- Meaningful labels should generally be at least 11px.
-- Create an **asymmetric hero** using oversized typography and a large cropped abstract eclipse.
-- Use CSS/SVG depth, a faint rim, and extremely slow ambient movement.
-- Keep the headline immediately readable.
-- Aim for a deliberate page sequence rather than repetitive equal sections:
-  - theme-aware hero
-  - dark statement
-  - dark capabilities
-  - dark work
-  - off-white approach section
-  - dark closing invitation/footer
-- Replace the homepage’s three equal project cards with one broad lead project and two secondary previews.
-- Keep all existing concept labels and destinations.
-- Redesign the footer as a spacious closing composition with:
-  - large **PSAMETRA** wordmark
-  - cropped eclipse geometry
-  - compact navigation
-  - real RMS contact address
-
-### Stage 2 — smooth motion and navigation
-
-#### Desktop glide
-
-- Use **Lenis only** for the selected desktop glide.
-- Enable it for fine-pointer desktop interaction.
-- Starting tuning point from the audit: `lerp: 0.12` with normal wheel distance.
-- Keep touch scrolling native.
-- Disable scroll smoothing when `prefers-reduced-motion` is enabled.
-- Use one scroll owner and one animation-frame loop.
-- Coordinate scrolling with the existing transition provider and mobile dialog.
-- Cancel inertia before navigation and restore scrolling after completion/cancellation.
-- Preserve:
-  - anchors
-  - sticky navigation
-  - keyboard scrolling
-  - browser history
-  - native scrolling inside form controls
-- Do not stack CSS smooth scrolling on top of Lenis.
-
-#### Section entrances
-
-- Reveal selected content groups once using roughly:
-  - 16px upward movement
-  - opacity fade
-  - about 450ms duration
-  - small grouped delays
-- Content must stay visible if JavaScript fails.
-- Reduced-motion users should get content without translation/rotation-heavy animation.
-
-#### Ambient motion
-
-- Retain slow orbital movement.
-- Pause ambient animation outside the viewport where appropriate.
-- Clip decorative overflow inside the artwork so it cannot create horizontal page scroll.
-
-#### Page transition target
-
-Shorten the eclipse transition to about **620ms**:
-
-- ~80ms cover
-- ~220ms rotation concurrent with destination loading
-- ~320ms split reveal
-
-Begin destination loading earlier. Wait for the correct destination before revealing. Integrate actual content arrival with the reveal instead of delaying routing unnecessarily.
-
-Reduced-motion version should use brief fades without rotation, translation, or eased scrolling.
-
-Hover interactions should generally remain around **180–220ms** with roughly 4–8px of movement.
-
-### Animation framework decision
-
-Previous audit conclusion:
-
-- Lenis fits the requested desktop glide.
-- Motion and React Three Fiber were reviewed as references.
-- This version does **not** need an additional animation framework or an interactive 3D scene.
-- The user mentioned high-end 3D inspiration (for example, planets orbiting a sun) only as inspiration for premium feel, **not as an instruction to build that specific effect**.
-
----
-
-## 5. Internal pages
-
-### Services
-
-- Retain all four services and their current descriptions.
-- Replace repetitive card-like presentation with more editorial/open rows.
-- Use restrained monochrome diagrams such as:
-  - software architecture
-  - information flow
-  - responsive frames
-  - resolving layout geometry
-
-### Work
-
-- Enlarge project previews into roughly 16:10 editorial compositions.
-- Increase project-title scale.
-- Reduce heavy enclosing borders/boxes.
-- Preserve the current projects and their honest concept/prototype status.
-- Do not imply unlaunched work is a shipped client success.
-
-### About
-
-Position Psametra as the software company Saad and Rafay are building, focused on software products, business systems, and websites.
-
-Present two equal founder profiles with portfolio links:
-
-- **Muhammad Saad** — software engineering, AI/ML, and backend systems
-  - Portfolio: `https://muhammadsaad-portfolio.vercel.app/`
-- **Abdur Rafay Khan** — full-stack development, interfaces, and product delivery
-  - Portfolio: `https://abdur-rafay-khan-portfolio.vercel.app/`
-
-Keep the About presentation typographic/editorial.
-
-Do **not** invent:
-
-- executive titles not approved by the user
-- client outcomes
-- portraits
-- claims that Raaziq or another concept has launched
-- unsupported revenue/customer metrics
-
-### Contact
-
-- Use a large invitation with fewer competing text blocks.
-- Use a simple line-based form.
-- Configure `rmspvtltd.software@gmail.com`.
-- Provide a clickable email address.
-- Provide an **Open email draft** action.
-- No backend/database is required.
-- Retain brief download as a fallback.
-- Never claim an enquiry was sent if the site only opens a mail draft.
-- Reject whitespace-only values before preparing the draft.
-
-### Interface/architecture constraints
-
-- Retain static export and existing URLs.
-- Extend shared content data with founder profiles where appropriate.
-- Reuse existing contact-email configuration where appropriate.
-- No backend.
-- No database.
-- No checkout.
-- No new public API.
-
----
-
-## 6. Testing and delivery plan
-
-Before implementation, inspect the actual installed Next.js version/docs and current repo configuration rather than assuming old framework behavior.
-
-Establish fresh results for:
-
-- dependency install
-- lint
-- typecheck
-- existing tests
-- production build
-
-### Responsive matrix
-
-Test all pages at approximately:
-
-- 320px
-- 375px
-- 390px
-- 430px
-- 768px
-- 1024px
-- 1280px
-- 1440px
-- 1920px
-
-Test both themes and complete orbital rotations.
-
-### Interaction/history coverage
-
-Verify:
-
-- direct refresh on every route
-- active-link highlighting
-- cross-page anchors
-- same-page Back/Forward
-- browser Back/Forward behavior
-- rapid navigation
-- interrupted transition cleanup
-- slow destination loading
-- mobile menu closure
-- focus restoration
-- reduced motion
-- keyboard navigation/scrolling
-
-### Contact/accessibility coverage
-
-Verify:
-
-- keyboard access
-- visible focus
-- readable contrast
-- whitespace validation
-- email-draft URL encoding
-- brief download without pretending an enquiry was sent
-
-### Motion/performance coverage
-
-- Record scrolling and transition traces on desktop.
-- Test an emulated mid-range phone.
-- Target stable 60fps without recurring animation-induced long tasks.
-- Repeat Lighthouse with comparable settings.
-- Targets:
-  - mobile performance **>=95**
-  - desktop performance **>=99**
-  - LCP **<=2.5s**
-  - CLS **<=0.05**
-  - preserve the current speed wherever possible
-- Real-user INP <=200ms remains a field target when sufficient traffic data exists.
-
----
-
-## 7. Push/deployment workflow
-
-**Do not silently push or deploy. Ask Saad first, except for the mandatory end-of-session handoff update once the user has already authorized ongoing implementation work.**
-
-Recommended sequence after each reviewable stage:
-
-1. implement only the approved stage
-2. run relevant tests/checks
-3. show Saad a concise diff/change summary and test results
-4. ask whether to push the implementation changes
-5. if approved, push using `msaad9632` to the existing RMS repository
-6. verify the resulting Vercel preview/deployment state
-7. show Saad the preview/result
-8. ask before any production promotion or other production-impacting action that is not already automatically tied to the approved push
-
-### End-of-session exception for continuity
-
-Once Saad has approved a working session/implementation scope, the AI is explicitly instructed to **update, commit, and push `HANDOFF.md` before it stops or before its usage/context limit ends**, even if no further product-code push is approved. This exception is only for the handoff file and exists so the next AI is never left without current state.
-
-Do not create another repository under Saad’s personal account.
-
----
-
-## 8. Priority order for the next AI
-
-When Saad authorizes implementation, continue from the actual repository state rather than rebuilding blindly.
-
-Suggested first actions:
-
-1. Read this `HANDOFF.md` completely.
-2. Confirm current branch and HEAD because this file itself creates a new commit after the audited base commit.
-3. Inspect current source structure and installed dependencies.
-4. Compare actual source with the audit findings.
-5. Present the exact files/components proposed for **Stage 1** before editing if Saad has not already approved implementation.
-6. If Saad approves Stage 1, implement visual system/homepage only.
-7. Verify locally/build/test.
-8. Report results and ask before pushing implementation changes.
-9. Continue stage-by-stage through motion/navigation, internal pages, then full verification.
-10. **Before ending the session or reaching the model limit, update and push this HANDOFF.md with everything completed and remaining.**
-
----
-
-## 9. Context from previous session
-
-The previous audit reviewed:
-
-- the live website
-- all five routes
-- Saad’s and Rafay’s public portfolios
-- desktop/mobile layouts
-- source code
-- Vercel build records
-
-The visual goal is **premium, restrained, smooth, and memorable**, not animation for animation’s sake. Loading time should remain minimal and scrolling/transition animation should feel smooth.
-
-The user explicitly requested that major areas be scored out of 10 and that premium feel should improve from the current roughly 6.5/10 toward 9/10 without sacrificing performance.
-
-The company context is software-focused: Saad and Rafay intend to sell software, business systems such as logistics-style software, and websites.
-
----
-
-## 10. Current handoff status
-
-At the moment this file is created:
-
-- Premium-upgrade website implementation: **not started**
-- Handoff documentation: **created in this commit**
-- Website code changed by current ChatGPT session: **none**
-- Vercel changed by current ChatGPT session: **none**
-- Production deployment intentionally changed by current ChatGPT session: **none**
-- Next step requires Saad’s explicit approval.
+| Overall premium feel | **8.4** | Major improvement from the old ~6.5 baseline; release verification and final polish remain |
+| Hero / visual identity | **8.8** | Stronger scale, eclipse treatment, restraint, and hierarchy |
+| Typography | **8.7** | Much closer to the intended editorial/premium hierarchy |
+| Section pacing / composition | **8.6** | Less repetitive and more deliberate than the old build |
+| Services presentation | **8.5** | Editorial treatment and diagrams improve distinctiveness |
+| Work presentation | **8.6** | Larger studies and hierarchy materially improve impact |
+| About / founder credibility | **8.6** | Both founders are represented equally with real portfolio destinations |
+| Contact experience | **8.4** | Real RMS address and honest mail-draft/download behavior; needs final browser acceptance |
+| Navigation / transition motion | **8.1** | Faster and better coordinated, but resize-lock bug prevents release-grade score |
+| Desktop scrolling / motion | **8.5** | Architecture matches plan; needs measured trace before claiming performance quality |
+| Mobile responsiveness | **8.5** | Settled layouts are strong across matrix; breakpoint-state bug remains |
+| Accessibility readiness | **8.5** | Good foundations and reduced-motion design, but full upgraded-build automated/manual acceptance still pending |
+| Performance readiness | **8.7** | Build remains lean/static-oriented, but new Lighthouse/frame measurements are still required |
+
+Target remains approximately **9/10 without sacrificing performance**.
+
+## 7. Priority recommendations
+
+### P0 / release blockers
+
+1. **Fix and regression-test the mobile-menu breakpoint scroll-lock bug.**
+2. Create/identify an authorized Vercel preview of the upgraded commit before production promotion; do not test the old production URL as though it contains the upgrade.
+3. Run fresh Lighthouse on the upgraded preview. Targets from the approved plan remain mobile >=95, desktop >=99, LCP <=2.5s, CLS <=0.05.
+4. Run an automated accessibility + contrast scan on the upgraded preview and complete a keyboard/focus pass in both themes.
+
+### P1 / high-value acceptance work
+
+5. Stress rapid/interrupted navigation, including Back during cover/rotation/reveal and slow/throttled destinations.
+6. Finish explicit dark-mode and light-mode visual review of every route at representative desktop/mobile widths.
+7. Verify the downloaded brief bytes/filename and the complete contact mailto result in-browser.
+8. Verify both external founder portfolio links from the rendered About page.
+9. Verify a full ambient-orbit cycle and real-device/native touch behavior without horizontal scroll or scroll ownership conflicts.
+10. Verify OS-level `prefers-reduced-motion`, not only code-path/unit behavior.
+
+### P2 / polish after acceptance
+
+11. Only after performance traces are clean, tune any motion that still feels slightly long/heavy. Do not add another animation framework or 3D stack merely for spectacle.
+12. Use product-owner visual review to decide whether remaining differences from a 9/10 feel are typography/spacing refinements rather than architecture changes.
+
+## 8. Exact next steps for the next AI
+
+1. Read this handoff first.
+2. Confirm current branch/HEAD because this handoff commit will sit on top of `d77fefd`.
+3. Do not deploy production or alter Vercel settings without Saad’s approval.
+4. If Saad authorizes code changes, fix **only** the confirmed resize/menu lock bug first and add a regression test.
+5. Re-run lint, typecheck, tests, build, and the responsive/browser checks affected by that fix.
+6. Ask Saad before any product-code push/deployment unless he has already explicitly authorized that bounded action.
+7. Complete Stage 4 acceptance on an upgraded preview.
+8. Report the new measured Lighthouse/accessibility/performance evidence separately from the old production baseline.
+9. **Before stopping or reaching a model/context limit, update and push this handoff again.** Never leave continuation state only in chat.
+
+## 9. Non-negotiable product constraints carried forward
+
+- Repository ownership remains RMS.
+- Existing routes/core concepts/logo assets remain unless Saad explicitly changes scope.
+- Default theme follows system; manual theme switch stays.
+- Desktop scroll may use gentle Lenis easing; touch remains native.
+- No backend/database is required for contact.
+- Contact address is `rmspvtltd.software@gmail.com`.
+- Do not claim an enquiry was sent when only a mail draft is opened.
+- Do not invent client outcomes, executive titles, portraits, revenue/customer metrics, or shipped-client claims for concept work.
+- Keep honest concept/prototype labels.
+- Do not add a heavy animation/3D framework without a demonstrated need.
+- Do not change the website merely because an audit recommendation exists; Saad controls implementation scope.
+
+## 10. Handoff status
+
+At this checkpoint:
+
+- Premium-upgrade implementation: **implemented in GitHub at `49a5691`, not deployed to production**
+- Current branch documentation checkpoint before this commit: **`d77fefd`**
+- Product code changed by this continuation: **none**
+- Vercel deployment/settings changed by this continuation: **none**
+- Confirmed unresolved bug: **mobile-menu breakpoint resize can retain scroll lock**
+- Fresh upgraded-build Lighthouse/accessibility/performance acceptance: **pending**
+- Next code action: **requires Saad’s approval**
+- Handoff push: **authorized by Saad and performed as this documentation-only commit**
