@@ -23,6 +23,7 @@ After this migration notice was written, the user directly requested this bounde
 5. Replaced the About illustration with the supplied original Psametra PNG artwork. The light artwork appears in dark theme and the dark artwork in light theme.
 6. Added a pure `headerVisibilityChange` policy with tests, while `HeaderBehavior` remains the sole owner of scroll listeners and cleanup.
 7. Updated README, architecture ownership, and browser QA records for the sixth route and new interactions.
+8. Changed the large footer wordmark from `PSAMETRA` to lowercase `psametra` in commit `baedb98`; its existing scale and layout are unchanged.
 
 ## Exact verification
 
@@ -35,6 +36,7 @@ After this migration notice was written, the user directly requested this bounde
 - Browser responsive matrix: PASS for all six routes at 320, 390, 820, 821, 1024, and 1440 CSS pixels in both themes, 72 checks total, with no horizontal overflow or navigation overlap.
 - Browser interaction review: centered header, removed project button, scrolled glass appearance, down-scroll retraction, top-edge reveal, dropdown visibility, mobile five-route dialog and focus restoration all passed.
 - Browser content review: About selected the correct original logo for both themes; Team showed both equal profiles and exact LinkedIn destinations. No application error or warning appeared in the final pass.
+- Lowercase footer change: `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed on 2026-09-14.
 
 ## Remaining work
 
