@@ -12,13 +12,6 @@ export default function Work() {
   return (
     <>
       <PageIntro {...site.intros.work} />
-      <div className="container work-notice">
-        <span className="status-dot" />
-        <p>
-          These are illustrative concepts, not commissioned projects. Client
-          case studies will be added as they become available.
-        </p>
-      </div>
       <section className="container work-details">
         {site.projects.map((project) => (
           <article id={project.id} key={project.id} className="work-detail">

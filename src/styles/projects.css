@@ -116,25 +116,6 @@
 .project-visual .product-cell > span {
   color: var(--muted);
 }
-.work-notice {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-block: 24px;
-  border-top: 1px solid var(--line);
-}
-.work-notice p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 16px;
-}
-.status-dot {
-  flex-shrink: 0;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-}
 .work-details {
   padding-bottom: 100px;
 }
