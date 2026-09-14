@@ -1,15 +1,56 @@
 ﻿# REPOSITORY MIGRATED — 2026-09-14
 
-**DO NOT CONTINUE NEW IMPLEMENTATION IN THIS REPOSITORY.**
+After this migration notice was written, the user directly requested this bounded header, About, and Team implementation in the current `D:\psametra-website` workspace and asked that the work be pushed. That direct request supersedes the document-only restriction for these completed changes. It does not authorize a production deployment.
 
-Saad has moved all future Psametra/logistics website work to:
+## Latest repository state
+
+- Repository: `rmspvtltdsoftware/psametra-website`.
+- Branch: `codex/psametra-site`.
+- Source and documentation commit after integrating remote handoff history: `41d415e` (`Refine header navigation and add team page`).
+- This handoff is committed separately on top of that source commit; use `git log -1` for its exact hash.
+- The user previously authorized pushes through the current ARKhan8604 credential because both founders collaborate on the RMS repository. Do not repeat the obsolete historical requirement to use `msaad9632`.
+- Production was not deployed and no Vercel configuration changed. The local preview is `http://127.0.0.1:3000/` while the development server is running.
+
+## Implemented
+
+1. Centered the five desktop destinations and removed the header project button from desktop and mobile navigation.
+2. Added a translucent scrolled header surface. Deliberate downward scrolling retracts the desktop header to an 8px top-edge target; upward scrolling, pointer hover, and keyboard focus reveal it.
+3. Added hover and focus-within dropdowns for every desktop destination, with related links sourced from the typed central content module.
+4. Added `/team` with equal profiles for co-founders Abdur Rafay Khan and Muhammad Saad. Founder names and LinkedIn actions open the exact approved profile URLs; existing portfolio links remain available.
+5. Replaced the About illustration with the supplied original Psametra PNG artwork. The light artwork appears in dark theme and the dark artwork in light theme.
+6. Added a pure `headerVisibilityChange` policy with tests, while `HeaderBehavior` remains the sole owner of scroll listeners and cleanup.
+7. Updated README, architecture ownership, and browser QA records for the sixth route and new interactions.
+
+## Exact verification
+
+- `npm run lint`: PASS, no errors or warnings.
+- `npm run typecheck`: PASS, including generated Next route types.
+- `npm test`: PASS, 11 tests and zero failures.
+- `npm run build`: PASS with `/team`; all six routes and the custom 404 are statically prerendered.
+- `npm run format:check`: PASS.
+- `git diff --check`: PASS before commits.
+- Browser responsive matrix: PASS for all six routes at 320, 390, 820, 821, 1024, and 1440 CSS pixels in both themes, 72 checks total, with no horizontal overflow or navigation overlap.
+- Browser interaction review: centered header, removed project button, scrolled glass appearance, down-scroll retraction, top-edge reveal, dropdown visibility, mobile five-route dialog and focus restoration all passed.
+- Browser content review: About selected the correct original logo for both themes; Team showed both equal profiles and exact LinkedIn destinations. No application error or warning appeared in the final pass.
+
+## Remaining work
+
+- Product-owner review and any requested visual refinement.
+- The broader production performance, accessibility, full keyboard, reduced-motion, hardware touch, and interrupted-transition acceptance checks listed below remain pending.
+- Deploy only after explicit production authorization and only to the approved RMS Vercel scope.
+
+## Historical migration destination
+
+Saad had moved future unrequested Psametra/logistics website work to:
+
 - GitHub: `RMSPvtLtd/LogisticsWebsite`
 - Local: `E:\LogisticsWebsite`
 - Branch: `main`
 
-This repository is now historical/reference material only. The active repository contains a copy of this code and the current handoff. Any older instruction below saying not to create/use a new repository is superseded by Saad's 2026-09-14 instruction.
+That migration remains relevant for future unrequested work. The implementation above was made only because the user later gave a direct request in this repository.
 
 ---
+
 # Psametra â€” A-Z audit, continuation checklist, and AI handoff
 
 **Updated:** 2026-09-13, ~23:35 PKT  
@@ -179,6 +220,7 @@ No second critical code bug was found during static inspection beyond the alread
 ## 4. APPROVED PLAN IMPLEMENTATION STATUS
 
 ### VIS-01 â€” shared visual system / typography / palette
+
 **DONE / VERIFIED**
 
 - restrained monochrome palette
@@ -191,6 +233,7 @@ No second critical code bug was found during static inspection beyond the alread
 Do not redesign from scratch.
 
 ### VIS-02 â€” premium homepage hero
+
 **DONE / VERIFIED**
 
 - large asymmetric typography
@@ -200,6 +243,7 @@ Do not redesign from scratch.
 - ambient drift with reduced-motion support
 
 ### VIS-03 â€” homepage pacing
+
 **DONE / VERIFIED**
 
 - dark statement
@@ -209,6 +253,7 @@ Do not redesign from scratch.
 - dark closing CTA/footer
 
 ### VIS-04 â€” homepage work hierarchy
+
 **DONE / VERIFIED**
 
 - one lead concept + two secondary previews
@@ -216,6 +261,7 @@ Do not redesign from scratch.
 - honest concept labels retained
 
 ### VIS-05 â€” footer upgrade
+
 **DONE / VERIFIED**
 
 - oversized PSAMETRA wordmark
@@ -223,6 +269,7 @@ Do not redesign from scratch.
 - real RMS contact link in upgraded source
 
 ### MOT-01 â€” Lenis desktop glide
+
 **DONE / VERIFIED IN CODE + PREVIOUS LOCAL BROWSER PASS**
 
 - pinned Lenis `1.3.26`
@@ -233,6 +280,7 @@ Do not redesign from scratch.
 - native touch retained
 
 ### MOT-02 â€” page transition architecture
+
 **DONE / VERIFIED**
 
 - one root transition owner
@@ -244,6 +292,7 @@ Do not redesign from scratch.
 - reduced-motion path avoids rotation/translation-heavy choreography
 
 ### MOT-03 â€” progressive entrances / ambient pause
+
 **DONE / VERIFIED**
 
 - content visible without JS
@@ -253,6 +302,7 @@ Do not redesign from scratch.
 - reduced motion cancels running entrance animation
 
 ### INT-01 â€” Services page
+
 **DONE / VERIFIED**
 
 - editorial rows
@@ -261,6 +311,7 @@ Do not redesign from scratch.
 - deliverables retained
 
 ### INT-02 â€” Work page
+
 **DONE / VERIFIED**
 
 - larger editorial visual studies
@@ -269,6 +320,7 @@ Do not redesign from scratch.
 - concept status remains honest
 
 ### INT-03 â€” About / founders
+
 **DONE / VERIFIED**
 
 - Muhammad Saad and Abdur Rafay Khan represented equally
@@ -276,6 +328,7 @@ Do not redesign from scratch.
 - no invented titles/metrics/outcomes
 
 ### INT-04 â€” Contact
+
 **DONE / VERIFIED IN SOURCE + PARTIAL BROWSER QA**
 
 - real default email `rmspvtltd.software@gmail.com`
@@ -329,6 +382,7 @@ Run the full matrix again only if global CSS/layout/navigation structure changes
 ## 6. CONFIRMED BUG QUEUE
 
 ### BUG-01 â€” mobile menu resize can retain scroll lock
+
 **TODO â€” P0 BEFORE RELEASE / NEEDS SAAD AUTHORIZATION TO FIX**
 
 Reproduction:
@@ -356,6 +410,7 @@ Recommended bounded fix:
 Do not implement until Saad authorizes website code changes.
 
 ### BUG-02 â€” none confirmed
+
 **VERIFIED:** static A-Z inspection found no second release-critical bug.
 
 Do not invent additional bugs without reproduction/evidence.
@@ -367,6 +422,7 @@ Do not invent additional bugs without reproduction/evidence.
 These did not all appear in the earlier handoff.
 
 ### QA-01 â€” browser-level regression coverage
+
 **TODO â€” P1 RECOMMENDATION / NEEDS SAAD FOR IMPLEMENTATION**
 
 Current tests are valuable but pure/unit-oriented. They cover transition ordering, URL policy, theme bootstrap, and contact formatting. They do not mount the actual dialog/viewport behavior, which is exactly why BUG-01 escaped.
@@ -378,6 +434,7 @@ Recommended:
 - do not create a giant brittle screenshot suite
 
 ### CI-01 â€” GitHub CI
+
 **TODO â€” P1 RECOMMENDATION / NEEDS SAAD FOR IMPLEMENTATION**
 
 The latest GitHub commit has no reported CI/status checks. Local checks passed, but there is no durable automated gate visible on GitHub.
@@ -393,6 +450,7 @@ Recommended lightweight workflow on push/PR:
 If browser tests are later added, run the small critical suite after the build gate.
 
 ### SEO-01 â€” canonical / metadata base / share completeness
+
 **TODO â€” P1 RECOMMENDATION**
 
 Current root metadata has title, description, and basic Open Graph fields, and pages have titles/descriptions. The repository does not currently provide a complete public-share/SEO layer.
@@ -408,6 +466,7 @@ Consider after the final domain is known:
 Do not hard-code a temporary Vercel URL as the permanent canonical if Psametra will use a custom domain.
 
 ### SEO-02 â€” robots / sitemap / structured organization data
+
 **TODO â€” P1 RECOMMENDATION**
 
 No `robots.ts`/`robots.txt` or `sitemap.ts`/`sitemap.xml` is present in the current tree. Consider:
@@ -419,6 +478,7 @@ No `robots.ts`/`robots.txt` or `sitemap.ts`/`sitemap.xml` is present in the curr
 Do not invent address, awards, clients, ratings, founding dates, or other schema facts.
 
 ### BRAND-01 â€” generated app icon is not square
+
 **TODO â€” P2 RECOMMENDATION**
 
 `scripts/optimize-brand.mjs` resizes the supplied dark logo to width 192 while preserving its original aspect ratio. The resulting `src/app/icon.png` is therefore approximately 192Ã—128 rather than a conventional square app/favicon asset.
@@ -432,6 +492,7 @@ Recommended:
 Do not crop/redraw the logo without Saadâ€™s approval.
 
 ### PERF-01 â€” brand images are always `priority`
+
 **TODO â€” P2 PERFORMANCE POLISH**
 
 `Brand()` renders both light/dark WebPs with `priority`, and the component is used in both header and footer. The assets are already small (~16.9KB dark WebP and ~26.7KB light WebP), so this is not a serious problem, but the footer does not need LCP priority and both theme variants do not necessarily need eager treatment.
@@ -444,6 +505,7 @@ Recommended only if fresh Lighthouse/trace shows value:
 - avoid changing the visual/logo assets just for micro-optimization
 
 ### PERF-02 â€” keep current dependency discipline
+
 **VERIFIED / DO NOT CHANGE WITHOUT EVIDENCE**
 
 - no Framer Motion
@@ -455,6 +517,7 @@ Recommended only if fresh Lighthouse/trace shows value:
 Do not add 3D/heavy animation libraries merely to chase â€œpremium.â€
 
 ### CODE-01 â€” `SiteLink` client subscription scope
+
 **OPTIONAL P3 CLEANUP**
 
 `SiteLink` calls `usePathname()` for every use, including many ordinary content/CTA links where active-route semantics are unnecessary. This is not a current bug and may not matter measurably.
@@ -467,11 +530,13 @@ Possible future cleanup only if profiling/build analysis justifies it:
 Do not refactor this before release acceptance simply for theoretical purity.
 
 ### CODE-02 â€” minor repo housekeeping
+
 **OPTIONAL P3**
 
 `.gitignore` contains `.vercel` twice. Harmless; clean only when touching nearby configuration.
 
 ### CONTENT-01 â€” generic concepts are now the largest credibility limitation
+
 **P1 PRODUCT/SALES RECOMMENDATION â€” NEEDS SAAD DECISION**
 
 The current Work page is intentionally honest, but every item is a generic concept study. For a software company trying to win work, verified real builds will create more trust than another layer of visual polish.
@@ -487,11 +552,13 @@ Potential direction:
 This is probably the highest-impact path from ~8.4 visual quality toward a company site that also sells effectively.
 
 ### CONTENT-02 â€” founder proof links
+
 **OPTIONAL P2 / NEEDS SAAD CONTENT APPROVAL**
 
 Current founder profiles link to portfolios. If useful and approved, add verified professional proof such as GitHub/LinkedIn links. Keep both founders balanced. Do not assign CEO/CTO or other executive titles unless Saad explicitly approves them for Psametra.
 
 ### PROOF-01 â€” verified external project proof inventory (2026-09-14)
+
 **VERIFIED / AUDIT EVIDENCE ONLY â€” NO SITE CHANGE**
 
 Founder portfolios and the private RMS logistics repository materially strengthen the evidence available for future Work-page copy, but personal/freelance work must not be silently relabeled as Psametra company client work.
@@ -502,11 +569,13 @@ Founder portfolios and the private RMS logistics repository materially strengthe
 - Existing Psametra founder portfolio links are already present; do not repeat work to add them.
 
 ### CASE-01 â€” APPNA New Jersey case-study candidate
+
 **VERIFIED REAL PUBLIC BUILD / NEEDS ATTRIBUTION + COPY APPROVAL BEFORE USE**
 
 APPNA New Jersey is the strongest immediately public client-style proof found in the audit. It can support a real-work case study once ownership/agency attribution is phrased truthfully. Prefer verifiable scope, screenshots, stack, and public URL. Do not invent outcomes, engagement metrics, or imply Psametra contracted the work unless Saad confirms that relationship.
 
 ### CASE-02 â€” Raaziq logistics platform case-study candidate
+
 **VERIFIED REAL PRODUCT EVIDENCE / NEEDS PUBLICATION + CLAIM APPROVAL BEFORE USE**
 
 Evidence reviewed from `E:\LogisticSoftware\sea-and-air` and the live branded shell at `https://frontend-beryl-three.vercel.app/` confirms Raaziq is a substantial logistics build rather than a concept mockup. The air vertical documents quotation-to-shipment workflows, ops/worker/customer/public-tracking surfaces, a 17-stage air-freight lifecycle, FastAPI + React architecture, and a documented integration-test suite. The sea vertical provides public container lookup through a provider abstraction and shares the customer-facing tracking UI.
@@ -514,16 +583,19 @@ Evidence reviewed from `E:\LogisticSoftware\sea-and-air` and the live branded sh
 Claim boundaries are important: current documentation explicitly does **not** support claims of live carrier integrations for air, ETA prediction, GPS/IoT, AI pricing/prediction, payments/ERP, or other future capabilities. The sea SAPT connector has an explicit authorization/commercial-use caveat; never market it as an official SAPT partnership/integration unless separately authorized. Air documentation is internally stale/inconsistent around ops authentication, so avoid detailed auth claims until runtime/source behavior is specifically re-verified. Public shell/branding was verified; authenticated live workflow verification was not completed in this audit.
 
 ### CONTENT-03 â€” recommended real-work information architecture
+
 **P1 PRODUCT/SALES RECOMMENDATION â€” NEEDS SAAD DECISION**
 
 For credibility, the strongest evidence-backed direction is a distinct **Selected Work / Real Builds** area led by APPNA New Jersey and Raaziq, plus a separately labeled **Founder-built products** area if QuickSign, `extract`, Ledger, or DineSync are used. This separation prevents personal/freelance work from being presented as company client history while still proving the founders can ship real systems.
 
 ### TESTIMONIAL-01 â€” temporary testimonial evidence boundary
+
 **OWNER-REPORTED POSITIVE FEEDBACK / STAGING PLACEHOLDER ONLY / NEEDS APPROVED QUOTE FOR FACTUAL PUBLICATION**
 
 Saad reports that both the APPNA New Jersey client and the Raaziq client were happy with the work and intends to use temporary testimonials. No exact approved client quotation, speaker name/title, or publication permission was verified during this audit. A testimonial component may use clearly marked staging/placeholder copy during development, but fabricated attributed quotes must not ship as factual customer statements. Before production, use an exact approved quote or owner/client-approved paraphrase with truthful attribution.
 
 ### AUDIT-01 â€” one-pass local audit confirmation (2026-09-14)
+
 **VERIFIED / AUDIT ONLY â€” NO PRODUCT CODE CHANGE**
 
 A single local audit script inspected Git state, package/config files, the filtered source tree, tests, TODO/FIXME/error patterns, existing handoff items, relevant navigation/scroll/SEO/performance patterns, and attempted the standard quality gates. At the start of the pass, branch `codex/psametra-site` and `origin/codex/psametra-site` both pointed to `1051fed7e43645ece769fce616b14e8ef0f71188`; the only working-tree change was this handoff update.
@@ -537,6 +609,7 @@ A single local audit script inspected Git state, package/config files, the filte
 - The temporary audit report is not a project artifact and must not be committed.
 
 ### BIZ-01 â€” custom company domain
+
 **P1 BEFORE SERIOUS PUBLIC LAUNCH / NEEDS SAAD**
 
 Current production is on a `vercel.app` hostname. A real Psametra domain would materially improve trust, email/brand consistency, canonical SEO, and sharing.
@@ -544,6 +617,7 @@ Current production is on a `vercel.app` hostname. A real Psametra domain would m
 Do not buy/configure a domain without Saadâ€™s approval.
 
 ### ANALYTICS-01 â€” lightweight conversion measurement
+
 **OPTIONAL P2 AFTER LAUNCH / NEEDS SAAD**
 
 README confirms there is currently no analytics. Once the upgraded site is live, consider lightweight measurement for:
@@ -563,21 +637,25 @@ Use a privacy-conscious setup and document it. Do not add analytics before Saad 
 This is the list the next AI should work through rather than starting another general audit.
 
 ### REL-01 â€” BUG-01 fix
+
 **TODO / BLOCKED ON SAAD AUTHORIZATION**
 
 Fix mobile-menu breakpoint scroll lock and add regression coverage.
 
 ### REL-02 â€” standard code gate after BUG-01
+
 **TODO AFTER REL-01**
 
 Run lint, typecheck, tests, build. Re-run breakpoint-focused browser checks, not automatically the entire old matrix.
 
 ### REL-03 â€” upgraded Vercel preview
+
 **TODO / NEEDS SAAD AUTHORIZATION IF DEPLOYMENT ACTION REQUIRED**
 
 Create or identify a preview containing the upgraded HEAD. Verify it is built from the correct new SHA. Do not promote production yet.
 
 ### REL-04 â€” fresh Lighthouse / Core Web Vitals lab checks
+
 **TODO ON UPGRADED PREVIEW**
 
 Targets retained from plan:
@@ -590,6 +668,7 @@ Targets retained from plan:
 Record actual scores and test conditions. Do not reuse old production scores.
 
 ### REL-05 â€” upgraded accessibility acceptance
+
 **TODO ON UPGRADED PREVIEW**
 
 - automated accessibility scan
@@ -600,6 +679,7 @@ Record actual scores and test conditions. Do not reuse old production scores.
 - both themes
 
 ### REL-06 â€” navigation stress
+
 **TODO**
 
 - rapid repeated internal clicks
@@ -610,6 +690,7 @@ Record actual scores and test conditions. Do not reuse old production scores.
 - transition + mobile-menu lock overlap
 
 ### REL-07 â€” motion / device acceptance
+
 **TODO**
 
 - desktop wheel trace
@@ -620,6 +701,7 @@ Record actual scores and test conditions. Do not reuse old production scores.
 - do not claim stable 60fps until measured
 
 ### REL-08 â€” contact end-to-end acceptance
+
 **TODO**
 
 - inspect downloaded brief bytes/content/filename
@@ -628,6 +710,7 @@ Record actual scores and test conditions. Do not reuse old production scores.
 - real RMS address everywhere
 
 ### REL-09 â€” external links
+
 **TODO**
 
 - Saad portfolio link
@@ -635,11 +718,13 @@ Record actual scores and test conditions. Do not reuse old production scores.
 - any future real case-study links
 
 ### REL-10 â€” product-owner visual review
+
 **TODO / NEEDS SAAD**
 
 Saad reviews the actual upgraded preview on desktop/mobile and both themes. Record concrete requested refinements instead of launching another generic redesign audit.
 
 ### REL-11 â€” production promotion
+
 **TODO / BLOCKED ON SAAD EXPLICIT APPROVAL**
 
 Only after the release queue above is acceptable. Confirm RMS Vercel scope and deployed commit SHA after promotion.
@@ -649,9 +734,11 @@ Only after the release queue above is acceptable. Confirm RMS Vercel scope and d
 ## 9. WHAT REMOTE DESKTOP COMMANDER IS / IS NOT NEEDED FOR
 
 ### Not needed for current source audit
+
 **VERIFIED:** GitHub + Vercel connectors were enough to inspect the committed repo and deployment state A-Z.
 
 ### Useful later
+
 Remote Desktop Commander can be useful if Saad authorizes it for:
 
 - inspecting the exact local working tree if it has unpushed changes
@@ -669,21 +756,21 @@ Do not require RDC merely to reread source files already audited in GitHub.
 
 These are subjective design/readiness scores for the upgraded implementation reviewed locally/source-side, NOT scores for the stale public production build.
 
-| Area | Score | Status |
-|---|---:|---|
-| Overall premium feel | **8.4/10** | strong improvement; final acceptance pending |
-| Hero / identity | **8.8** | visually strong |
-| Typography | **8.7** | close to intended hierarchy |
-| Section pacing | **8.6** | deliberate and varied |
-| Services | **8.5** | editorial treatment works |
-| Work presentation | **8.6 visual / lower sales proof** | presentation strong; generic concepts limit credibility |
-| About/founders | **8.6** | balanced and credible within supplied facts |
-| Contact | **8.4** | honest and usable; final browser acceptance pending |
-| Navigation/motion | **8.1** | BUG-01 blocks release-grade score |
-| Desktop glide | **8.5 provisional** | architecture good; measured traces pending |
-| Mobile responsiveness | **8.5** | settled layouts strong; breakpoint bug remains |
-| Accessibility readiness | **8.5 provisional** | final upgraded preview scan pending |
-| Performance readiness | **8.7 provisional** | lean architecture; fresh measured results pending |
+| Area                    |                              Score | Status                                                  |
+| ----------------------- | ---------------------------------: | ------------------------------------------------------- |
+| Overall premium feel    |                         **8.4/10** | strong improvement; final acceptance pending            |
+| Hero / identity         |                            **8.8** | visually strong                                         |
+| Typography              |                            **8.7** | close to intended hierarchy                             |
+| Section pacing          |                            **8.6** | deliberate and varied                                   |
+| Services                |                            **8.5** | editorial treatment works                               |
+| Work presentation       | **8.6 visual / lower sales proof** | presentation strong; generic concepts limit credibility |
+| About/founders          |                            **8.6** | balanced and credible within supplied facts             |
+| Contact                 |                            **8.4** | honest and usable; final browser acceptance pending     |
+| Navigation/motion       |                            **8.1** | BUG-01 blocks release-grade score                       |
+| Desktop glide           |                **8.5 provisional** | architecture good; measured traces pending              |
+| Mobile responsiveness   |                            **8.5** | settled layouts strong; breakpoint bug remains          |
+| Accessibility readiness |                **8.5 provisional** | final upgraded preview scan pending                     |
+| Performance readiness   |                **8.7 provisional** | lean architecture; fresh measured results pending       |
 
 Do not raise these scores merely because code was changed. Raise them only after evidence/product review supports it.
 
@@ -724,4 +811,3 @@ Do not raise these scores merely because code was changed. Raise them only after
 - Next coding action: **REL-01 only after Saad approval**
 
 **Next AI: do not start another A-Z audit. Start at the first applicable TODO in Section 8, respecting authorization, and update this checklist as each item is actually completed.**
-
