@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="footer dark-surface">
       <div className="container">
         <div className="footer-wordmark" aria-hidden="true">
-          PSAMETRA
+          psametra
         </div>
         <div className="footer-top">
           <SiteLink href="/" aria-label="Psametra home">
