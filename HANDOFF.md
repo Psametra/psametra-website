@@ -26,6 +26,7 @@ After this migration notice was written, the user directly requested this bounde
 8. Changed the large footer wordmark from `PSAMETRA` to lowercase `psametra` in commit `baedb98`; its existing scale and layout are unchanged.
 9. Kept the complete homepage hero mark inside its art column at every breakpoint in commit `a3eacc2`. Removed the deliberate horizontal offset, constrained the mark to available width, and gave the mobile composition enough height for its caption.
 10. Removed the Work page concept disclaimer and its unused notice styling in commit `4ba1bbb`.
+11. Expanded the footer into responsive Explore, Capabilities, and Company directories in commit `9409766`. Links reuse the central navigation and service data where possible and include relevant About, Team, and Contact anchors.
 
 ## Exact verification
 
@@ -41,6 +42,7 @@ After this migration notice was written, the user directly requested this bounde
 - Lowercase footer change: `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed on 2026-09-14.
 - Complete hero mark change: the same lint, typecheck, build, and diff checks passed. At 390px, browser geometry confirmed all four mark edges remain inside the 410px hero-art boundary and document overflow is zero.
 - Work notice removal: `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed on 2026-09-14.
+- Footer directory: the same checks passed. Browser review at 390px and 1440px confirmed readable link columns, correct destinations, and no layout overflow.
 
 ## Remaining work
 
