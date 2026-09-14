@@ -34,9 +34,7 @@
   align-self: stretch;
 }
 .hero-art .eclipse {
-  width: 520px;
-  max-width: none;
-  margin-left: 160px;
+  width: min(520px, calc(100% - 40px));
   filter: drop-shadow(0 0 6px var(--hero-logo-glow-near))
     drop-shadow(0 0 16px var(--hero-logo-glow-far));
 }
@@ -316,8 +314,7 @@
     font-size: clamp(76px, 7.5vw, 100px);
   }
   .hero-art .eclipse {
-    width: 420px;
-    margin-left: 150px;
+    width: min(420px, calc(100% - 40px));
   }
   .hero-art .eclipse-half {
     border-width: 62px;
@@ -339,8 +336,7 @@
     height: 520px;
   }
   .hero-art .eclipse {
-    width: 330px;
-    margin-left: 150px;
+    width: min(330px, calc(100% - 40px));
   }
   .hero-art .eclipse-half {
     border-width: 49px;
@@ -377,12 +373,11 @@
     max-width: 340px;
   }
   .hero-art {
-    height: 330px;
+    height: 410px;
     margin-top: 48px;
   }
   .hero-art .eclipse {
-    width: 310px;
-    margin-left: 100px;
+    width: min(310px, calc(100% - 32px));
   }
   .hero-art .eclipse-half {
     border-width: 46px;
