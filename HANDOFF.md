@@ -12,6 +12,7 @@ After this migration notice was written, the user directly requested this bounde
 - Vercel Git connection updated with the user's explicit confirmation: RMS project `rmspvtltdsoftware-4375s-projects/psametra-website` is connected to `rmspvtltdsoftware/psametra-website`. Vercel reported “Connected Git Repository successfully.”
 - A fresh production rebuild was then requested. Deployment `C45ZbaZ3yH547zDZYiXFVYCHABXv` completed with status Ready as a rebuild of preview `2u8asdL5PnSGwKFbJpKS2s3hGEx9`, which was built from commit `747ba9c` on `codex/psametra-site`.
 - `https://psametra-website.vercel.app/` was checked after the rebuild and serves the updated site, including the five-item centered header and `/team/` route.
+- With the user's explicit confirmation, Vercel Production branch tracking was changed from `main` to `codex/psametra-site`. Vercel confirmed “Branch tracking saved”; auto-assignment of production domains remains enabled, so every future push to this branch creates a production deployment.
 - The local preview is `http://127.0.0.1:3000/` while the development server is running.
 
 ## Implemented
