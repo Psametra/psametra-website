@@ -11,7 +11,7 @@ export default function Contact() {
   return (
     <>
       <PageIntro {...site.intros.contact} />
-      <section className="contact-layout container">
+      <section id="project-brief" className="contact-layout container">
         <aside>
           <h2>
             Every project starts

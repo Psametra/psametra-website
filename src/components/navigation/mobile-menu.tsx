@@ -77,13 +77,6 @@ export function MobileMenu() {
           ))}
         </nav>
         <p>Good things begin with a conversation.</p>
-        <Link
-          className="button primary"
-          href="/contact"
-          onClick={() => dialog.current?.close()}
-        >
-          Start a project <Arrow />
-        </Link>
       </dialog>
     </div>
   );

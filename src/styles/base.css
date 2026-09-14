@@ -127,8 +127,7 @@ p {
   border-color: var(--ink);
   color: var(--surface);
 }
-.primary:hover,
-.header-cta:hover {
+.primary:hover {
   background: var(--control-accent);
   border-color: var(--control-accent);
   color: white;

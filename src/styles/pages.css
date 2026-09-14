@@ -74,13 +74,12 @@
   place-items: center;
   position: relative;
   overflow: clip;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
 }
-.about-art .eclipse {
-  width: 320px;
-  transform: rotate(-20deg);
-}
-.about-art .eclipse-half {
-  border-width: 48px;
+.about-art .about-brand {
+  width: min(86%, 480px);
+  height: 370px;
 }
 .about-art > span {
   position: absolute;
@@ -97,34 +96,78 @@
   color: var(--muted);
   font-size: 18px;
 }
-.founders {
-  border-top: 1px solid var(--line);
-}
-.founder-grid,
 .about-principles {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   margin-top: 64px;
 }
-.founder-grid article,
 .about-principles article {
   border-top: 1px solid var(--line);
   padding-top: 32px;
 }
-.founder-grid h3 {
-  font-size: clamp(30px, 3.2vw, 48px);
-  letter-spacing: -0.04em;
-  font-weight: 450;
-  margin: 32px 0 20px;
+.team-section {
+  border-top: 1px solid var(--line);
 }
-.founder-grid p {
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-top: 64px;
+}
+.team-profile {
+  scroll-margin-top: 112px;
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+}
+.team-profile-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.team-monogram {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: 50%;
   color: var(--muted);
-  font-size: 16px;
+  font:
+    12px var(--font-geist-mono),
+    monospace;
 }
-.founder-grid .founder-focus {
+.team-profile h2 {
+  font-size: clamp(36px, 4vw, 62px);
+  margin: 44px 0 24px;
+}
+.team-profile h2 a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 18px;
+}
+.team-profile h2 svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 200ms;
+}
+.team-profile h2 a:hover svg {
+  transform: translate(4px, -4px);
+}
+.team-profile p {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 560px;
+}
+.team-profile .founder-focus {
   color: var(--ink);
-  max-width: 420px;
+}
+.team-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 28px;
 }
 .about-principles h3 {
   font-size: 28px;
@@ -242,13 +285,7 @@
   .contact-layout {
     gap: 48px;
   }
-  .about-art .eclipse {
-    width: 260px;
-  }
-  .about-art .eclipse-half {
-    border-width: 39px;
-  }
-  .founder-grid {
+  .team-grid {
     gap: 32px;
   }
   .form-row {
@@ -283,7 +320,7 @@
   }
   .about-story,
   .contact-layout,
-  .founder-grid,
+  .team-grid,
   .about-principles {
     grid-template-columns: 1fr;
     gap: 48px;
@@ -291,10 +328,17 @@
   .about-art {
     min-height: 330px;
   }
+  .about-art .about-brand {
+    width: 92%;
+    height: 280px;
+  }
+  .team-profile h2 {
+    margin-top: 32px;
+  }
   .about-story {
     padding-bottom: 64px;
   }
-  .founder-grid,
+  .team-grid,
   .about-principles {
     margin-top: 48px;
   }

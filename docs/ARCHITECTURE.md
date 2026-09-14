@@ -12,6 +12,7 @@ The supplied engineering rules guide the architecture. The relevant principles a
 | Navigation animation  | `TransitionProvider`                | Wrap the application once                                        |
 | Transition ordering   | `runTransition`                     | Cover, commit, and reveal are promises, with explicit sequencing |
 | Active link state     | `SiteLink`                          | The same public contract as Next Link                            |
+| Header visibility     | `HeaderBehavior`                    | Scroll direction and hover/focus visibility policy               |
 | Theme preference      | `theme-config.ts`, `ThemeToggle`    | System, light, and dark, with optional local persistence         |
 | Mobile navigation     | `MobileMenu`                        | Native dialog owns focus containment and Escape behavior         |
 | Enquiry preparation   | `ContactForm`, `formatProjectBrief` | Validated local download or visitor-reviewed email draft         |
@@ -57,3 +58,10 @@ Keep new business copy in the content module. Put reusable presentation in `comp
 - The normal transition budget is 80 + max(220, route readiness) + 320ms. Reduced motion uses two 100ms fades. The route commit barrier, native history cancellation, and 8-second navigation recovery bound remain intact.
 
 Lenis API reference: https://github.com/darkroomengineering/lenis (verified against installed 1.3.26 types and stylesheet). No additional animation framework was introduced.
+
+## Header and team ownership (2026-09-14)
+
+- `HeaderBehavior` owns scroll observation and exposes only `data-scrolled` and `data-hidden` state to CSS. The pure `headerVisibilityChange` policy is tested independently from React and browser event wiring.
+- Desktop dropdowns are CSS hover and focus-within interactions, so pointer and keyboard access share the same content. The mobile dialog reuses the primary route list without duplicating a header call to action.
+- Founder names, roles, biographies, portfolio URLs, and approved LinkedIn URLs remain immutable editorial data in `src/content/site.ts`. The Team route renders that source directly.
+- `Brand` selects optimized artwork by default and supports the supplied original PNG pair where the complete logo treatment is required on About.

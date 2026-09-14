@@ -1,6 +1,6 @@
 # Psametra
 
-A five-page company website built with Next.js App Router, strict TypeScript, React, and Tailwind CSS. The design follows the supplied visual reference: restrained typography, alternating surfaces, Neptune blue, and geometric eclipse motifs.
+A six-page company website built with Next.js App Router, strict TypeScript, React, and Tailwind CSS. The design follows the supplied visual reference: restrained typography, alternating surfaces, Neptune blue, and geometric eclipse motifs.
 
 ## Local development
 
@@ -20,7 +20,7 @@ npm test
 npm run build
 ```
 
-The build generates a static site in `out/`. All five routes and the custom 404 are prerendered. `npm start` serves that exported site for production inspection. Google font files are downloaded at build time by `next/font` and served locally to visitors.
+The build generates a static site in `out/`. All six routes and the custom 404 are prerendered. `npm start` serves that exported site for production inspection. Google font files are downloaded at build time by `next/font` and served locally to visitors.
 
 ## Content and brand assets
 
@@ -46,6 +46,12 @@ Tests deliberately delay the route promise to prove that stale content is not re
 ## Scrolling
 
 `ScrollProvider` dynamically loads Lenis 1.3.26 only on fine-pointer, hover-capable viewports at least 768px wide with no reduced-motion preference. It owns one automatic RAF with lerp 0.12. Touch stays native; anchors, keyboard, and history cancel inertia. Modal and transition locks compose through an idempotent release API.
+
+## Header and team
+
+The desktop header centers five primary destinations. Once the page moves away from the top, the header uses a translucent glass surface. Downward scrolling retracts it while leaving a narrow hover target at the top edge; upward scrolling, pointer hover, and keyboard focus reveal it. Each desktop destination exposes related links on hover or focus. Mobile navigation keeps the same five destinations in its accessible dialog.
+
+The Team route reads founder information and approved external links from `src/content/site.ts`. The About story uses the supplied original light and dark PNG artwork, selected by the active theme.
 
 ## Deploy to Vercel
 

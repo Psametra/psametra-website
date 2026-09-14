@@ -23,6 +23,13 @@ export const site = {
       description:
         "Psametra is the company Muhammad Saad and Abdur Rafay Khan are building to create focused software products, business systems, and websites.",
     },
+    team: {
+      label: "The people behind Psametra",
+      title: "Two co-founders.",
+      accent: "One shared standard.",
+      description:
+        "Complementary engineering and product perspectives, brought together around clear thinking and careful delivery.",
+    },
     contact: {
       label: "Let’s build something that matters",
       title: "A good place",
@@ -42,29 +49,84 @@ export const site = {
     process.env.NEXT_PUBLIC_CONTACT_EMAIL || "rmspvtltd.software@gmail.com",
   founders: [
     {
-      name: "Muhammad Saad",
-      focus: "Software engineering · AI/ML · Backend systems",
-      description:
-        "Connecting applied intelligence with dependable software foundations.",
-      portfolio: "https://muhammadsaad-portfolio.vercel.app/",
-    },
-    {
       name: "Abdur Rafay Khan",
+      role: "Co-founder",
       focus: "Full-stack development · Interfaces · Product delivery",
       description:
         "Connecting considered interfaces with the systems that bring them to life.",
+      linkedin: "https://www.linkedin.com/in/abdur-rafay-khan-266579246/",
       portfolio: "https://abdur-rafay-khan-portfolio.vercel.app/",
+    },
+    {
+      name: "Muhammad Saad",
+      role: "Co-founder",
+      focus: "Software engineering · AI/ML · Backend systems",
+      description:
+        "Connecting applied intelligence with dependable software foundations.",
+      linkedin: "https://www.linkedin.com/in/muhammad-saad-492853407/",
+      portfolio: "https://muhammadsaad-portfolio.vercel.app/",
     },
   ],
   logo: {
     light: "/brand/psametra-logo-dark.webp",
     dark: "/brand/psametra-logo-light.webp",
+    originalLight: "/brand/psametra-logo-dark.png",
+    originalDark: "/brand/psametra-logo-light.png",
   },
   navigation: [
-    { label: "Services", href: "/services" },
-    { label: "Work", href: "/work" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+    {
+      label: "Services",
+      href: "/services",
+      note: "Capabilities",
+      summary: "Focused technology for real business needs.",
+      links: [
+        { label: "Software engineering", href: "/services#software" },
+        { label: "AI systems", href: "/services#ai" },
+      ],
+    },
+    {
+      label: "Work",
+      href: "/work",
+      note: "Selected concepts",
+      summary: "See how we turn complexity into coherent systems.",
+      links: [
+        { label: "Software systems", href: "/work#systems" },
+        { label: "Applied intelligence", href: "/work#intelligence" },
+      ],
+    },
+    {
+      label: "About",
+      href: "/about",
+      note: "Our perspective",
+      summary: "The principles and thinking behind Psametra.",
+      links: [
+        { label: "Our story", href: "/about#story" },
+        { label: "How we work", href: "/about#principles" },
+      ],
+    },
+    {
+      label: "Team",
+      href: "/team",
+      note: "Co-founders",
+      summary: "Meet the two people building Psametra.",
+      links: [
+        { label: "Abdur Rafay Khan", href: "/team#abdur-rafay-khan" },
+        { label: "Muhammad Saad", href: "/team#muhammad-saad" },
+      ],
+    },
+    {
+      label: "Contact",
+      href: "/contact",
+      note: "Start a conversation",
+      summary: "Bring us an idea, a challenge, or an early what-if.",
+      links: [
+        { label: "Project brief", href: "/contact#project-brief" },
+        {
+          label: "Email Psametra",
+          href: "mailto:rmspvtltd.software@gmail.com",
+        },
+      ],
+    },
   ],
   home: {
     description:

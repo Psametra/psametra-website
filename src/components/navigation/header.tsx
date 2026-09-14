@@ -1,31 +1,39 @@
 import { site } from "@/content/site";
 import { Brand } from "@/components/brand";
 import { SiteLink } from "./site-link";
-import { Arrow } from "@/components/ui";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileMenu } from "./mobile-menu";
+import { HeaderBehavior } from "./header-behavior";
 export function Header() {
   return (
-    <header className="header">
+    <HeaderBehavior>
       <div className="header-inner container">
         <SiteLink href="/" aria-label="Psametra home">
           <Brand />
         </SiteLink>
         <nav aria-label="Main navigation">
           {site.navigation.map((item) => (
-            <SiteLink key={item.href} href={item.href}>
-              {item.label}
-            </SiteLink>
+            <div className="nav-item" key={item.href}>
+              <SiteLink href={item.href}>{item.label}</SiteLink>
+              <div className="nav-dropdown">
+                <span>{item.note}</span>
+                <p>{item.summary}</p>
+                <div>
+                  {item.links.map((link) => (
+                    <SiteLink href={link.href} key={link.href}>
+                      {link.label} <span aria-hidden="true">↗</span>
+                    </SiteLink>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </nav>
         <div className="header-actions">
           <ThemeToggle />
-          <SiteLink href="/contact" className="button header-cta">
-            Start a project <Arrow diagonal />
-          </SiteLink>
           <MobileMenu />
         </div>
       </div>
-    </header>
+    </HeaderBehavior>
   );
 }

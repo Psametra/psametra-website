@@ -48,3 +48,11 @@ These are not marked complete and previous production Lighthouse numbers do not 
 - Product-owner visual review. No unsupported numeric quality score is assigned.
 
 Production https://psametra-website.vercel.app/ remains the earlier release. No production deployment or Vercel setting change was made in this implementation session.
+
+## Header and team refinement — 2026-09-14
+
+- Desktop header review confirmed centered navigation, removal of the header project button, translucent scrolled state, downward retraction, top-edge hover reveal, upward-scroll reveal, and dropdown access through hover/focus.
+- About displayed the supplied original light logo on dark surfaces and original dark logo on light surfaces. Team displayed equal founder cards, and each founder name resolved to the approved LinkedIn profile.
+- Mobile review at 390px confirmed the five-route dialog includes Team, excludes the removed project button, restores focus on close, and introduces no horizontal overflow.
+- Responsive matrix covered all six routes at 320, 390, 820, 821, 1024, and 1440 CSS pixels in both themes: 72 checks with no horizontal overflow or navigation overlap.
+- No application error or warning was observed in the final browser pass. Production was not deployed as part of this change.
