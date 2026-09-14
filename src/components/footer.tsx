@@ -9,21 +9,41 @@ export function Footer() {
           psametra
         </div>
         <div className="footer-top">
-          <SiteLink href="/" aria-label="Psametra home">
-            <Brand />
-          </SiteLink>
-          <p>
-            Thoughtfully built.
-            <br />
-            For what comes next.
-          </p>
-          <nav aria-label="Footer navigation">
-            {site.navigation.map((item) => (
-              <SiteLink href={item.href} key={item.href}>
-                {item.label}
-              </SiteLink>
-            ))}
-          </nav>
+          <div className="footer-identity">
+            <SiteLink href="/" aria-label="Psametra home">
+              <Brand />
+            </SiteLink>
+            <p>
+              Thoughtfully built.
+              <br />
+              For what comes next.
+            </p>
+          </div>
+          <div className="footer-directory">
+            <nav aria-label="Explore Psametra">
+              <span>Explore</span>
+              {site.navigation.map((item) => (
+                <SiteLink href={item.href} key={item.href}>
+                  {item.label}
+                </SiteLink>
+              ))}
+            </nav>
+            <nav aria-label="Capabilities">
+              <span>Capabilities</span>
+              {site.services.map((service) => (
+                <SiteLink href={`/services#${service.id}`} key={service.id}>
+                  {service.title}
+                </SiteLink>
+              ))}
+            </nav>
+            <nav aria-label="Company information">
+              <span>Company</span>
+              <SiteLink href="/about#story">Our story</SiteLink>
+              <SiteLink href="/about#principles">Our principles</SiteLink>
+              <SiteLink href="/team">Co-founders</SiteLink>
+              <SiteLink href="/contact#project-brief">Project brief</SiteLink>
+            </nav>
+          </div>
         </div>
         <div className="footer-bottom">
           <span>
