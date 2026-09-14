@@ -9,7 +9,9 @@ After this migration notice was written, the user directly requested this bounde
 - Source and documentation commit after integrating remote handoff history: `41d415e` (`Refine header navigation and add team page`).
 - This handoff is committed separately on top of that source commit; use `git log -1` for its exact hash.
 - The user previously authorized pushes through the current ARKhan8604 credential because both founders collaborate on the RMS repository. Do not repeat the obsolete historical requirement to use `msaad9632`.
-- Production was not deployed and no Vercel configuration changed. The local preview is `http://127.0.0.1:3000/` while the development server is running.
+- Vercel Git connection updated with the user's explicit confirmation: RMS project `rmspvtltdsoftware-4375s-projects/psametra-website` is connected to `rmspvtltdsoftware/psametra-website`. Vercel reported “Connected Git Repository successfully.”
+- The connection did not start a new deployment. The deployments page still showed the prior ready production deployment from commit `698002c` on `codex/psametra-site`. No manual production deployment or other Vercel setting change was made.
+- The local preview is `http://127.0.0.1:3000/` while the development server is running.
 
 ## Implemented
 
