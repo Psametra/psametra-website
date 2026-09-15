@@ -40,8 +40,8 @@ test("email draft round-trips Unicode, newlines and query characters without ext
     service: "AI Systems",
     details: "Review source A?\nThen evaluate B & C #1.",
   };
-  const url = new URL(projectEmailUrl("rmspvtltd.software@gmail.com", brief));
-  assert.equal(url.pathname, "rmspvtltd.software@gmail.com");
+  const url = new URL(projectEmailUrl("psametratech@gmail.com", brief));
+  assert.equal(url.pathname, "psametratech@gmail.com");
   assert.equal(url.searchParams.size, 2);
   assert.equal(url.searchParams.get("body"), formatProjectBrief(brief));
 });

@@ -1,3 +1,6 @@
+const contactEmail =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "psametratech@gmail.com";
+
 /** The editorial source of truth. Replace concepts here when verified project stories are available. */
 export const site = {
   name: "Psametra",
@@ -45,8 +48,7 @@ export const site = {
   ],
   description:
     "Thoughtful software engineering, AI systems, and digital experiences for ambitious businesses.",
-  email:
-    process.env.NEXT_PUBLIC_CONTACT_EMAIL || "rmspvtltd.software@gmail.com",
+  email: contactEmail,
   founders: [
     {
       name: "Abdur Rafay Khan",
@@ -123,7 +125,7 @@ export const site = {
         { label: "Project brief", href: "/contact#project-brief" },
         {
           label: "Email Psametra",
-          href: "mailto:rmspvtltd.software@gmail.com",
+          href: `mailto:${contactEmail}`,
         },
       ],
     },

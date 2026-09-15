@@ -33,7 +33,7 @@ The build generates a static site in `out/`. All six routes and the custom 404 a
 
 Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_CONTACT_EMAIL` to a verified business address. Rebuild after changing it.
 
-The approved default is `rmspvtltd.software@gmail.com`. The form validates meaningful, trimmed entries and opens a `mailto:` draft in the visitor’s email application; a separate download action always remains available. It never claims to send a message, stores no enquiry data, and has no backend. Add a separately validated server endpoint if direct form delivery becomes a requirement.
+The approved default is `psametratech@gmail.com`. The form validates meaningful, trimmed entries and opens a `mailto:` draft in the visitor’s email application; a separate download action always remains available. It never claims to send a message, stores no enquiry data, and has no backend. Add a separately validated server endpoint if direct form delivery becomes a requirement.
 
 ## Page transitions
 

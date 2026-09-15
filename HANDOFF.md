@@ -18,6 +18,7 @@ After this migration notice was written, the user directly requested this bounde
 - Production deployment `Chv7fiweSWBRk5gYwSevwrift4Lj`, triggered by the hero-art grid correction `689d032`, completed with status Ready.
 - Production deployment `GyMkS3DzhdQURcadMSM2LC3jg8xH`, triggered by the capability-orbit containment commit `0f679d4`, completed with status Ready.
 - Production deployment `3JD246pvC5PfSQeqfU3bZ3gLBym3`, triggered by the distinct Services motion-study commit `507a7f2`, completed with status Ready.
+- Production deployment `J6dZDsmRtSevE1hUjfGK8LCHmv5P`, triggered by the neutral Services-marker commit `58b342e`, completed with status Ready.
 - The local preview is `http://127.0.0.1:3000/` while the development server is running.
 
 ## Implemented
@@ -37,6 +38,7 @@ After this migration notice was written, the user directly requested this bounde
 13. Added height-aware maximum diameters to the capabilities orbit rings so the complete circular artwork stays inside its fixed-height artboard instead of clipping at the top and bottom. Breakpoint values remain centralized as custom properties on the art component. This correction and handoff update are committed together; use `git log -1` for the exact hash.
 14. Replaced the four repeated Services wireframes with distinct code-native motion studies: a flowing software pipeline, an orbiting AI network, layered browser frames with scan/cursor motion, and a product-direction path. Motion uses CSS only, honors `prefers-reduced-motion`, and keeps the capability copy as the accessible explanation. This source and handoff update are committed together; use `git log -1` for the exact hash.
 15. Replaced the diagonal-arrow prefixes on non-interactive Services deliverables with small blue circular markers so the rows no longer imply link behavior. Actual links retain their directional-arrow treatment. This source and handoff update are committed together; use `git log -1` for the exact hash.
+16. Changed the approved site-wide contact address to `psametratech@gmail.com`. The central content model now owns one shared email value used by the Contact dropdown, Contact page, footer, and project-brief draft; the environment example, README, tests, and historical handoff references were updated with it. This source and handoff update are committed together; use `git log -1` for the exact hash.
 
 ## Exact verification
 
@@ -57,6 +59,7 @@ After this migration notice was written, the user directly requested this bounde
 - Capabilities orbit containment: browser geometry checks at 1280, 1025, 1024, 820, 700, and 390px confirmed the outer ring is fully contained, remains circular, preserves at least 30px of vertical clearance, never overlaps its caption, and produces zero horizontal document overflow.
 - Services motion studies: browser review confirmed all four distinct visuals render as intended. At 390px each diagram remains inside the viewport at 235×139px, the document has zero horizontal overflow, and each capability exposes its expected CSS animation set; the animations are excluded when reduced motion is requested.
 - Services deliverable markers: browser review confirmed the three non-interactive rows use compact blue dots with no arrow glyphs in their accessible text, while their dividers and alignment remain intact.
+- Contact email change: source search confirms the former address has no remaining repository references. The Contact dropdown, Contact page, footer, and generated project-brief draft all resolve from the shared `site.email` value.
 
 ## Remaining work
 
@@ -356,7 +359,7 @@ Do not redesign from scratch.
 
 **DONE / VERIFIED IN SOURCE + PARTIAL BROWSER QA**
 
-- real default email `rmspvtltd.software@gmail.com`
+- real default email `psametratech@gmail.com`
 - explicit mailto draft
 - local brief download
 - whitespace validation
@@ -808,7 +811,7 @@ Do not raise these scores merely because code was changed. Raise them only after
 - Default theme follows system; manual theme switch stays.
 - Desktop may use gentle Lenis easing; touch stays native.
 - Contact has no backend/database unless Saad explicitly changes that decision.
-- Approved address: `rmspvtltd.software@gmail.com`.
+- Approved address: `psametratech@gmail.com`.
 - Never claim an enquiry was sent when only a mail draft opens.
 - Keep concept/prototype status honest.
 - Do not invent customers, outcomes, testimonials, revenue, awards, addresses, launch status, executive titles, or metrics.
