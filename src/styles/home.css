@@ -27,16 +27,18 @@
 .hero-art {
   height: 570px;
   display: grid;
-  place-items: center;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
   position: relative;
   overflow: clip;
   min-width: 0;
   align-self: stretch;
-  box-sizing: border-box;
-  padding-bottom: 72px;
 }
 .hero-art .eclipse {
-  width: min(520px, calc(100% - 40px));
+  grid-row: 2;
+  justify-self: center;
+  width: min(460px, calc(100% - 40px));
   filter: drop-shadow(0 0 6px var(--hero-logo-glow-near))
     drop-shadow(0 0 16px var(--hero-logo-glow-far));
 }
@@ -44,15 +46,15 @@
   border-width: 77px;
 }
 .art-coordinate {
-  position: absolute;
-  top: 0;
-  right: 0;
+  grid-row: 1;
+  justify-self: end;
+  align-self: start;
   color: var(--muted);
 }
 .art-caption {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  grid-row: 3;
+  justify-self: end;
+  align-self: end;
   text-align: right;
   color: var(--muted);
   background: transparent;
@@ -335,8 +337,10 @@
   }
   .hero-art {
     height: 520px;
+    grid-template-rows: minmax(0, 1fr) auto;
   }
   .hero-art .eclipse {
+    grid-row: 1;
     width: min(330px, calc(100% - 40px));
   }
   .hero-art .eclipse-half {
@@ -344,6 +348,9 @@
   }
   .art-coordinate {
     display: none;
+  }
+  .art-caption {
+    grid-row: 2;
   }
   .principles-grid,
   .process-grid {
@@ -384,9 +391,7 @@
     border-width: 46px;
   }
   .art-caption {
-    bottom: 0;
-    left: 0;
-    right: auto;
+    justify-self: start;
     text-align: left;
   }
   .hero-baseline {
