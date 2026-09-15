@@ -32,6 +32,8 @@
   overflow: clip;
   min-width: 0;
   align-self: stretch;
+  box-sizing: border-box;
+  padding-bottom: 72px;
 }
 .hero-art .eclipse {
   width: min(520px, calc(100% - 40px));
@@ -53,8 +55,7 @@
   right: 0;
   text-align: right;
   color: var(--muted);
-  background: var(--surface);
-  padding-top: 12px;
+  background: transparent;
 }
 .art-caption span {
   display: block;
