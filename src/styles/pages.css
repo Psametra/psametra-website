@@ -56,10 +56,120 @@
   margin-top: 32px;
   stroke: var(--muted);
   stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.service-diagram * {
+  vector-effect: non-scaling-stroke;
+}
+.diagram-panel {
+  fill: var(--surface-alt);
+}
+.diagram-faint {
+  opacity: 0.24;
+}
+.diagram-track,
+.diagram-detail {
+  opacity: 0.65;
+}
+.diagram-detail {
+  stroke-width: 0.8;
+}
+.diagram-node {
+  fill: var(--surface);
+}
+.diagram-soft-fill {
+  fill: color-mix(in srgb, var(--accent) 10%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 38%, transparent);
+}
+.diagram-signal {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+.diagram-cursor {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+.diagram-diamond {
+  transform-box: fill-box;
+  transform-origin: center;
+  rotate: 45deg;
 }
 .diagram-accent {
   fill: var(--accent);
   stroke: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .diagram-software .diagram-signal,
+  .diagram-product-route {
+    stroke-dasharray: 0.1 0.9;
+    animation: diagram-route 4s linear infinite;
+  }
+  .diagram-ai .diagram-orbit-dot {
+    transform-origin: 160px 95px;
+    animation: diagram-orbit 9s linear infinite;
+  }
+  .diagram-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: diagram-pulse 2.8s ease-in-out infinite;
+  }
+  .diagram-pulse-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: diagram-breathe 3.8s ease-in-out infinite;
+  }
+  .diagram-web .diagram-scan {
+    stroke: var(--accent);
+    opacity: 0.72;
+    animation: diagram-scan 4.5s ease-in-out infinite;
+  }
+  .diagram-web .diagram-cursor {
+    animation: diagram-cursor 4.5s ease-in-out infinite;
+  }
+}
+@keyframes diagram-route {
+  to {
+    stroke-dashoffset: -1;
+  }
+}
+@keyframes diagram-orbit {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes diagram-pulse {
+  50% {
+    scale: 1.65;
+    opacity: 0.45;
+  }
+}
+@keyframes diagram-breathe {
+  50% {
+    scale: 1.14;
+    opacity: 0.48;
+  }
+}
+@keyframes diagram-scan {
+  0%,
+  100% {
+    translate: 0 0;
+    opacity: 0.2;
+  }
+  50% {
+    translate: 0 76px;
+    opacity: 0.9;
+  }
+}
+@keyframes diagram-cursor {
+  0%,
+  100% {
+    translate: -36px -25px;
+  }
+  50% {
+    translate: 0 0;
+  }
 }
 .about-story {
   display: grid;

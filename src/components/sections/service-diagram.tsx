@@ -1,6 +1,195 @@
 type Capability = "software" | "ai" | "web" | "product";
 
-/** Decorative, code-native diagrams; capability copy remains the accessible explanation. */
+function SoftwareSystem() {
+  return (
+    <>
+      <g className="diagram-faint">
+        <path d="M18 24H302M18 95H302M18 166H302" />
+        <path d="M66 14V176M160 14V176M254 14V176" />
+      </g>
+      <rect
+        className="diagram-panel"
+        x="18"
+        y="47"
+        width="78"
+        height="96"
+        rx="5"
+      />
+      <rect
+        className="diagram-panel"
+        x="121"
+        y="29"
+        width="78"
+        height="60"
+        rx="5"
+      />
+      <rect
+        className="diagram-panel"
+        x="224"
+        y="47"
+        width="78"
+        height="96"
+        rx="5"
+      />
+      <path
+        className="diagram-track"
+        d="M96 95H121M199 59H211Q224 59 224 72V95"
+      />
+      <path
+        className="diagram-signal"
+        pathLength={1}
+        d="M38 112H78L110 130H160V112H282"
+      />
+      <circle className="diagram-node" cx="38" cy="112" r="6" />
+      <circle className="diagram-node" cx="160" cy="112" r="6" />
+      <circle
+        className="diagram-accent diagram-pulse"
+        cx="282"
+        cy="112"
+        r="5"
+      />
+      <path
+        className="diagram-detail"
+        d="M36 68h42M36 79h28M139 49h42M242 68h42M242 79h26"
+      />
+    </>
+  );
+}
+
+function IntelligenceSystem() {
+  return (
+    <>
+      <circle className="diagram-faint diagram-ring" cx="160" cy="95" r="75" />
+      <ellipse
+        className="diagram-faint diagram-ring"
+        cx="160"
+        cy="95"
+        rx="124"
+        ry="46"
+      />
+      <path
+        className="diagram-track"
+        d="M160 95L72 43M160 95l91-48M160 95l104 64M160 95L57 151"
+      />
+      <circle className="diagram-node" cx="72" cy="43" r="13" />
+      <circle className="diagram-node" cx="251" cy="47" r="9" />
+      <circle className="diagram-node" cx="264" cy="159" r="12" />
+      <circle className="diagram-node" cx="57" cy="151" r="9" />
+      <circle
+        className="diagram-soft-fill diagram-pulse-ring"
+        cx="160"
+        cy="95"
+        r="35"
+      />
+      <circle className="diagram-node" cx="160" cy="95" r="24" />
+      <circle className="diagram-accent diagram-pulse" cx="160" cy="95" r="5" />
+      <circle
+        className="diagram-accent diagram-orbit-dot"
+        cx="160"
+        cy="20"
+        r="4"
+      />
+      <path
+        className="diagram-detail"
+        d="M65 39h14M244 43h14M257 155h14M50 147h14"
+      />
+    </>
+  );
+}
+
+function WebSystem() {
+  return (
+    <>
+      <rect
+        className="diagram-faint diagram-panel"
+        x="82"
+        y="15"
+        width="214"
+        height="130"
+        rx="6"
+      />
+      <rect
+        className="diagram-faint diagram-panel"
+        x="55"
+        y="29"
+        width="214"
+        height="130"
+        rx="6"
+      />
+      <rect
+        className="diagram-panel"
+        x="24"
+        y="45"
+        width="214"
+        height="130"
+        rx="6"
+      />
+      <path className="diagram-track" d="M24 70h214" />
+      <circle className="diagram-node" cx="40" cy="58" r="3" />
+      <circle className="diagram-node" cx="51" cy="58" r="3" />
+      <circle className="diagram-node" cx="62" cy="58" r="3" />
+      <rect
+        className="diagram-soft-fill"
+        x="42"
+        y="89"
+        width="73"
+        height="52"
+        rx="3"
+      />
+      <path
+        className="diagram-detail"
+        d="M132 91h76M132 105h58M132 119h69M42 154h166"
+      />
+      <path className="diagram-scan" d="M34 80h194" />
+      <path className="diagram-cursor" d="M196 129l20 9-9 4-4 10z" />
+      <circle
+        className="diagram-accent diagram-pulse"
+        cx="207"
+        cy="142"
+        r="3"
+      />
+    </>
+  );
+}
+
+function ProductSystem() {
+  return (
+    <>
+      <g className="diagram-faint">
+        <path d="M22 36H298M22 95H298M22 154H298" />
+        <path d="M54 17V173M160 17V173M266 17V173" />
+      </g>
+      <path
+        className="diagram-track"
+        d="M34 143C80 143 78 55 126 55s46 79 91 79 43-78 72-78"
+      />
+      <path
+        className="diagram-signal diagram-product-route"
+        pathLength={1}
+        d="M34 143C80 143 78 55 126 55s46 79 91 79 43-78 72-78"
+      />
+      <circle className="diagram-node" cx="34" cy="143" r="8" />
+      <rect
+        className="diagram-node diagram-diamond"
+        x="118"
+        y="47"
+        width="16"
+        height="16"
+      />
+      <circle className="diagram-node" cx="217" cy="134" r="8" />
+      <circle className="diagram-accent diagram-pulse" cx="289" cy="56" r="5" />
+      <path className="diagram-detail" d="M26 20h58M174 20h52M241 167h51" />
+      <circle
+        className="diagram-soft-fill diagram-pulse-ring"
+        cx="217"
+        cy="134"
+        r="25"
+      />
+    </>
+  );
+}
+
+/** Decorative, code-native motion studies; capability copy remains the accessible explanation. */
 export function ServiceDiagram({ type }: { type: Capability }) {
   return (
     <svg
@@ -10,37 +199,13 @@ export function ServiceDiagram({ type }: { type: Capability }) {
       aria-hidden="true"
     >
       {type === "software" ? (
-        <>
-          <path d="M160 48v35M65 115V83h190v32M160 83v32" />
-          <rect x="117" y="15" width="86" height="33" />
-          <rect x="22" y="115" width="86" height="45" />
-          <rect x="117" y="115" width="86" height="45" />
-          <rect x="212" y="115" width="86" height="45" />
-          <circle className="diagram-accent" cx="160" cy="83" r="3" />
-        </>
+        <SoftwareSystem />
       ) : type === "ai" ? (
-        <>
-          <path d="M55 50L160 95 55 140M160 95h90" />
-          <circle cx="55" cy="50" r="22" />
-          <circle cx="55" cy="140" r="22" />
-          <circle cx="160" cy="95" r="33" />
-          <rect x="250" y="67" width="48" height="56" />
-          <circle className="diagram-accent" cx="160" cy="95" r="4" />
-        </>
+        <IntelligenceSystem />
       ) : type === "web" ? (
-        <>
-          <rect x="24" y="24" width="210" height="132" />
-          <path d="M24 48h210M45 69h112M45 83h80M45 123h60" />
-          <rect x="213" y="75" width="65" height="96" />
-          <path d="M228 95h35M228 108h25" />
-          <circle className="diagram-accent" cx="246" cy="154" r="3" />
-        </>
+        <WebSystem />
       ) : (
-        <>
-          <rect x="33" y="24" width="254" height="142" />
-          <path d="M33 58h254M116 58v108M137 81h125M137 99h75M53 81h42M53 99h30M137 135h42" />
-          <circle className="diagram-accent" cx="271" cy="41" r="3" />
-        </>
+        <ProductSystem />
       )}
     </svg>
   );
