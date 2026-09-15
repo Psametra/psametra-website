@@ -15,6 +15,7 @@ After this migration notice was written, the user directly requested this bounde
 - With the user's explicit confirmation, Vercel Production branch tracking was changed from `main` to `codex/psametra-site`. Vercel confirmed “Branch tracking saved”; auto-assignment of production domains remains enabled, so every future push to this branch creates a production deployment.
 - Automatic production deployment `EPGGyGpqL7zsR69DLK5dYyKLXMfi`, triggered by commit `c6d9ffc`, completed with status Ready. This verifies the branch-tracking configuration end to end.
 - Production deployment `F7QBgLXRrPP4Fv1kHdet3Af3hRq2`, triggered by the transparent-caption commit `6efb1fd`, also completed with status Ready.
+- Production deployment `Chv7fiweSWBRk5gYwSevwrift4Lj`, triggered by the hero-art grid correction `689d032`, completed with status Ready.
 - The local preview is `http://127.0.0.1:3000/` while the development server is running.
 
 ## Implemented
@@ -31,6 +32,7 @@ After this migration notice was written, the user directly requested this bounde
 10. Removed the Work page concept disclaimer and its unused notice styling in commit `4ba1bbb`.
 11. Expanded the footer into responsive Explore, Capabilities, and Company directories in commit `9409766`. Links reuse the central navigation and service data where possible and include relevant About, Team, and Contact anchors.
 12. Made the homepage hero-art caption transparent, then placed the coordinate label, complete mark, and caption in dedicated grid rows so none of the three elements can overlap. The coordinate label is intentionally omitted below the desktop breakpoint. This correction and handoff update are committed together; use `git log -1` for the exact hash.
+13. Added height-aware maximum diameters to the capabilities orbit rings so the complete circular artwork stays inside its fixed-height artboard instead of clipping at the top and bottom. Breakpoint values remain centralized as custom properties on the art component. This correction and handoff update are committed together; use `git log -1` for the exact hash.
 
 ## Exact verification
 
@@ -48,6 +50,7 @@ After this migration notice was written, the user directly requested this bounde
 - Work notice removal: `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed on 2026-09-14.
 - Footer directory: the same checks passed. Browser review at 390px and 1440px confirmed readable link columns, correct destinations, and no layout overflow.
 - Hero artwork separation: browser geometry checks at 1280, 1025, 1024, 820, 700, and 390px confirmed zero coordinate/mark overlap, zero mark/caption overlap, a fully contained mark, and zero horizontal document overflow at every width. The caption remains transparent.
+- Capabilities orbit containment: browser geometry checks at 1280, 1025, 1024, 820, 700, and 390px confirmed the outer ring is fully contained, remains circular, preserves at least 30px of vertical clearance, never overlaps its caption, and produces zero horizontal document overflow.
 
 ## Remaining work
 

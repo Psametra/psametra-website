@@ -151,6 +151,10 @@
   color: var(--accent);
 }
 .capabilities-art {
+  --orbit-one-max: 215px;
+  --orbit-two-max: 352px;
+  --orbit-three-max: 440px;
+
   position: relative;
   min-width: 0;
   height: 500px;
@@ -172,14 +176,14 @@
   border-radius: 50%;
 }
 .orbit-one {
-  width: 44%;
+  width: min(44%, var(--orbit-one-max));
   border-color: #306cfe33;
 }
 .orbit-two {
-  width: 72%;
+  width: min(72%, var(--orbit-two-max));
 }
 .orbit-three {
-  width: 90%;
+  width: min(90%, var(--orbit-three-max));
   border-style: dashed;
 }
 .orbit-two::before,
@@ -357,6 +361,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .capabilities-art {
+    --orbit-one-max: 176px;
+    --orbit-two-max: 288px;
+    --orbit-three-max: 360px;
+
     height: 420px;
   }
   .principle-intro {
@@ -426,6 +434,10 @@
     gap: 24px;
   }
   .capabilities-art {
+    --orbit-one-max: 156px;
+    --orbit-two-max: 256px;
+    --orbit-three-max: 320px;
+
     height: 380px;
     max-width: 480px;
     width: 100%;
