@@ -45,9 +45,14 @@
   border-top: 1px solid var(--line);
 }
 .service-detail li::before {
-  content: "↗";
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
   margin-right: 16px;
-  color: var(--muted);
+  vertical-align: 0.18em;
 }
 .service-diagram {
   display: block;

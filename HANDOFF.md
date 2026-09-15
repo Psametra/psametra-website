@@ -17,6 +17,7 @@ After this migration notice was written, the user directly requested this bounde
 - Production deployment `F7QBgLXRrPP4Fv1kHdet3Af3hRq2`, triggered by the transparent-caption commit `6efb1fd`, also completed with status Ready.
 - Production deployment `Chv7fiweSWBRk5gYwSevwrift4Lj`, triggered by the hero-art grid correction `689d032`, completed with status Ready.
 - Production deployment `GyMkS3DzhdQURcadMSM2LC3jg8xH`, triggered by the capability-orbit containment commit `0f679d4`, completed with status Ready.
+- Production deployment `3JD246pvC5PfSQeqfU3bZ3gLBym3`, triggered by the distinct Services motion-study commit `507a7f2`, completed with status Ready.
 - The local preview is `http://127.0.0.1:3000/` while the development server is running.
 
 ## Implemented
@@ -35,6 +36,7 @@ After this migration notice was written, the user directly requested this bounde
 12. Made the homepage hero-art caption transparent, then placed the coordinate label, complete mark, and caption in dedicated grid rows so none of the three elements can overlap. The coordinate label is intentionally omitted below the desktop breakpoint. This correction and handoff update are committed together; use `git log -1` for the exact hash.
 13. Added height-aware maximum diameters to the capabilities orbit rings so the complete circular artwork stays inside its fixed-height artboard instead of clipping at the top and bottom. Breakpoint values remain centralized as custom properties on the art component. This correction and handoff update are committed together; use `git log -1` for the exact hash.
 14. Replaced the four repeated Services wireframes with distinct code-native motion studies: a flowing software pipeline, an orbiting AI network, layered browser frames with scan/cursor motion, and a product-direction path. Motion uses CSS only, honors `prefers-reduced-motion`, and keeps the capability copy as the accessible explanation. This source and handoff update are committed together; use `git log -1` for the exact hash.
+15. Replaced the diagonal-arrow prefixes on non-interactive Services deliverables with small blue circular markers so the rows no longer imply link behavior. Actual links retain their directional-arrow treatment. This source and handoff update are committed together; use `git log -1` for the exact hash.
 
 ## Exact verification
 
@@ -54,6 +56,7 @@ After this migration notice was written, the user directly requested this bounde
 - Hero artwork separation: browser geometry checks at 1280, 1025, 1024, 820, 700, and 390px confirmed zero coordinate/mark overlap, zero mark/caption overlap, a fully contained mark, and zero horizontal document overflow at every width. The caption remains transparent.
 - Capabilities orbit containment: browser geometry checks at 1280, 1025, 1024, 820, 700, and 390px confirmed the outer ring is fully contained, remains circular, preserves at least 30px of vertical clearance, never overlaps its caption, and produces zero horizontal document overflow.
 - Services motion studies: browser review confirmed all four distinct visuals render as intended. At 390px each diagram remains inside the viewport at 235×139px, the document has zero horizontal overflow, and each capability exposes its expected CSS animation set; the animations are excluded when reduced motion is requested.
+- Services deliverable markers: browser review confirmed the three non-interactive rows use compact blue dots with no arrow glyphs in their accessible text, while their dividers and alignment remain intact.
 
 ## Remaining work
 
