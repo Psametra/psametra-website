@@ -21,6 +21,7 @@ After this migration notice was written, the user directly requested this bounde
 - Production deployment `J6dZDsmRtSevE1hUjfGK8LCHmv5P`, triggered by the neutral Services-marker commit `58b342e`, completed with status Ready.
 - Production deployment `CC4MC1PznYeZK8QdUdsRtbgbeHM2`, triggered by founder-admin commit `c0156c1`, completed with status Ready. Both founder profiles authenticated successfully against `https://psametra-website.vercel.app/admin/` and rendered the protected editor. The editor intentionally reports that Cloudinary publishing is unavailable until the RMS account connection below is completed.
 - The local preview is `http://127.0.0.1:3000/` while the development server is running.
+- Production deployment `CiDBTivmywsCJKca8KU8peH8LSte`, triggered by password-management commit `dbfe074`, completed with status Ready and owns `https://psametra-website.vercel.app`. Both founder recovery credentials reached their profile-specific `/admin/security` screen in production. Password writes remain intentionally disabled until RMS completes the existing Cloudinary account recovery and configures `CLOUDINARY_URL`; `ADMIN_CREDENTIALS_SECRET` is already installed as a sensitive Production variable.
 
 ## Implemented
 
