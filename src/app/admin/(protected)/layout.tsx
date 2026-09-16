@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { AdminLogout } from "@/components/admin/admin-logout";
 import { getAdminSession } from "@/lib/admin-auth";
 
@@ -13,9 +14,20 @@ export default async function ProtectedAdminLayout({
   return (
     <main className="admin-shell">
       <aside className="admin-sidebar">
-        <a className="admin-mark" href="/admin">
-          p.
-        </a>
+        <Link
+          className="admin-mark"
+          href="/admin"
+          aria-label="Psametra admin home"
+        >
+          <Image
+            src="/brand/psametra-logo-light.webp"
+            width={1536}
+            height={1024}
+            sizes="112px"
+            alt=""
+            priority
+          />
+        </Link>
         <nav className="admin-sidebar-nav" aria-label="Admin workspace">
           <Link href="/admin">Content</Link>
           <Link href="/admin/security">Security</Link>
