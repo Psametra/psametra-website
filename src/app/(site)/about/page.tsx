@@ -1,29 +1,31 @@
-import type { Metadata } from "next";
-import { site } from "@/content/site";
+import { getSiteContent } from "@/lib/content-store";
+import { pageMetadata } from "@/lib/site-metadata";
 import { PageIntro } from "@/components/sections/page-intro";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { SectionLabel } from "@/components/ui";
 import { Brand } from "@/components/brand";
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Independent thinking. Thoughtful engineering. Get to know the principles behind Psametra.",
-};
-export default function About() {
+export async function generateMetadata() {
+  return pageMetadata(await getSiteContent(), "about");
+}
+export default async function About() {
+  const site = await getSiteContent();
   return (
     <>
       <PageIntro {...site.intros.about} />
       <section id="story" className="about-story container" data-reveal>
         <div className="about-art">
-          <Brand original priority={false} className="about-brand" />
-          <span>CLARITY / CARE / CRAFT</span>
+          <Brand
+            logo={site.logo}
+            original
+            priority={false}
+            className="about-brand"
+          />
+          <span>{site.copy.about.artCaption}</span>
         </div>
         <div>
-          <SectionLabel>A considered perspective</SectionLabel>
-          <h2>
-            More than what we build.
-            <br />
-            How we think.
+          <SectionLabel>{site.copy.about.storyLabel}</SectionLabel>
+          <h2 style={{ whiteSpace: "pre-line" }}>
+            {site.copy.about.storyTitle}
           </h2>
           {site.aboutStory.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
@@ -31,8 +33,8 @@ export default function About() {
         </div>
       </section>
       <section id="principles" className="container section" data-reveal>
-        <SectionLabel>Our operating principles</SectionLabel>
-        <h2>The foundations don’t change.</h2>
+        <SectionLabel>{site.copy.about.principlesLabel}</SectionLabel>
+        <h2>{site.copy.about.principlesTitle}</h2>
         <div className="about-principles">
           {site.principles.map((principle, index) => (
             <article key={principle.title}>
@@ -43,7 +45,7 @@ export default function About() {
           ))}
         </div>
       </section>
-      <ContactCta />
+      <ContactCta copy={site.copy.cta} />
     </>
   );
 }

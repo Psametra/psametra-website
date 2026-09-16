@@ -1,8 +1,10 @@
 const contactEmail =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL || "psametratech@gmail.com";
 
-/** The editorial source of truth. Replace concepts here when verified project stories are available. */
-export const site = {
+import type { SiteContent } from "./site-schema";
+
+/** The version-controlled fallback and initial content used before Cloudinary is configured. */
+export const defaultSite = {
   name: "Psametra",
   intros: {
     services: {
@@ -278,6 +280,125 @@ export const site = {
         "Test the details, document the decisions, and prepare for what comes next.",
     },
   ],
-} as const;
+  seo: {
+    home: {
+      title: "Psametra — Software engineered for what’s next.",
+      description:
+        "Thoughtful software engineering, AI systems, and digital experiences for ambitious businesses.",
+    },
+    services: {
+      title: "Services",
+      description:
+        "Software engineering, AI systems, web platforms, and product strategy. Explore what we can build together.",
+    },
+    work: {
+      title: "Work & Concepts",
+      description:
+        "Explore conceptual directions for custom platforms, applied AI, digital experiences, and product engineering.",
+    },
+    about: {
+      title: "About",
+      description:
+        "Independent thinking. Thoughtful engineering. Get to know the principles behind Psametra.",
+    },
+    team: {
+      title: "Team",
+      description:
+        "Meet Psametra co-founders Abdur Rafay Khan and Muhammad Saad.",
+    },
+    contact: {
+      title: "Start a Project",
+      description:
+        "Tell us what you have in mind. Start a conversation about your next software, AI, or digital product project.",
+    },
+  },
+  appearance: {
+    light: {
+      surface: "#f7f7f5",
+      ink: "#111111",
+      muted: "#676b73",
+      accent: "#124bea",
+    },
+    dark: {
+      surface: "#050505",
+      ink: "#f7f7f5",
+      muted: "#969ca8",
+      accent: "#306cfe",
+    },
+  },
+  copy: {
+    home: {
+      heroLabel: "Independent thinking. Exceptional engineering.",
+      heroTitle: "Software engineered",
+      heroAccent: "for what’s next.",
+      primaryAction: "Start a project",
+      secondaryAction: "Explore our work",
+      coordinate: "PS / 001 — THE POSSIBILITY OF PRECISE",
+      caption: ["Built with intention.", "Designed to move you forward."],
+      baseline: "SOFTWARE. INTELLIGENCE. POSSIBILITY.",
+      discover: "Discover Psametra",
+      clarityTitle: "Clarity in every system.",
+      clarityDescription:
+        "Complexity is everywhere.\nWe build what brings it into focus.",
+      clarityAction: "Meet Psametra",
+      capabilitiesLabel: "CAPABILITIES",
+      capabilitiesCaption: "CONNECTED THINKING. COHERENT SYSTEMS.",
+      workLabel: "SELECTED CONCEPTS",
+      workTitle: "Possibility, made tangible.",
+      workAction: "Explore all concepts",
+      workNote:
+        "Concept studies that illustrate our thinking. Not commissioned client work.",
+      approachLabel: "OUR APPROACH",
+      approachTitle: "A clearer path\nfrom insight to impact.",
+      approachDescription:
+        "Technology is only as valuable as the problem it solves. We bring clarity, care, and a long-term perspective to every decision.",
+    },
+    services: {
+      processLabel: "A clear way forward",
+      processTitle: "Deliberate at every step.",
+    },
+    about: {
+      artCaption: "CLARITY / CARE / CRAFT",
+      storyLabel: "A considered perspective",
+      storyTitle: "More than what we build.\nHow we think.",
+      principlesLabel: "Our operating principles",
+      principlesTitle: "The foundations don’t change.",
+    },
+    team: { sectionLabel: "Co-founders" },
+    contact: {
+      sideTitle: "Every project starts\nwith a conversation.",
+      sideDescription:
+        "Tell us about your business, what you want to change, and where you’d like to go. A few thoughtful details are all we need to get started.",
+      emailLabel: "Prefer email?",
+      nextLabel: "What comes next",
+      nextSteps: [
+        "Align on your goals.",
+        "Explore the right approach.",
+        "Define a clear next step.",
+      ],
+      formServiceLabel: "What are you thinking about?",
+      formDetailsLabel: "A little about your project",
+      formNote:
+        "This opens your email app. You review and send the message yourself. No email app? Download your brief instead.",
+      emailAction: "Open email draft",
+      downloadAction: "Download brief",
+    },
+    footer: {
+      tagline: ["Thoughtfully built.", "For what comes next."],
+      exploreLabel: "Explore",
+      capabilitiesLabel: "Capabilities",
+      companyLabel: "Company",
+      closing: "Precision is a practice.",
+    },
+    cta: {
+      label: "The next chapter starts here",
+      title: "Something in mind?",
+      accent: "Let’s make it matter.",
+      action: "Start a conversation",
+    },
+  },
+} satisfies SiteContent;
 
-export type Project = (typeof site.projects)[number];
+/** Client-only components use the fallback; server-rendered pages receive Cloudinary content. */
+export const site: SiteContent = defaultSite;
+export type { Project } from "./site-schema";

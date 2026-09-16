@@ -1,14 +1,13 @@
-import type { Metadata } from "next";
-import { site } from "@/content/site";
+import { getSiteContent } from "@/lib/content-store";
+import { pageMetadata } from "@/lib/site-metadata";
 import { PageIntro } from "@/components/sections/page-intro";
 import { ProjectVisual } from "@/components/sections/project-card";
 import { ContactCta } from "@/components/sections/contact-cta";
-export const metadata: Metadata = {
-  title: "Work & Concepts",
-  description:
-    "Explore conceptual directions for custom platforms, applied AI, digital experiences, and product engineering.",
-};
-export default function Work() {
+export async function generateMetadata() {
+  return pageMetadata(await getSiteContent(), "work");
+}
+export default async function Work() {
+  const site = await getSiteContent();
   return (
     <>
       <PageIntro {...site.intros.work} />
@@ -37,7 +36,7 @@ export default function Work() {
           </article>
         ))}
       </section>
-      <ContactCta />
+      <ContactCta copy={site.copy.cta} />
     </>
   );
 }

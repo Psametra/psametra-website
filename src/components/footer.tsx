@@ -1,7 +1,7 @@
-import { site } from "@/content/site";
+import type { SiteContent } from "@/content/site-schema";
 import { Brand } from "./brand";
 import { SiteLink } from "./navigation/site-link";
-export function Footer() {
+export function Footer({ content }: { content: SiteContent }) {
   return (
     <footer className="footer dark-surface">
       <div className="container">
@@ -11,33 +11,36 @@ export function Footer() {
         <div className="footer-top">
           <div className="footer-identity">
             <SiteLink href="/" aria-label="Psametra home">
-              <Brand />
+              <Brand logo={content.logo} />
             </SiteLink>
             <p>
-              Thoughtfully built.
-              <br />
-              For what comes next.
+              {content.copy.footer.tagline.map((line) => (
+                <span key={line}>
+                  {line}
+                  <br />
+                </span>
+              ))}
             </p>
           </div>
           <div className="footer-directory">
             <nav aria-label="Explore Psametra">
-              <span>Explore</span>
-              {site.navigation.map((item) => (
+              <span>{content.copy.footer.exploreLabel}</span>
+              {content.navigation.map((item) => (
                 <SiteLink href={item.href} key={item.href}>
                   {item.label}
                 </SiteLink>
               ))}
             </nav>
             <nav aria-label="Capabilities">
-              <span>Capabilities</span>
-              {site.services.map((service) => (
+              <span>{content.copy.footer.capabilitiesLabel}</span>
+              {content.services.map((service) => (
                 <SiteLink href={`/services#${service.id}`} key={service.id}>
                   {service.title}
                 </SiteLink>
               ))}
             </nav>
             <nav aria-label="Company information">
-              <span>Company</span>
+              <span>{content.copy.footer.companyLabel}</span>
               <SiteLink href="/about#story">Our story</SiteLink>
               <SiteLink href="/about#principles">Our principles</SiteLink>
               <SiteLink href="/team">Co-founders</SiteLink>
@@ -49,8 +52,8 @@ export function Footer() {
           <span>
             © {new Date().getUTCFullYear()} Psametra. All rights reserved.
           </span>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-          <span>Precision is a practice.</span>
+          <a href={`mailto:${content.email}`}>{content.email}</a>
+          <span>{content.copy.footer.closing}</span>
         </div>
       </div>
     </footer>

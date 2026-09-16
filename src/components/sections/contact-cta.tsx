@@ -1,19 +1,21 @@
 import { SiteLink } from "@/components/navigation/site-link";
 import { Arrow, SectionLabel } from "@/components/ui";
-export function ContactCta() {
+import type { SiteContent } from "@/content/site-schema";
+
+export function ContactCta({ copy }: { copy: SiteContent["copy"]["cta"] }) {
   return (
     <section className="cta-section">
       <div className="container cta-inner">
         <div data-reveal>
-          <SectionLabel>The next chapter starts here</SectionLabel>
+          <SectionLabel>{copy.label}</SectionLabel>
           <h2>
-            Something in mind?
+            {copy.title}
             <br />
-            <span>Let’s make it matter.</span>
+            <span>{copy.accent}</span>
           </h2>
         </div>
         <SiteLink className="button primary" href="/contact">
-          Start a conversation <Arrow diagonal />
+          {copy.action} <Arrow diagonal />
         </SiteLink>
       </div>
     </section>

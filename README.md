@@ -20,12 +20,12 @@ npm test
 npm run build
 ```
 
-The build generates a static site in `out/`. All six routes and the custom 404 are prerendered. `npm start` serves that exported site for production inspection. Google font files are downloaded at build time by `next/font` and served locally to visitors.
+The public routes are server-rendered so published Cloudinary content appears without a code deployment. `npm start` runs the production Next.js server after a build. Google font files are downloaded at build time by `next/font` and served locally to visitors.
 
 ## Content and brand assets
 
-- `src/content/site.ts`: navigation, page introductions, company story, service descriptions, project concepts, and operating principles. Keep portfolio entries labelled as concepts until real case studies are supplied.
-- `src/app/*/page.tsx`: route composition and section-specific headings. Shared sections are in `src/components/sections/`.
+- `src/content/site.ts`: typed fallback and seed content. Keep portfolio entries labelled as concepts until real case studies are supplied.
+- `src/app/(site)/*/page.tsx`: public route composition. Shared sections are in `src/components/sections/`.
 - `src/styles/tokens.css`: surface colors, typography-related theme values, radii, spacing, and motion tokens. Styles are separated by ownership: navigation, home, projects, diagrams, internal pages, and footer.
 - `public/brand/`: original supplied PNGs and optimized WebP versions. Replace originals using the same filenames and run `npm run assets`. The asset script preserves the complete artwork, alpha, aspect ratio, and existing appearance; it does not crop, redraw, or add effects to the logo.
 
@@ -53,14 +53,20 @@ The desktop header centers five primary destinations. Once the page moves away f
 
 The Team route reads founder information and approved external links from `src/content/site.ts`. The About story uses the supplied original light and dark PNG artwork, selected by the active theme.
 
+## Founder admin
+
+`/admin/login` is limited to `abdurrafaykhan@psametra.tech` and `muhammadsaad@psametra.tech`. Passwords are stored only as scrypt hashes; signed, HTTP-only, same-site cookies expire after eight hours. Generate a hash with `npm run admin:hash -- "a-long-password"` and configure the three `ADMIN_*` environment variables documented in `.env.example`.
+
+Cloudinary owns the versioned `psametra/cms/site-content.json` document and uploaded `psametra/cms/media` assets. Set `CLOUDINARY_URL` server-side. The visual editor covers identity, all page copy, introductions, services, work, About, principles, process, founders, navigation, logos, SEO, and both theme palettes. Advanced JSON mode exposes the complete validated document. Publishing applies immediately; it does not require a Git commit or deployment.
+
 ## Deploy to Vercel
 
 1. Import this repository into Vercel using its Next.js preset.
 2. Verify the RMS Vercel account and scope before deploying. The email defaults to the approved RMS address.
-3. Use `npm run build`; the static export is `out/`.
+3. Configure the server-only admin and Cloudinary variables, then run `npm run build`.
 4. Deploy and connect your company domain when ready.
 
-There are no runtime secrets, databases, analytics, third-party embeds, or server requirements. Images are optimized ahead of time because the export has no image-optimization server. The `.openai/hosting.json` file also identifies the private Sites project used for review; it is not required by Vercel.
+The site now requires a Next.js server runtime for founder authentication and Cloudinary-backed content. There is still no enquiry database, analytics, or third-party embed. The `.openai/hosting.json` file identifies the private Sites project used for review; it is separate from the RMS Vercel deployment.
 
 ## Verification
 

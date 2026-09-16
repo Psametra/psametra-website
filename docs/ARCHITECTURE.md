@@ -6,7 +6,9 @@ The supplied engineering rules guide the architecture. The relevant principles a
 
 | Area                  | Owner                               | What callers need to know                                        |
 | --------------------- | ----------------------------------- | ---------------------------------------------------------------- |
-| Editable company data | `src/content/site.ts`               | Typed, immutable content; no rendering details                   |
+| Editable company data | `content-store.ts`, Cloudinary      | Validated content with a version-controlled fallback             |
+| Admin authentication  | `admin-auth.ts`                     | Two allowlisted profiles, scrypt hashes, signed HTTP-only cookie |
+| Admin interface       | `/admin`, `AdminEditor`             | Complete visual and JSON editing surface                         |
 | Routes                | `src/app/`                          | Compose server-rendered content and export metadata              |
 | Branding              | `Brand`                             | Render the correct supplied asset for the current theme          |
 | Navigation animation  | `TransitionProvider`                | Wrap the application once                                        |
@@ -22,7 +24,13 @@ The supplied engineering rules guide the architecture. The relevant principles a
 
 Pages, copy, illustrations, and shared sections are server components. Only navigation, theme preference, the mobile dialog, and the contact interaction require client code. The provider receives server-rendered children instead of importing route modules, so wrapping the tree does not turn every route into client code.
 
-The requested Next.js stack was retained instead of adopting a different Sites starter. Static export is appropriate because the site does not need accounts, stored records, or server-side enquiries. CSS handles interaction states; the browser Web Animations API handles the finite eclipse choreography. No Framer Motion, Three.js, or icon library was needed.
+The requested Next.js stack was retained instead of adopting a different Sites starter. Public pages are dynamically server-rendered so Cloudinary content changes appear immediately. Cloudinary raw storage holds one validated JSON document and its media folder holds admin uploads. Repository content remains the outage/setup fallback. CSS handles interaction states; the browser Web Animations API handles the finite eclipse choreography. No animation or icon library was added.
+
+## Admin security and content consistency
+
+Only the two explicit founder identifiers can authenticate. Password material is never committed: deployments receive scrypt hashes and a separate session-signing secret through encrypted environment variables. Sessions use signed, HTTP-only, secure, same-site cookies with an eight-hour lifetime. Every mutation checks same-origin headers and repeats authorization inside the route handler. Image uploads accept only image MIME types and enforce a 6 MB server limit.
+
+The content adapter validates document shape, collection limits, total serialized size, and theme color syntax before overwrite. Cloudinary keeps versions of the raw asset, while CDN invalidation and uncached reads make published edits visible to public routes. Failed reads and initial setup degrade to the reviewed repository defaults; failed writes never mutate that fallback.
 
 Two transition designs were considered: independent animated link wrappers, and a single root owner. Independent wrappers would duplicate timing, route recovery, and exclusion state. A root owner keeps those decisions in one place while preserving ordinary anchors and Next prefetching.
 

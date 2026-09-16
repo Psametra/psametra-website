@@ -1,15 +1,14 @@
-import type { Metadata } from "next";
-import { site } from "@/content/site";
+import { getSiteContent } from "@/lib/content-store";
+import { pageMetadata } from "@/lib/site-metadata";
 import { PageIntro } from "@/components/sections/page-intro";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { SectionLabel } from "@/components/ui";
 import { ServiceDiagram } from "@/components/sections/service-diagram";
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Software engineering, AI systems, web platforms, and product strategy. Explore what we can build together.",
-};
-export default function Services() {
+export async function generateMetadata() {
+  return pageMetadata(await getSiteContent(), "services");
+}
+export default async function Services() {
+  const site = await getSiteContent();
   return (
     <>
       <PageIntro {...site.intros.services} />
@@ -38,8 +37,8 @@ export default function Services() {
         ))}
       </section>
       <section className="container section">
-        <SectionLabel>A clear way forward</SectionLabel>
-        <h2>Deliberate at every step.</h2>
+        <SectionLabel>{site.copy.services.processLabel}</SectionLabel>
+        <h2>{site.copy.services.processTitle}</h2>
         <div className="process-grid">
           {site.process.map((step, index) => (
             <article key={step.title}>
@@ -50,7 +49,7 @@ export default function Services() {
           ))}
         </div>
       </section>
-      <ContactCta />
+      <ContactCta copy={site.copy.cta} />
     </>
   );
 }

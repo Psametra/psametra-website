@@ -1,22 +1,22 @@
-import type { Metadata } from "next";
-import { site } from "@/content/site";
+import { getSiteContent } from "@/lib/content-store";
+import { pageMetadata } from "@/lib/site-metadata";
 import { PageIntro } from "@/components/sections/page-intro";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { Arrow, SectionLabel } from "@/components/ui";
 
-export const metadata: Metadata = {
-  title: "Team",
-  description: "Meet Psametra co-founders Abdur Rafay Khan and Muhammad Saad.",
-};
+export async function generateMetadata() {
+  return pageMetadata(await getSiteContent(), "team");
+}
 
 const founderId = (name: string) => name.toLowerCase().replaceAll(" ", "-");
 
-export default function Team() {
+export default async function Team() {
+  const site = await getSiteContent();
   return (
     <>
       <PageIntro {...site.intros.team} />
       <section className="team-section container section">
-        <SectionLabel>Co-founders</SectionLabel>
+        <SectionLabel>{site.copy.team.sectionLabel}</SectionLabel>
         <div className="team-grid">
           {site.founders.map((founder, index) => (
             <article
@@ -69,7 +69,7 @@ export default function Team() {
           ))}
         </div>
       </section>
-      <ContactCta />
+      <ContactCta copy={site.copy.cta} />
     </>
   );
 }

@@ -22,6 +22,30 @@
   --ease-premium: cubic-bezier(0.76, 0, 0.24, 1);
   color-scheme: light;
 }
+.public-site {
+  --surface: var(--cms-light-surface, #f7f7f5);
+  --ink: var(--cms-light-ink, #111111);
+  --muted: var(--cms-light-muted, #676b73);
+  --accent: var(--cms-light-accent, #124bea);
+}
+[data-theme="dark"] .public-site {
+  --surface: var(--cms-dark-surface, #050505);
+  --ink: var(--cms-dark-ink, #f7f7f5);
+  --muted: var(--cms-dark-muted, #969ca8);
+  --accent: var(--cms-dark-accent, #306cfe);
+}
+.public-site .light-surface {
+  --surface: var(--cms-light-surface, #f7f7f5);
+  --ink: var(--cms-light-ink, #111111);
+  --muted: var(--cms-light-muted, #676b73);
+  --accent: var(--cms-light-accent, #124bea);
+}
+.public-site .dark-surface {
+  --surface: var(--cms-dark-surface, #050505);
+  --ink: var(--cms-dark-ink, #f7f7f5);
+  --muted: var(--cms-dark-muted, #969ca8);
+  --accent: var(--cms-dark-accent, #306cfe);
+}
 [data-theme="dark"] {
   --surface: #050505;
   --surface-alt: #111111;

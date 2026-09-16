@@ -1,5 +1,13 @@
 # Verification — premium upgrade, 2026-09-13
 
+## Admin CMS gate (2026-09-16)
+
+- Next.js type generation and strict TypeScript pass for all public, admin, and API routes.
+- ESLint passes without warnings.
+- The production build includes dynamic public routes, `/admin`, `/admin/login`, and four protected API endpoints.
+- Unit coverage verifies the checked-in seed satisfies the CMS schema and rejects unsafe theme values and oversized collections.
+- Cloudinary persistence requires the RMS product environment credentials in Vercel; the UI deliberately disables publishing until configured.
+
 ## Automated checks
 
 - `npm run lint`: passed, no errors or warnings.

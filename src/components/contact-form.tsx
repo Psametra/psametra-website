@@ -1,6 +1,6 @@
 "use client";
 import { useState, type FormEvent } from "react";
-import { site } from "@/content/site";
+import type { ServiceContent, SiteContent } from "@/content/site-schema";
 import { Arrow } from "./ui";
 import {
   briefFieldError,
@@ -10,7 +10,15 @@ import {
 } from "@/lib/project-brief";
 
 /** Prepares a local brief. No submission is claimed and no personal data leaves the browser automatically. */
-export function ContactForm() {
+export function ContactForm({
+  email,
+  services,
+  copy,
+}: {
+  email: string;
+  services: ServiceContent[];
+  copy: SiteContent["copy"]["contact"];
+}) {
   const [message, setMessage] = useState("");
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -32,7 +40,7 @@ export function ContactForm() {
       (event.nativeEvent as SubmitEvent).submitter?.getAttribute("value") ===
       "download";
     if (!download) {
-      window.location.href = projectEmailUrl(site.email, brief);
+      window.location.href = projectEmailUrl(email, brief);
       setMessage(
         "Your email app has been requested. Review and send your brief there.",
       );
@@ -99,16 +107,16 @@ export function ContactForm() {
         />
       </label>
       <label>
-        What are you thinking about?
+        {copy.formServiceLabel}
         <select name="service" defaultValue="Not sure yet">
           <option>Not sure yet</option>
-          {site.services.map((service) => (
+          {services.map((service) => (
             <option key={service.id}>{service.title}</option>
           ))}
         </select>
       </label>
       <label>
-        A little about your project <span>*</span>
+        {copy.formDetailsLabel} <span>*</span>
         <textarea
           name="details"
           rows={5}
@@ -118,17 +126,14 @@ export function ContactForm() {
           placeholder="The idea, the challenge, or what you’d like to make possible…"
         />
       </label>
-      <p className="form-note">
-        This opens your email app. You review and send the message yourself. No
-        email app? Download your brief instead.
-      </p>
+      <p className="form-note">{copy.formNote}</p>
       <div className="form-actions">
         <button className="button primary" type="submit" value="email">
-          Open email draft
+          {copy.emailAction}
           <Arrow diagonal />
         </button>
         <button className="text-link" type="submit" value="download">
-          Download brief <Arrow />
+          {copy.downloadAction} <Arrow />
         </button>
       </div>
       <p className="form-status" role="status">

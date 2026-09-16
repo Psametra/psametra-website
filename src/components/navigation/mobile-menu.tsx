@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { site } from "@/content/site";
+import type { NavigationItem } from "@/content/site-schema";
 import Link from "next/link";
 import { Arrow } from "@/components/ui";
 import { normalizePath } from "@/lib/navigation";
 import { useScrollController } from "./scroll-provider";
 
 /** A native modal provides focus containment, Escape dismissal, and background exclusion. */
-export function MobileMenu() {
+export function MobileMenu({ navigation }: { navigation: NavigationItem[] }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
   const { suspend } = useScrollController();
@@ -59,7 +59,7 @@ export function MobileMenu() {
           </button>
         </div>
         <nav aria-label="Mobile navigation">
-          {site.navigation.map((item, index) => (
+          {navigation.map((item, index) => (
             <Link
               href={item.href}
               key={item.href}
