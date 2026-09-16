@@ -94,7 +94,7 @@ export const defaultSite = {
       note: "Selected concepts",
       summary: "See how we turn complexity into coherent systems.",
       links: [
-        { label: "Software systems", href: "/work#systems" },
+        { label: "Psametra Logistics", href: "/work#systems" },
         { label: "Applied intelligence", href: "/work#intelligence" },
       ],
     },
@@ -189,15 +189,19 @@ export const defaultSite = {
   projects: [
     {
       id: "systems",
-      title: "Custom Software Systems",
-      category: "PLATFORM ENGINEERING",
+      title: "Psametra Logistics",
+      category: "LOGISTICS EXPERIENCE",
       type: "system",
-      summary: "One coherent workspace for the moving parts of a business.",
+      summary:
+        "A connected freight experience spanning the public website, shipment tracking, quote flows, customer workspace, and operations.",
       challenge:
-        "Fragmented tools make everyday operations harder than they need to be.",
+        "Freight journeys often fragment customer information across inquiries, milestones, documents, and exception handling.",
       approach:
-        "A modular operations platform that brings workflows, permissions, and information into one considered experience.",
-      tags: ["Architecture", "Operations", "Custom software"],
+        "We designed and engineered one responsive experience connecting the public brand, freight inquiry, sample tracking, customer portal, and operational views across air, sea, and road.",
+      tags: ["Product design", "Full-stack engineering", "Logistics"],
+      status: "live-concept",
+      href: "https://psametra-logistics.vercel.app/",
+      image: "/work/logistics-home.webp",
     },
     {
       id: "intelligence",
@@ -210,6 +214,7 @@ export const defaultSite = {
       approach:
         "A retrieval-led assistant with source references, explicit review points, and well-defined boundaries for automation.",
       tags: ["Retrieval", "Human oversight", "Automation"],
+      status: "concept",
     },
     {
       id: "experiences",
@@ -222,6 +227,7 @@ export const defaultSite = {
       approach:
         "An accessible, performance-minded web platform that balances distinctive design with a clear customer journey.",
       tags: ["Interface design", "Web", "Accessibility"],
+      status: "concept",
     },
     {
       id: "products",
@@ -234,6 +240,7 @@ export const defaultSite = {
       approach:
         "A focused product slice supported by a reusable design system, typed interfaces, and a deliberate path to iteration.",
       tags: ["Discovery", "Design systems", "Engineering"],
+      status: "concept",
     },
   ],
   workStats: [

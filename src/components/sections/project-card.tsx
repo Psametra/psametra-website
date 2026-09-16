@@ -1,9 +1,23 @@
 import type { Project } from "@/content/site";
+import Image from "next/image";
 import { SiteLink } from "@/components/navigation/site-link";
 import { Arrow } from "@/components/ui";
 
-/** Abstract interface studies communicate the concept without implying a shipped client product. */
+/** Projects use a verified site capture when supplied and abstract studies otherwise. */
 export function ProjectVisual({ project }: { project: Project }) {
+  if (project.image) {
+    return (
+      <div className="project-visual project-visual-live" aria-hidden="true">
+        <Image
+          src={project.image}
+          alt=""
+          fill
+          sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 64px), min(1640px, calc(100vw - 112px))"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={`project-visual visual-${project.type}`} aria-hidden="true">
       <span className="concept-label">

@@ -23,4 +23,12 @@ test("CMS validation rejects unsafe colors and oversized collections", () => {
   const invalidMetric = structuredClone(defaultSite);
   invalidMetric.workStats[0].value = -1;
   assert.equal(validateSiteContent(invalidMetric), false);
+
+  const unsafeProjectLink = structuredClone(defaultSite);
+  unsafeProjectLink.projects[0].href = "javascript:alert(1)";
+  assert.equal(validateSiteContent(unsafeProjectLink), false);
+
+  const unsafeProjectImage = structuredClone(defaultSite);
+  unsafeProjectImage.projects[0].image = "https://example.com/tracker.png";
+  assert.equal(validateSiteContent(unsafeProjectImage), false);
 });

@@ -26,6 +26,17 @@
   left: 24px;
   color: var(--muted);
 }
+.project-visual-live {
+  isolation: isolate;
+  background: #11171a;
+}
+.project-visual-live img {
+  object-fit: cover;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-card:hover .project-visual-live img {
+  transform: scale(1.018);
+}
 .project-caption {
   display: flex;
   align-items: center;
@@ -167,8 +178,13 @@
 .work-detail-copy > .eyebrow,
 .work-detail-copy h2,
 .work-detail-copy .work-lead,
-.work-detail-copy .tags {
+.work-detail-copy .tags,
+.work-detail-copy .work-project-link {
   grid-column: 1/-1;
+}
+.work-project-link {
+  justify-self: start;
+  margin-top: 30px;
 }
 .work-detail-copy h2 {
   font-size: clamp(36px, 4vw, 60px);

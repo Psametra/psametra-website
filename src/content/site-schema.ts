@@ -33,6 +33,9 @@ export interface ProjectContent {
   challenge: string;
   approach: string;
   tags: string[];
+  status: "concept" | "live-concept";
+  href?: string;
+  image?: string;
 }
 
 export interface WorkStatContent {
@@ -176,7 +179,10 @@ export function validateSiteContent(value: unknown): value is SiteContent {
       (project) =>
         !contentId.test(project.id) ||
         !["system", "ai", "web", "product"].includes(project.type) ||
-        !Array.isArray(project.tags),
+        !["concept", "live-concept"].includes(project.status) ||
+        !Array.isArray(project.tags) ||
+        (project.href !== undefined && !/^https:\/\//.test(project.href)) ||
+        (project.image !== undefined && !imageHref.test(project.image)),
     ) ||
     candidate.workStats.some(
       (stat) =>
