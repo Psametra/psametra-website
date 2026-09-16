@@ -11,6 +11,27 @@ export default async function Work() {
   return (
     <>
       <PageIntro {...site.intros.work} />
+      <section
+        className="work-metrics container"
+        aria-label="Work metrics"
+        data-reveal
+      >
+        {site.workStats.map((stat) => (
+          <article key={stat.label}>
+            <strong
+              aria-label={`${stat.prefix}${stat.value}${stat.suffix} ${stat.label}`}
+              data-counter-target={stat.value}
+              data-counter-prefix={stat.prefix}
+              data-counter-suffix={stat.suffix}
+            >
+              {stat.prefix}
+              {stat.value.toLocaleString()}
+              {stat.suffix}
+            </strong>
+            <span>{stat.label}</span>
+          </article>
+        ))}
+      </section>
       <section className="container work-details">
         {site.projects.map((project) => (
           <article id={project.id} key={project.id} className="work-detail">

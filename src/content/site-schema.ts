@@ -35,6 +35,13 @@ export interface ProjectContent {
   tags: string[];
 }
 
+export interface WorkStatContent {
+  label: string;
+  value: number;
+  prefix: string;
+  suffix: string;
+}
+
 export interface SiteContent {
   name: string;
   description: string;
@@ -59,6 +66,7 @@ export interface SiteContent {
   navigation: NavigationItem[];
   services: ServiceContent[];
   projects: ProjectContent[];
+  workStats: WorkStatContent[];
   principles: Array<{ title: string; description: string }>;
   process: Array<{ title: string; description: string }>;
   seo: Record<PageKey, { title: string; description: string }>;
@@ -150,6 +158,7 @@ export function validateSiteContent(value: unknown): value is SiteContent {
     candidate.navigation,
     candidate.services,
     candidate.projects,
+    candidate.workStats,
     candidate.principles,
     candidate.process,
   ];
@@ -168,6 +177,21 @@ export function validateSiteContent(value: unknown): value is SiteContent {
         !contentId.test(project.id) ||
         !["system", "ai", "web", "product"].includes(project.type) ||
         !Array.isArray(project.tags),
+    ) ||
+    candidate.workStats.some(
+      (stat) =>
+        !stat ||
+        typeof stat.label !== "string" ||
+        !stat.label ||
+        stat.label.length > 80 ||
+        typeof stat.value !== "number" ||
+        !Number.isFinite(stat.value) ||
+        stat.value < 0 ||
+        stat.value > 1_000_000 ||
+        typeof stat.prefix !== "string" ||
+        typeof stat.suffix !== "string" ||
+        stat.prefix.length > 10 ||
+        stat.suffix.length > 10,
     ) ||
     candidate.navigation.some(
       (item) =>

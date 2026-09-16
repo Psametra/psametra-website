@@ -48,6 +48,7 @@ After this migration notice was written, the user directly requested this bounde
 20. Replaced the temporary `p.` label in the protected admin sidebar with the supplied white Psametra logo. The logo remains a compact, accessible link back to the admin content screen and scales cleanly with the mobile sidebar layout.
 21. Connected the existing RMS Cloudinary account without selecting a paid plan or creating a duplicate account. Added `CLOUDINARY_URL` to the RMS Vercel project as a sensitive Production variable, redeployed the current branch, and seeded `psametra/cms/site-content.json` through the authenticated CMS API. The production editor and Security screen now report connected storage.
 22. Updated the About artwork to load the supplied full-resolution PNG without image recompression. The logo now has an accurate responsive size hint and sits in an explicit centered grid row, with the caption in a separate bottom row so alignment stays stable at desktop and mobile widths.
+23. Added an animated metrics strip to the Work page for clients served, projects delivered, and satisfaction rate. Each item exposes an editable heading, number, prefix, and suffix in the admin panel's dedicated Work counters section. Repository defaults remain zero until the founders enter verified business figures; the site does not invent company performance claims.
 
 ## Exact verification
 

@@ -236,6 +236,26 @@ export const defaultSite = {
       tags: ["Discovery", "Design systems", "Engineering"],
     },
   ],
+  workStats: [
+    {
+      label: "Clients served",
+      value: 0,
+      prefix: "",
+      suffix: "",
+    },
+    {
+      label: "Projects delivered",
+      value: 0,
+      prefix: "",
+      suffix: "",
+    },
+    {
+      label: "Satisfaction rate",
+      value: 0,
+      prefix: "",
+      suffix: "%",
+    },
+  ],
   principles: [
     {
       title: "Clarity before complexity.",
