@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       { error: "Enter both profile name and password." },
       { status: 400 },
     );
-  const profile = authenticateAdmin(body.username, body.password);
+  const profile = await authenticateAdmin(body.username, body.password);
   if (!profile) {
     await new Promise((resolve) => setTimeout(resolve, 650));
     return Response.json(

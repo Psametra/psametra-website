@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 
 export function AdminLoginForm({
   profiles,
+  notice,
 }: {
   profiles: Array<{ name: string; username: string }>;
+  notice?: string;
 }) {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -37,6 +39,11 @@ export function AdminLoginForm({
 
   return (
     <form className="admin-login-form" onSubmit={submit}>
+      {notice && (
+        <p className="admin-form-notice" role="status">
+          {notice}
+        </p>
+      )}
       <label>
         Admin profile
         <select name="username" autoComplete="username">

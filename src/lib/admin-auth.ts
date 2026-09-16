@@ -7,26 +7,13 @@ import {
   timingSafeEqual,
 } from "node:crypto";
 import { cookies } from "next/headers";
+import { getAdminPasswordHash } from "@/lib/admin-credential-store";
+import { adminProfiles, type AdminProfile } from "@/lib/admin-profiles";
 
 const COOKIE_NAME = "psametra-admin";
 const SESSION_SECONDS = 60 * 60 * 8;
 
-export const adminProfiles = [
-  {
-    id: "abdur-rafay-khan",
-    name: "Abdur Rafay Khan",
-    username: "abdurrafaykhan@psametra.tech",
-    passwordEnvironmentKey: "ADMIN_ABDUR_PASSWORD_HASH",
-  },
-  {
-    id: "muhammad-saad",
-    name: "Muhammad Saad",
-    username: "muhammadsaad@psametra.tech",
-    passwordEnvironmentKey: "ADMIN_SAAD_PASSWORD_HASH",
-  },
-] as const;
-
-export type AdminProfile = (typeof adminProfiles)[number];
+export { adminProfiles } from "@/lib/admin-profiles";
 
 interface SessionPayload {
   profileId: AdminProfile["id"];
@@ -50,7 +37,7 @@ export function hashAdminPassword(
   return `${salt}:${scryptSync(password, salt, 64).toString("hex")}`;
 }
 
-function passwordMatches(password: string, stored: string | undefined) {
+export function passwordMatches(password: string, stored: string | undefined) {
   if (!stored) return false;
   const [salt, expectedHex] = stored.split(":");
   if (!salt || !expectedHex) return false;
@@ -59,15 +46,22 @@ function passwordMatches(password: string, stored: string | undefined) {
   return expected.length === actual.length && timingSafeEqual(expected, actual);
 }
 
-export function authenticateAdmin(username: string, password: string) {
+export async function authenticateAdmin(username: string, password: string) {
   const normalized = username.trim().toLowerCase();
   const profile = adminProfiles.find(
     (candidate) => candidate.username === normalized,
   );
   if (!profile) return null;
-  return passwordMatches(password, process.env[profile.passwordEnvironmentKey])
+  return passwordMatches(password, await getAdminPasswordHash(profile))
     ? profile
     : null;
+}
+
+export async function verifyAdminPassword(
+  profile: AdminProfile,
+  password: string,
+) {
+  return passwordMatches(password, await getAdminPasswordHash(profile));
 }
 
 export async function createAdminSession(profile: AdminProfile) {

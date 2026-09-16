@@ -59,6 +59,8 @@ The Team route reads founder information and approved external links from `src/c
 
 Cloudinary owns the versioned `psametra/cms/site-content.json` document and uploaded `psametra/cms/media` assets. Set `CLOUDINARY_URL` server-side. The visual editor covers identity, all page copy, introductions, services, work, About, principles, process, founders, navigation, logos, SEO, and both theme palettes. Advanced JSON mode exposes the complete validated document. Publishing applies immediately; it does not require a Git commit or deployment.
 
+Each founder can change only their own password from `/admin/security`. Mutable password hashes are encrypted with `ADMIN_CREDENTIALS_SECRET` before Cloudinary stores `psametra/cms/admin-credentials.json`; the two Vercel password hashes remain recovery defaults. A successful password change revokes the current session and requires a fresh sign-in.
+
 ## Deploy to Vercel
 
 1. Import this repository into Vercel using its Next.js preset.
