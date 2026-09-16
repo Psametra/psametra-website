@@ -51,6 +51,7 @@ After this migration notice was written, the user directly requested this bounde
 23. Added an animated metrics strip to the Work page for clients served, projects delivered, and satisfaction rate. Each item exposes an editable heading, number, prefix, and suffix in the admin panel's dedicated Work counters section. Repository defaults remain zero until the founders enter verified business figures; the site does not invent company performance claims.
 24. Replaced the first generic Work placeholder with Psametra Logistics, a live Psametra-built concept experience at `https://psametra-logistics.vercel.app/`. The entry uses an optimized capture of the real deployed homepage, links to the live experience, describes only verified public functionality, and remains explicitly labeled as a live concept because the logistics site states that its shipment data is fictional. Its status, URL, image, copy, and tags are editable in the admin Work section; validation limits project links to HTTPS and project images to local or Cloudinary sources.
 25. Removed rotation from the homepage hero mark's ambient animation so its two gaps remain vertically aligned throughout the cycle. The slow vertical float remains, preserving subtle motion without tilting the Psametra logo.
+26. Replaced the Contact CTA's generic background arch with the canonical Psametra split-ring vector. The oversized mark remains subtly cropped behind the call to action, while its top and bottom gaps and ring proportions now match the real company symbol.
 
 ## Exact verification
 

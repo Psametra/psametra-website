@@ -23,6 +23,24 @@ export function SectionLabel({ children }: { children: ReactNode }) {
     </p>
   );
 }
+
+/** Canonical Psametra symbol for decorative contexts that need a scalable mark. */
+export function PsametraMark({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 100 100"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M43 10a41 41 0 0 0 0 80V76a27 27 0 0 1 0-52ZM57 10a41 41 0 0 1 0 80V76a27 27 0 0 0 0-52Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 /** Decorative geometry; the original company logo is rendered separately and remains intact. */
 export function Eclipse() {
   return (

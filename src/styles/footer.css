@@ -39,15 +39,14 @@
 .cta-inner .primary:hover {
   background: #dededc;
 }
-.cta-section::before {
-  content: "";
+.cta-mark {
   position: absolute;
-  width: 800px;
-  height: 800px;
-  border: 110px solid #ffffff04;
-  border-radius: 50%;
-  left: calc(50% - 400px);
+  width: min(800px, calc(100vw - 40px));
+  height: auto;
+  left: 50%;
   top: 50px;
+  translate: -50% 0;
+  color: #111111;
 }
 .footer {
   padding-block: 40px 32px;
