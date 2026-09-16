@@ -34,7 +34,7 @@ export function PsametraMark({ className }: { className?: string }) {
       aria-hidden="true"
     >
       <path
-        d="M43 10a41 41 0 0 0 0 80V76a27 27 0 0 1 0-52ZM57 10a41 41 0 0 1 0 80V76a27 27 0 0 0 0-52Z"
+        d="M46 9.2A41 41 0 0 0 46 90.8V76.7A27 27 0 0 1 46 23.3ZM54 9.2A41 41 0 0 1 54 90.8V76.7A27 27 0 0 0 54 23.3Z"
         fill="currentColor"
       />
     </svg>
