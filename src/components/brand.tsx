@@ -6,11 +6,15 @@ export function Brand({
   className = "",
   priority = true,
   logo,
+  sizes = "126px",
+  unoptimized = false,
 }: {
   original?: boolean;
   className?: string;
   priority?: boolean;
   logo: SiteContent["logo"];
+  sizes?: string;
+  unoptimized?: boolean;
 }) {
   return (
     <span className={`brand ${className}`}>
@@ -19,18 +23,20 @@ export function Brand({
         src={original ? logo.originalLight : logo.light}
         width={1536}
         height={1024}
-        sizes="126px"
+        sizes={sizes}
         alt="Psametra"
         priority={priority}
+        unoptimized={unoptimized}
       />
       <Image
         className="logo-on-dark"
         src={original ? logo.originalDark : logo.dark}
         width={1536}
         height={1024}
-        sizes="126px"
+        sizes={sizes}
         alt="Psametra"
         priority={priority}
+        unoptimized={unoptimized}
       />
     </span>
   );

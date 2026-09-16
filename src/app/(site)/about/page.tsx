@@ -19,6 +19,8 @@ export default async function About() {
             original
             priority={false}
             className="about-brand"
+            sizes="(max-width: 800px) calc(100vw - 72px), 560px"
+            unoptimized
           />
           <span>{site.copy.about.artCaption}</span>
         </div>
