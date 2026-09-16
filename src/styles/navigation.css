@@ -130,6 +130,16 @@
 .icon-button:hover {
   background: var(--surface-alt);
 }
+.profile-link {
+  color: var(--muted);
+  transition:
+    color 180ms,
+    background 180ms;
+}
+.profile-link:hover,
+.profile-link:focus-visible {
+  color: var(--ink);
+}
 .mobile-menu {
   display: none;
 }

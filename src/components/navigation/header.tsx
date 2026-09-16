@@ -30,6 +30,26 @@ export function Header({ content }: { content: SiteContent }) {
           ))}
         </nav>
         <div className="header-actions">
+          <SiteLink
+            className="icon-button profile-link"
+            href="/admin"
+            aria-label="Open founder admin"
+            title="Founder admin"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="8" r="3.25" />
+              <path d="M5.75 19c.55-3.4 2.63-5.1 6.25-5.1s5.7 1.7 6.25 5.1" />
+            </svg>
+          </SiteLink>
           <ThemeToggle />
           <MobileMenu navigation={content.navigation} />
         </div>
